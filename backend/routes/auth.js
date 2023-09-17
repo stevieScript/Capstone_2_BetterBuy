@@ -7,7 +7,7 @@ const {createToken} = require('../helpers/tokens');
 const userAuthSchema = require('../schemas/userAuth.json');
 const userRegisterSchema = require('../schemas/userRegister.json');
 
-/** POST /auth/token:  { username, password } => { token }
+/** POST /auth/token:  { email, password } => { token }
  *
  * Returns JWT token which can be used to authenticate further requests.
  *
@@ -22,8 +22,8 @@ router.post('/token', async function (req, res, next) {
 			throw new BadRequestError(errs);
 		}
 
-		const {username, password} = req.body;
-		const user = await User.authenticate(username, password);
+		const {email, password} = req.body;
+		const user = await User.authenticate(email, password);
 		const token = createToken(user);
 		return res.json({token});
 	} catch (err) {
@@ -32,7 +32,7 @@ router.post('/token', async function (req, res, next) {
 });
 
 /** POST /auth/register:   { user } => { token }
- * user must include { username, password, firstName, lastName, email }
+ * user must include { password, firstName, lastName, email }
  * Returns JWT token which can be used to authenticate further requests.
  * This will add user to database.
  * Authorization required: none
@@ -54,3 +54,4 @@ router.post('/register', async function (req, res, next) {
 });
 
 module.exports = router;
+

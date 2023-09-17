@@ -40,7 +40,7 @@ class User {
 	 * Returns { firstName, lastName, email, password }
 	 * Throws BadRequestError on duplicates.
 	 * */
-	static async register({password, firstName, lastName, email}) {
+	static async register({firstName, lastName, email, password}) {
 		const duplicateCheck = await db.query(
 			`SELECT email
            FROM users
@@ -56,13 +56,13 @@ class User {
 
 		const result = await db.query(
 			`INSERT INTO users
-           (password,
-            first_name,
+           (first_name,
             last_name,
-            email)
+            email, 
+						password)
            VALUES ($1, $2, $3, $4)
            RETURNING email`,
-			[hashedPassword, firstName, lastName, email]
+			[firstName, lastName, email, hashedPassword]
 		);
 
 		const user = result.rows[0];
@@ -74,7 +74,7 @@ class User {
 	 * Returns { firstName, lastName, email, password }
 	 * Throws BadRequestError on duplicates.
 	 * */
-	static async changePassword({password, firstName, lastName, email}) {
+	static async changePassword({password, email}) {
 		const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR);
 
 		const result = await db.query(
@@ -90,4 +90,6 @@ class User {
 		return user;
 	}
 }
+
+module.exports = User;
 
