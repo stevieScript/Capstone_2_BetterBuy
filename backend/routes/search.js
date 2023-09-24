@@ -15,10 +15,7 @@ const router = new express.Router();
  * */
 router.get('/', async function (req, res, next) {
 	try {
-		const query = encodeURI(req.query.q);
-		// const response = await axios.get(
-		// 	`https://svcs.ebay.com/services/search/FindingService/v1?OPERATION-NAME=findItemsByKeywords&SERVICE-VERSION=1.0.0&SECURITY-APPNAME=${process.env.EBAY_APP_ID}&RESPONSE-DATA-FORMAT=JSON&REST-PAYLOAD&keywords=${search}&paginationInput.entriesPerPage=10&GLOBAL-ID=EBAY-US&siteid=0`
-		// );
+		const query = req.query.q;
 		const response = await eBay.finding.findItemsByKeywords({
 			keywords: query,
 		});
