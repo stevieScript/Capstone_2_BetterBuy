@@ -1,4 +1,5 @@
-import * as React from 'react';
+import React, {useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,38 +12,53 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-// import {createTheme, ThemeProvider} from '@mui/material/styles';
-
-// function Copyright(props) {
-// 	return (
-// 		<Typography variant='body2' color='text.secondary' align='center' {...props}>
-// 			{'Copyright © '}
-// 			<Link color='inherit' href='https://mui.com/'>
-// 				Your Website
-// 			</Link>{' '}
-// 			{new Date().getFullYear()}
-// 			{'.'}
-// 		</Typography>
-// 	);
-// }
-
-// TODO remove, this demo shouldn't need to reset the theme.
-
-// const defaultTheme = createTheme();
+import Api from '../api';
 
 export default function SignUp() {
-	const handleSubmit = (event) => {
+	const navigate = useNavigate();
+	const [formData, setFormData] = useState({
+		firstName: '',
+		lastName: '',
+		email: '',
+		password: '',
+	});
+	const [error, setError] = useState(false);
+
+	const handleSubmit = async (event) => {
 		event.preventDefault();
-		const data = new FormData(event.currentTarget);
-		console.log({
-			email: data.get('email'),
-			password: data.get('password'),
-		});
+		let result = await Api.register(formData);
+		if (result.success) {
+			navigate('/user');
+		} else {
+			setError(result.error);
+			console.log(result.error);
+		}
+	};
+
+	const handleChange = (event) => {
+		const {name, value} = event.target;
+		setFormData((prev) => ({
+			...prev,
+			[name]: value,
+		}));
 	};
 
 	return (
 		// <ThemeProvider>
 		<Container component='main' maxWidth='xs'>
+			{/* {error.length ? (
+				<Box
+					sx={{
+						marginTop: 8,
+						display: 'flex',
+						flexDirection: 'column',
+						alignItems: 'center',
+					}}>
+					<Typography component='h1' variant='h5'>
+						{error}
+					</Typography>
+				</Box>
+			) : null} */}
 			<CssBaseline />
 			<Box
 				sx={{
@@ -68,6 +84,7 @@ export default function SignUp() {
 								id='firstName'
 								label='First Name'
 								autoFocus
+								onChange={handleChange}
 							/>
 						</Grid>
 						<Grid item xs={12} sm={6}>
@@ -78,6 +95,7 @@ export default function SignUp() {
 								label='Last Name'
 								name='lastName'
 								autoComplete='family-name'
+								onChange={handleChange}
 							/>
 						</Grid>
 						<Grid item xs={12}>
@@ -88,6 +106,7 @@ export default function SignUp() {
 								label='Email Address'
 								name='email'
 								autoComplete='email'
+								onChange={handleChange}
 							/>
 						</Grid>
 						<Grid item xs={12}>
@@ -99,6 +118,7 @@ export default function SignUp() {
 								type='password'
 								id='password'
 								autoComplete='new-password'
+								onChange={handleChange}
 							/>
 						</Grid>
 					</Grid>
