@@ -1,4 +1,6 @@
 const jsonschema = require('jsonschema');
+const jwt = require('jsonwebtoken');
+const {SECRET_KEY} = require('../config');
 const User = require('../models/user');
 const express = require('express');
 const {BadRequestError} = require('../expressError');
@@ -24,8 +26,11 @@ router.post('/token', async function (req, res, next) {
 
 		const {email, password} = req.body;
 		const user = await User.authenticate(email, password);
-		const token = createToken(user);
-		return res.json({token});
+		const token = jwt.sign({id: user.id}, SECRET_KEY, {
+			expiresIn: 60 * 60 * 24, // 1 day
+		});
+		res.cookie('token', token, {httpOnly: true});
+		return res.status(200);
 	} catch (err) {
 		return next(err);
 	}
@@ -46,8 +51,14 @@ router.post('/register', async function (req, res, next) {
 		}
 
 		const newUser = await User.register(req.body);
-		const token = createToken(newUser);
-		return res.status(201).json({token});
+		const token = jwt.sign({id: newUser.id}, SECRET_KEY, {
+			expiresIn: 60 * 60 * 24, // 1 day
+		});
+
+		res.cookie('token', token, {httpOnly: true});
+
+		// return res.status(201).json({token});
+		return res.status(201).json('User created');
 	} catch (err) {
 		return next(err);
 	}

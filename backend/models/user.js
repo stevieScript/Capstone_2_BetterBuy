@@ -1,7 +1,7 @@
 const db = require('../db');
 const bcrypt = require('bcrypt');
 const {BCRYPT_WORK_FACTOR} = require('../config');
-const {UnauthorizedError} = require('../expressError');
+const {UnauthorizedError, BadRequestError} = require('../expressError');
 
 /** Related functions for users. */
 class User {
@@ -13,10 +13,7 @@ class User {
 	static async authenticate(email, password) {
 		// try to find the user first
 		const result = await db.query(
-			`SELECT first_name AS "firstName",
-                last_name AS "lastName",
-                email,
-                password,
+			`SELECT id, password,
            FROM users
            WHERE email = $1`,
 			[email]
@@ -28,8 +25,8 @@ class User {
 			// compare hashed password to a new hash from password
 			const isValid = await bcrypt.compare(password, user.password);
 			if (isValid === true) {
-				delete user.password;
-				return user;
+				// delete user.password;
+				return user.id;
 			}
 		}
 
@@ -61,7 +58,7 @@ class User {
             email, 
 						password)
            VALUES ($1, $2, $3, $4)
-           RETURNING email`,
+           RETURNING id`,
 			[firstName, lastName, email, hashedPassword]
 		);
 

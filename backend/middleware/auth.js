@@ -19,7 +19,8 @@ function authenticateJWT(req, res, next) {
 		const authHeader = req.headers && req.headers.authorization;
 		if (authHeader) {
 			const token = authHeader.replace(/^[Bb]earer /, '').trim();
-			res.locals.user = jwt.verify(token, SECRET_KEY);
+			// res.locals.user = jwt.verify(token, SECRET_KEY);
+			req.user = jwt.verify(token, SECRET_KEY);
 		}
 		return next();
 	} catch (err) {
@@ -34,15 +35,30 @@ function authenticateJWT(req, res, next) {
 
 function ensureLoggedIn(req, res, next) {
 	try {
-		if (!res.locals.user) throw new UnauthorizedError();
+		if (!req.user) throw new UnauthorizedError();
 		return next();
 	} catch (err) {
 		return next(err);
 	}
 }
 
+function cookieJwtAuth(req, res, next) {
+	const token = req.cookies.token;
+	// Handle no token scenario, e.g., return a specific status or proceed without user data
+	if (!token) return next();
+
+	try {
+		req.user = jwt.verify(token, SECRET_KEY);
+		return next();
+	} catch (err) {
+		res.clearCookie('token'); // Clear the invalid token
+		return next(); // or return res.status(401).send('Invalid token');
+	}
+}
+
 module.exports = {
 	authenticateJWT,
+	cookieJwtAuth,
 	ensureLoggedIn,
 };
 

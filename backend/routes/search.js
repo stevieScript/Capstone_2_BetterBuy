@@ -5,6 +5,7 @@ const eBay = require('../eBayapi');
 const {BadRequestError} = require('../expressError');
 const e = require('express');
 const router = new express.Router();
+const {ensureLoggedIn} = require('../middleware/auth');
 
 /** GET /search
  *
@@ -13,7 +14,7 @@ const router = new express.Router();
  * Authorization required: none
  *
  * */
-router.get('/', async function (req, res, next) {
+router.get('/', ensureLoggedIn, async function (req, res, next) {
 	try {
 		const query = req.query.q;
 		const response = await eBay.finding.findItemsByKeywords({
