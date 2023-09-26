@@ -3,8 +3,10 @@ import AppRoutes from './AppRoutes';
 import NavBar from './components/NavBar';
 import Api from './api';
 // import jwt from 'jsonwebtoken';
+import UserContext from './auth/UserContext';
 import jwt_decode from 'jwt-decode';
 import {BrowserRouter} from 'react-router-dom';
+import User from './components/User';
 
 function App() {
 	const [infoLoaded, setInfoLoaded] = useState(false);
@@ -60,12 +62,14 @@ function App() {
 	return (
 		<div className='App'>
 			<BrowserRouter>
-				<NavBar />
-				<AppRoutes
-					handleLogin={handleLogin}
-					handleLogout={handleLogout}
-					handleSignup={handleSignup}
-				/>
+				<UserContext.Provider value={{currentUser, setCurrentUser}}>
+					<NavBar />
+					<AppRoutes
+						handleLogin={handleLogin}
+						handleLogout={handleLogout}
+						handleSignup={handleSignup}
+					/>
+				</UserContext.Provider>
 			</BrowserRouter>
 		</div>
 	);

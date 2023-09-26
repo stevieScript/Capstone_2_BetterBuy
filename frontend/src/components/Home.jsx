@@ -1,6 +1,12 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import {Navigate} from 'react-router-dom';
+import UserContext from '../auth/UserContext';
 import {Typography, Button, Box, ButtonGroup} from '@mui/material';
 function Home() {
+	const {currentUser} = useContext(UserContext);
+	if (currentUser) {
+		return <Navigate to='/user' />;
+	}
 	return (
 		<Box>
 			<Box
