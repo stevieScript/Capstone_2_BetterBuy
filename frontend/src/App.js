@@ -2,7 +2,8 @@ import React, {useState, useEffect} from 'react';
 import AppRoutes from './AppRoutes';
 import NavBar from './components/NavBar';
 import Api from './api';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
+import jwt_decode from 'jwt-decode';
 import {BrowserRouter} from 'react-router-dom';
 
 function App() {
@@ -14,9 +15,9 @@ function App() {
 		async function getCurrentUser() {
 			if (token) {
 				try {
-					let {username} = jwt.decode(token);
+					let {email} = jwt_decode(token);
 					Api.token = token;
-					let currentUser = await Api.getUser(username);
+					let currentUser = await Api.getUser(email);
 					setCurrentUser(currentUser);
 				} catch (err) {
 					console.error('App loadUserInfo: problem loading', err);
@@ -60,7 +61,11 @@ function App() {
 		<div className='App'>
 			<BrowserRouter>
 				<NavBar />
-				<AppRoutes />
+				<AppRoutes
+					handleLogin={handleLogin}
+					handleLogout={handleLogout}
+					handleSignup={handleSignup}
+				/>
 			</BrowserRouter>
 		</div>
 	);

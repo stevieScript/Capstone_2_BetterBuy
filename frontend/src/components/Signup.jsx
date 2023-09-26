@@ -12,9 +12,9 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Api from '../api';
+// import Api from '../api';
 
-export default function SignUp() {
+export default function SignUp({handleSignup}) {
 	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		firstName: '',
@@ -22,31 +22,31 @@ export default function SignUp() {
 		email: '',
 		password: '',
 	});
-	const [error, setError] = useState(false);
+	// const [errors, setErrors] = useState(false);
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		let result = await Api.register(formData);
+		let result = await handleSignup(formData);
+		console.log(`result: ${result}`);
 		if (result.success) {
 			navigate('/user');
 		} else {
-			setError(result.error);
-			console.log(result.error);
+			// setErrors(result.errors);
+			console.log(result.errors);
 		}
 	};
 
 	const handleChange = (event) => {
 		const {name, value} = event.target;
-		setFormData((prev) => ({
-			...prev,
+		setFormData((formData) => ({
+			...formData,
 			[name]: value,
 		}));
 	};
 
 	return (
-		// <ThemeProvider>
 		<Container component='main' maxWidth='xs'>
-			{/* {error.length ? (
+			{/* {errors.length ? (
 				<Box
 					sx={{
 						marginTop: 8,
@@ -55,7 +55,9 @@ export default function SignUp() {
 						alignItems: 'center',
 					}}>
 					<Typography component='h1' variant='h5'>
-						{error}
+						{errors.map((error, index) => (
+							<div key={index}>{error}</div>
+						))}
 					</Typography>
 				</Box>
 			) : null} */}
@@ -134,9 +136,7 @@ export default function SignUp() {
 					</Grid>
 				</Box>
 			</Box>
-			{/* <Copyright sx={{mt: 5}} /> */}
 		</Container>
-		// {/* </ThemeProvider> */}
 	);
 }
 
