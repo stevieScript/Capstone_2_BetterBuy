@@ -9,28 +9,29 @@ import {BrowserRouter} from 'react-router-dom';
 import User from './components/User';
 
 function App() {
-	const [infoLoaded, setInfoLoaded] = useState(false);
+	// const [infoLoaded, setInfoLoaded] = useState(false);
 	const [currentUser, setCurrentUser] = useState(null);
 	const [token, setToken] = useState(() => localStorage.getItem('token') || null);
 
-	useEffect(() => {
-		async function getCurrentUser() {
-			if (token) {
-				try {
-					let {email} = jwt_decode(token);
-					Api.token = token;
-					let currentUser = await Api.getUser(email);
-					setCurrentUser(currentUser);
-				} catch (err) {
-					console.error('App loadUserInfo: problem loading', err);
-					setCurrentUser(null);
-				}
-			}
-			setInfoLoaded(true);
-		}
-		setInfoLoaded(false);
-		getCurrentUser(token);
-	}, [token]);
+	// useEffect(() => {
+	// 	async function getCurrentUser() {
+	// 		if (token) {
+	// 			try {
+	// 				let {id} = jwt_decode(token);
+	// 				// Api.token = token;
+	// 				console.log(`useEffect token: ${token}`);
+	// 				let currentUser = await Api.getUser(id);
+	// 				setCurrentUser(currentUser);
+	// 			} catch (err) {
+	// 				console.error('App loadUserInfo: problem loading', err);
+	// 				setCurrentUser(null);
+	// 			}
+	// 		}
+	// 		setInfoLoaded(true);
+	// 	}
+	// 	setInfoLoaded(false);
+	// 	getCurrentUser(token);
+	// }, [token]);
 
 	const handleLogin = async (loginData) => {
 		try {

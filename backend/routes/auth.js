@@ -51,14 +51,13 @@ router.post('/register', async function (req, res, next) {
 		}
 
 		const newUser = await User.register(req.body);
+		console.log(`newUser: ${newUser.id}`);
 		const token = jwt.sign({id: newUser.id}, SECRET_KEY, {
-			expiresIn: 60 * 60 * 24, // 1 day
+			expiresIn: '24h',
 		});
-
 		res.cookie('token', token, {httpOnly: true});
-
 		// return res.status(201).json({token});
-		return res.status(201).json('User created');
+		return res.status(201).json(newUser.id);
 	} catch (err) {
 		return next(err);
 	}

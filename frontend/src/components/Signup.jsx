@@ -27,7 +27,7 @@ export default function SignUp({handleSignup}) {
 	const handleSubmit = async (event) => {
 		event.preventDefault();
 		let result = await handleSignup(formData);
-		console.log(`result: ${result}`);
+
 		if (result.success) {
 			navigate('/user');
 		} else {

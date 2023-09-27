@@ -1,10 +1,25 @@
 const db = require('../db');
 const bcrypt = require('bcrypt');
 const {BCRYPT_WORK_FACTOR} = require('../config');
-const {UnauthorizedError, BadRequestError} = require('../expressError');
+const {UnauthorizedError, BadRequestError, NotFoundError} = require('../expressError');
 
 /** Related functions for users. */
 class User {
+	/**get method to retreive user by ID */
+	static async get(id) {
+		const result = await db.query(
+			`SELECT id, first_name AS "firstName", last_name AS "lastName", email
+					 FROM users
+					 WHERE id = $1`,
+			[id]
+		);
+
+		const user = result.rows[0];
+
+		if (!user) throw new NotFoundError(`No user: ${id}`);
+
+		return user;
+	}
 	/** authenticate user with password.
 	 * Returns { first_name, last_name, email }
 	 *
@@ -63,7 +78,6 @@ class User {
 		);
 
 		const user = result.rows[0];
-
 		return user;
 	}
 
