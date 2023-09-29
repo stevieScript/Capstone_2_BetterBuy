@@ -73,11 +73,11 @@ class User {
             email, 
 						password)
            VALUES ($1, $2, $3, $4)
-           RETURNING id`,
+           RETURNING id, email`,
 			[firstName, lastName, email, hashedPassword]
 		);
-
 		const user = result.rows[0];
+
 		return user;
 	}
 
