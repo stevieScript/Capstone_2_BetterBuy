@@ -10,7 +10,7 @@ router.get('/:id', async function (req, res, next) {
 	// const user = await User.get(req.params.id);
 	try {
 		const user = await User.get(req.params.id);
-		return res.json({user});
+		return res.json({id: user.id, email: user.email});
 	} catch (err) {
 		return next(err);
 	}

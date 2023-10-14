@@ -1,4 +1,4 @@
-import * as React from 'react';
+import {useContext, useState} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -11,15 +11,31 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
+import {useNavigate} from 'react-router-dom';
+export default function SignIn({handleLogin}) {
+	const navigate = useNavigate();
+	const [formData, setFormData] = useState({
+		email: '',
+		password: '',
+	});
 
-export default function SignIn() {
-	const handleSubmit = (event) => {
-		event.preventDefault();
-		const data = new FormData(event.currentTarget);
-		console.log({
-			email: data.get('email'),
-			password: data.get('password'),
-		});
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		let result = await handleLogin(formData);
+
+		if (result.success) {
+			navigate('/user');
+		} else {
+			console.log(result.errors);
+		}
+	};
+
+	const handleChange = (e) => {
+		const {name, value} = e.target;
+		setFormData((formData) => ({
+			...formData,
+			[name]: value,
+		}));
 	};
 
 	return (
@@ -48,6 +64,7 @@ export default function SignIn() {
 						label='Email Address'
 						name='email'
 						autoComplete='email'
+						onChange={handleChange}
 						autoFocus
 					/>
 					<TextField
@@ -58,6 +75,7 @@ export default function SignIn() {
 						label='Password'
 						type='password'
 						id='password'
+						onChange={handleChange}
 						autoComplete='current-password'
 					/>
 					<FormControlLabel

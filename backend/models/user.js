@@ -10,7 +10,9 @@ class User {
 		const result = await db.query(
 			`SELECT id, first_name AS "firstName", last_name AS "lastName", email
 					 FROM users
-					 WHERE id = $1`,
+					 WHERE id = $1 
+					 RETURNING id, email
+					 `,
 			[id]
 		);
 
@@ -28,14 +30,14 @@ class User {
 	static async authenticate(email, password) {
 		// try to find the user first
 		const result = await db.query(
-			`SELECT id, password,
+			`SELECT id, password
            FROM users
            WHERE email = $1`,
 			[email]
 		);
 
 		const user = result.rows[0];
-
+		// console.log(`user: ${user.id}`);
 		if (user) {
 			// compare hashed password to a new hash from password
 			const isValid = await bcrypt.compare(password, user.password);
