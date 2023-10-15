@@ -62,7 +62,7 @@ function App() {
 	const handleLogout = () => {
 		setCurrentUser(null);
 		setUser(null);
-		localStorage.removeItem('id');
+		localStorage.removeItem('user');
 		<Navigate to='/' />;
 	};
 	return (
