@@ -8,10 +8,9 @@ class User {
 	/**get method to retreive user by ID */
 	static async get(id) {
 		const result = await db.query(
-			`SELECT id, first_name AS "firstName", last_name AS "lastName", email
+			`SELECT id, email
 					 FROM users
-					 WHERE id = $1 
-					 RETURNING id, email
+					 WHERE id = $1
 					 `,
 			[id]
 		);
@@ -19,7 +18,6 @@ class User {
 		const user = result.rows[0];
 
 		if (!user) throw new NotFoundError(`No user: ${id}`);
-
 		return user;
 	}
 	/** authenticate user with password.
@@ -37,7 +35,6 @@ class User {
 		);
 
 		const user = result.rows[0];
-		// console.log(`user: ${user.id}`);
 		if (user) {
 			// compare hashed password to a new hash from password
 			const isValid = await bcrypt.compare(password, user.password);

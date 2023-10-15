@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
-import {Box, Button} from '@mui/material';
+import {Box, Button, IconButton} from '@mui/material';
 
 function SearchBar({search}) {
 	const [searchTerm, setSearchTerm] = useState('');
@@ -17,24 +17,23 @@ function SearchBar({search}) {
 	};
 
 	return (
-		<Box>
+		<Box
+			sx={{
+				margin: '10px 0',
+			}}>
 			<form onSubmit={handleSubmit}>
 				<TextField
 					// id='outlined-basic'
 					label='Search'
-					color='secondary'
+					color='primary'
 					variant='outlined'
 					value={searchTerm}
 					onChange={handleChange}
+					sx={{width: '80%'}}
 				/>
-				<Button
-					type='submit'
-					variant='contained'
-					endIcon={<SearchIcon />}
-					size='small'
-					color='primary'>
-					Search
-				</Button>
+				<IconButton type='submit' sx={{p: '10px'}}>
+					<SearchIcon sx={{fontSize: '36px'}} />
+				</IconButton>
 			</form>
 		</Box>
 	);

@@ -32,7 +32,6 @@ export default function SignUp({handleSignup}) {
 			navigate('/user');
 		} else {
 			// setErrors(result.errors);
-			console.log(result.errors);
 		}
 	};
 

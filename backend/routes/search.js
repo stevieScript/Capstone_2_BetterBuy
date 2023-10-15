@@ -20,10 +20,8 @@ router.get('/', async function (req, res, next) {
 		const response = await eBay.finding.findItemsByKeywords({
 			keywords: query,
 		});
-		console.log(response.searchResult.item);
 		return res.json(response.searchResult.item);
 	} catch (err) {
-		console.log(err);
 		return next(err);
 	}
 });

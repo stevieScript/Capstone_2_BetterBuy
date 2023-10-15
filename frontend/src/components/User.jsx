@@ -3,7 +3,9 @@ import {Navigate} from 'react-router-dom';
 import UserContext from '../auth/UserContext';
 import {useContext} from 'react';
 import SearchBar from './SearchBar';
-import ProductCard from './ProductCard';
+import ProductCard from './ProductCard/ProductCard';
+import Box from '@mui/material/Box';
+import Grid from '@mui/material/Unstable_Grid2';
 import Api from '../api';
 
 function User() {
@@ -25,23 +27,29 @@ function User() {
 
 	const search = async (searchTerm) => {
 		const results = await Api.search(searchTerm);
-		console.log(results);
 		setResults(results);
 	};
 
 	return (
-		<div>
+		<Box
+			sx={{
+				maxWidth: '1200px',
+				margin: 'auto',
+				padding: '0 10px',
+			}}>
 			<SearchBar search={search} />
 			{results ? (
-				<div>
-					{results.map((result, i) => (
-						<ProductCard key={result['itemId']} item={result} />
+				<Grid container spacing={{xs: 2, md: 4}} columns={{xs: 12, md: 10}}>
+					{results.map((result) => (
+						<Grid item xs='auto' sm='auto' md='auto' key={result['itemId']}>
+							<ProductCard item={result} />
+						</Grid>
 					))}
-				</div>
+				</Grid>
 			) : (
 				<p> Sorry, no results found</p>
 			)}
-		</div>
+		</Box>
 	);
 }
 

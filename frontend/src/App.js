@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import AppRoutes from './AppRoutes';
 import NavBar from './components/NavBar';
 // import LoggedInNav from './components/LoggedInNav';
@@ -8,34 +8,38 @@ import UserContext from './auth/UserContext';
 // import jwt_decode from 'jwt-decode';
 import {BrowserRouter} from 'react-router-dom';
 // import User from './components/User';
+import './App.css';
 
 function App() {
-	// const [infoLoaded, setInfoLoaded] = useState(false);
+	const [infoLoaded, setInfoLoaded] = useState(false);
 	const [currentUser, setCurrentUser] = useState(null);
-	// const [user, setUser] = useState(() => localStorage.getItem('user') || null);
+	const [user, setUser] = useState(() => {
+		const storedUser = localStorage.getItem('user');
+		return storedUser ? JSON.parse(storedUser) : null;
+	});
 
-	// useEffect(() => {
-	// 	async function getCurrentUser() {
-	// 			try {
-	// 				let currentUser = await Api.getUser();
-	// 				setCurrentUser(currentUser);
-	// 			} catch (err) {
-	// 				// console.error('App loadUserInfo: problem loading', err);
-	// 				setCurrentUser(null);
-	// 			}
-	// 		}
-	// 		setInfoLoaded(true);
-	// 	}
-	// 	setInfoLoaded(false);
-	// 	getCurrentUser(user);
-	// }, []);
+	useEffect(() => {
+		async function getCurrentUser() {
+			if (user) {
+				try {
+					let currentUser = await Api.getUser(user);
+					setCurrentUser(currentUser);
+				} catch (err) {
+					console.error('App loadUserInfo: problem loading', err);
+					setCurrentUser(null);
+				}
+			}
+			setInfoLoaded(true);
+		}
+		setInfoLoaded(false);
+		getCurrentUser();
+	}, []);
 
 	const handleSignup = async (signupData) => {
 		try {
 			let res = await Api.register(signupData);
-			console.log(`handleSignup res: ${res}`);
-			// setUser(localStorage.setItem('user', res.id));
-			setCurrentUser(res);
+
+			setCurrentUser(res.id);
 			return {success: true};
 		} catch (errors) {
 			console.error('signup failed', errors);
@@ -46,7 +50,7 @@ function App() {
 	const handleLogin = async (loginData) => {
 		try {
 			let user = await Api.login(loginData);
-			// setUser(user);
+			setUser(user);
 			setCurrentUser(user);
 			return {success: true};
 		} catch (errors) {
@@ -57,8 +61,8 @@ function App() {
 
 	const handleLogout = () => {
 		setCurrentUser(null);
-		// setUser(null);
-		// localStorage.removeItem('id');
+		setUser(null);
+		localStorage.removeItem('id');
 	};
 	return (
 		<div className='App'>
@@ -66,6 +70,7 @@ function App() {
 				<UserContext.Provider value={{currentUser, setCurrentUser}}>
 					<NavBar />
 					{/* <LoggedInNav handleLogout={handleLogout} /> */}
+
 					<AppRoutes
 						handleLogin={handleLogin}
 						handleLogout={handleLogout}

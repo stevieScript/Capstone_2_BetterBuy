@@ -7,6 +7,9 @@
 		"start-frontend": "cd frontend && npm start",
 		"start-backend": "cd backend && nodemon server.js",
 		"start": "concurrently \"npm run start-frontend\" \"npm run start-backend\""
+	},
+	"dependencies": {
+		"@reduxjs/toolkit": "^1.9.7",
+		"redux": "^4.2.1"
 	}
 }
-

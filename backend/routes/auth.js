@@ -26,7 +26,6 @@ router.post('/token', async function (req, res, next) {
 
 		const {email, password} = req.body;
 		const user = await User.authenticate(email, password);
-		console.log(`user: ${user}`);
 		const token = jwt.sign({id: user}, SECRET_KEY, {
 			expiresIn: 60 * 60 * 24, // 1 day
 		});

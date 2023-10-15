@@ -16,16 +16,20 @@ class Api {
 	static async login(credentials) {
 		try {
 			const response = await axios.post(`${BASE_URL}/auth/token`, credentials);
-			localStorage.setItem('user', response.data.id);
-			return response.data;
+			localStorage.setItem('user', JSON.stringify(response.data.user));
+			return response.data.user;
 		} catch (err) {
 			console.error(err);
 		}
 	}
 
 	static async getUser(id) {
-		const response = await axios.get(BASE_URL + `users/${id}`);
-		return response.data;
+		try {
+			const response = await axios.get(`${BASE_URL}/users/${id}`);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
 	}
 	static async getProducts() {
 		const response = await axios.get(BASE_URL + 'products');

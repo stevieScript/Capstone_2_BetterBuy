@@ -26,7 +26,7 @@ export default function SignIn({handleLogin}) {
 		if (result.success) {
 			navigate('/user');
 		} else {
-			console.log(result.errors);
+			console.error(result.errors);
 		}
 	};
 
