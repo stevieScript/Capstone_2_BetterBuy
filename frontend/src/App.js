@@ -6,7 +6,7 @@ import Api from './api';
 // import jwt from 'jsonwebtoken';
 import UserContext from './auth/UserContext';
 // import jwt_decode from 'jwt-decode';
-import {BrowserRouter} from 'react-router-dom';
+import {BrowserRouter, Navigate} from 'react-router-dom';
 // import User from './components/User';
 import './App.css';
 
@@ -63,13 +63,14 @@ function App() {
 		setCurrentUser(null);
 		setUser(null);
 		localStorage.removeItem('id');
+		<Navigate to='/' />;
 	};
 	return (
 		<div className='App'>
 			<BrowserRouter>
 				<UserContext.Provider value={{currentUser, setCurrentUser}}>
-					<NavBar />
 					{/* <LoggedInNav handleLogout={handleLogout} /> */}
+					<NavBar handleLogout={handleLogout} />
 
 					<AppRoutes
 						handleLogin={handleLogin}

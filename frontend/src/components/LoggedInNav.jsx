@@ -18,7 +18,7 @@ import {useContext, useState} from 'react';
 import SearchBar from './SearchBar';
 import {TextField} from '@mui/material';
 
-export default function LoggedInNav() {
+export default function LoggedInNav({handleLogout}) {
 	const [searchTerm, setSearchTerm] = useState('');
 
 	const handleChange = (event) => {
@@ -102,7 +102,7 @@ export default function LoggedInNav() {
 					</Search> */}
 
 					{/* <SearchBar /> */}
-					<Button marginleft='auto' color='inherit' href='/logout'>
+					<Button marginleft='auto' color='inherit' onClick={handleLogout}>
 						Logout
 					</Button>
 					<Button color='inherit' href='/signup'>
