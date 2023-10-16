@@ -49,6 +49,15 @@ class Api {
 			console.error(err);
 		}
 	}
+
+	static async getById(id) {
+		try {
+			const response = await axios.get(`${BASE_URL}/search/${id}`);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	}
 }
 
 export default Api;

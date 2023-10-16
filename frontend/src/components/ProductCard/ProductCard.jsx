@@ -40,7 +40,7 @@ const ProductCard = ({item}) => {
 						<img src={item['galleryURL']} alt={item['title']} className='image' />
 					</div>
 					<div>
-						<Link className='link' to={`/product/${item.itemId}`}>
+						<Link className='link' to={`/search/${item.itemId}`}>
 							<h4>{item['title']}</h4>
 						</Link>
 						<span className='prices'>${item['sellingStatus']['currentPrice']['value']}</span>
