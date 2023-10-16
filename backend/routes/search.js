@@ -43,7 +43,6 @@ router.get('/:id', async function (req, res, next) {
 			ItemID: id,
 			IncludeSelector: 'Details',
 		});
-		console.log(response);
 		return res.json(response);
 	} catch (err) {
 		return next(err);

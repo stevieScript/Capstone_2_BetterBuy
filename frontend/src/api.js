@@ -53,6 +53,7 @@ class Api {
 	static async getById(id) {
 		try {
 			const response = await axios.get(`${BASE_URL}/search/${id}`);
+			console.log(`response.data: ${response.data}`);
 			return response.data;
 		} catch (err) {
 			console.error(err);

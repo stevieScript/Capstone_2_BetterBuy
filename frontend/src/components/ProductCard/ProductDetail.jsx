@@ -28,23 +28,6 @@ const Product = () => {
 		getData();
 	}, []);
 
-	// let data = [
-	// 	{
-	// 		ItemID: 174781966714,
-	// 		Title: 'Apple airpods(3rd generation) Bluetooth wireless earphone charging case - white',
-	// 		Subtitle: 'Only supports iOS 17 below versions',
-	// 		CurrentPrice: {
-	// 			value: 49.99,
-	// 			currencyID: 'USD',
-	// 		},
-	// 		ListingStatus: 'Active',
-	// 		QuantitySold: 984,
-	// 		TopRatedSeller: true,
-	// 		PictureURL:
-	// 			'https://i.ebayimg.com/00/s/MTYwMFgxMTk5/z/evwAAOSwXkNkx71N/$_57.JPG?set_id=8800005007',
-	// 	},
-	// ];
-
 	return (
 		<div className='product'>
 			<>
@@ -62,19 +45,18 @@ const Product = () => {
 					</div>
 					<button
 						className='add'
-						// onClick={() =>
-						// 	dispatch(
-						// 		addToCart({
-						// 			id: data[0].id,
-						// 			title: data[0].attributes.title,
-						// 			desc: data[0].attributes.desc,
-						// 			price: data[0].attributes.price,
-						// 			img: data[0].attributes.img.data[0].attributes.url,
-						// 			quantity,
-						// 		})
-						// )
-						// }
-					>
+						onClick={() =>
+							dispatch(
+								addToCart({
+									id: data[0]?.ItemID,
+									title: data[0]?.Title,
+									desc: data[0]?.ConditionDescription,
+									price: data[0]?.CurrentPrice.value,
+									img: data[0]?.PictureURL,
+									quantity,
+								})
+							)
+						}>
 						<AddShoppingCartIcon /> ADD TO CART
 					</button>
 					{/* <div className='links'>

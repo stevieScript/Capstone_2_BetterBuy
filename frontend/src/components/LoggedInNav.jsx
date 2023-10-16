@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 // import Typography from '@mui/material/Typography';
 import SearchIcon from '@mui/icons-material/Search';
-
+import {useSelector} from 'react-redux';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import InputBase from '@mui/material/InputBase';
@@ -21,7 +21,7 @@ import Cart from './Cart/Cart';
 export default function LoggedInNav({handleLogout}) {
 	const [searchTerm, setSearchTerm] = useState('');
 	const [open, setOpen] = useState(false);
-
+	const products = useSelector((state) => state.cart.products);
 	const handleChange = (event) => {
 		setSearchTerm(event.target.value);
 	};
@@ -111,6 +111,7 @@ export default function LoggedInNav({handleLogout}) {
 					</Button>
 					<IconButton color='inherit' className='cartIcon' onClick={() => setOpen(!open)}>
 						<ShoppingCartIcon />
+						<span>{products.length}</span>
 					</IconButton>
 				</Toolbar>
 			</AppBar>
