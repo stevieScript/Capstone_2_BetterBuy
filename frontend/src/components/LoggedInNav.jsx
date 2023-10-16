@@ -1,4 +1,3 @@
-import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
@@ -17,9 +16,11 @@ import Api from '../api';
 import {useContext, useState} from 'react';
 import SearchBar from './SearchBar';
 import {TextField} from '@mui/material';
+import Cart from './Cart/Cart';
 
 export default function LoggedInNav({handleLogout}) {
 	const [searchTerm, setSearchTerm] = useState('');
+	const [open, setOpen] = useState(false);
 
 	const handleChange = (event) => {
 		setSearchTerm(event.target.value);
@@ -108,11 +109,12 @@ export default function LoggedInNav({handleLogout}) {
 					<Button color='inherit' href='/signup'>
 						Profile
 					</Button>
-					<IconButton color='inherit' href='/cart'>
+					<IconButton color='inherit' className='cartIcon' onClick={() => setOpen(!open)}>
 						<ShoppingCartIcon />
 					</IconButton>
 				</Toolbar>
 			</AppBar>
+			{open && <Cart />}
 		</Box>
 	);
 }

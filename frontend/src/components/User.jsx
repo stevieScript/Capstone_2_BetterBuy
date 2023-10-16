@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {Navigate} from 'react-router-dom';
+import {useNavigate, useLocation} from 'react-router-dom';
 import UserContext from '../auth/UserContext';
+import {useDispatch} from 'react-redux';
 import {useContext} from 'react';
 import SearchBar from './SearchBar';
 import ProductCard from './ProductCard/ProductCard';
@@ -11,6 +13,18 @@ import Api from '../api';
 function User() {
 	const {currentUser} = useContext(UserContext);
 	const [results, setResults] = useState([]);
+	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	// const location = useLocation();
+
+	// useEffect(() => {
+	// 	const params = new URLSearchParams(location.search);
+	// 	const query = params.get('q');
+
+	// 	if (query) {
+	// 		search(query);
+	// 	}
+	// }, []);
 
 	// useEffect(() => {
 	// 	// This is where I will load top procudts
@@ -28,6 +42,7 @@ function User() {
 	const search = async (searchTerm) => {
 		const results = await Api.search(searchTerm);
 		setResults(results);
+		navigate('/search?search=' + searchTerm, {state: {results: results}});
 	};
 
 	return (

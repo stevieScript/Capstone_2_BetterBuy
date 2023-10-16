@@ -11,6 +11,8 @@ function AppRoutes({handleLogin, handleSignup, handleLogout}) {
 			<Route path='/login' element={<Login handleLogin={handleLogin} />} />
 			<Route path='/signup' element={<Signup handleSignup={handleSignup} />} />
 			<Route path='/user' handleLogout={handleLogout} element={<User />} />
+			<Route path='/search?' element={<User />} />
+			<Route path='*' element={<h1>Not Found</h1>} />
 		</Routes>
 	);
 }

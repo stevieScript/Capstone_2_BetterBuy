@@ -26,5 +26,28 @@ router.get('/', async function (req, res, next) {
 	}
 });
 
+/** GET /search/:id
+ *
+ * Route for getting individual item from Ebay API using item id
+ *
+ *
+ * Authorization required: none
+ *
+ *
+ * */
+
+router.get('/:id', async function (req, res, next) {
+	try {
+		const id = req.params.id;
+		const response = await eBay.shopping.GetItemStatus({
+			itemID: id,
+		});
+		console.log(response);
+		return res.json(response);
+	} catch (err) {
+		return next(err);
+	}
+});
+
 module.exports = router;
 
