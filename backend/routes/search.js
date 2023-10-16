@@ -39,8 +39,9 @@ router.get('/', async function (req, res, next) {
 router.get('/:id', async function (req, res, next) {
 	try {
 		const id = req.params.id;
-		const response = await eBay.shopping.GetItemStatus({
-			itemID: id,
+		const response = await eBay.shopping.GetSingleItem({
+			ItemID: id,
+			IncludeSelector: 'Details',
 		});
 		console.log(response);
 		return res.json(response);
