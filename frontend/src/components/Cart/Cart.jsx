@@ -8,26 +8,7 @@ import {removeItem, resetCart} from '../../redux/cartReducer';
 function Cart() {
 	const dispatch = useDispatch();
 	const products = useSelector((state) => state.cart.products);
-	// const data = [
-	// 	{
-	// 		id: 1,
-	// 		title: 'iPhone 13',
-	// 		price: 1000,
-	// 		quantity: 1,
-	// 		isNew: true,
-	// 		img: 'https://www.apple.com/newsroom/images/product/iphone/geo/Apple_iPhone-13-Blue-family_09142021_big.jpg.large.jpg',
-	// 		desc: 'This is a description of the iPhone 13',
-	// 	},
-	// 	{
-	// 		id: 1,
-	// 		title: 'iPhone 12',
-	// 		price: 800,
-	// 		quantity: 1,
-	// 		isNew: true,
-	// 		img: 'https://www.apple.com/newsroom/images/product/iphone/geo/Apple_iPhone-13-Blue-family_09142021_big.jpg.large.jpg',
-	// 		desc: 'This is a description of the iPhone 12',
-	// 	},
-	// ];
+
 	const total = products.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
 	return (
