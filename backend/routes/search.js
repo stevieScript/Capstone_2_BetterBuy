@@ -49,5 +49,26 @@ router.get('/:id', async function (req, res, next) {
 	}
 });
 
+/** GET /top-deals
+ *
+ * to get top selling items from Ebay API
+ *
+ * Authorization required: none
+ *
+ * */
+
+// router.get('/top-deals', async function (req, res, next) {
+// 	try {
+// 		const response = await eBay.finding.findItemsByCategory({
+// 			itemId: '9355',
+// 			sortOrder: 'BestMatch',
+// 		});
+// 		return res.json(response);
+// 	} catch (err) {
+// 		consol.log(err);
+// 		return next(err);
+// 	}
+// });
+
 module.exports = router;
 

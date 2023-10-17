@@ -60,6 +60,15 @@ class Api {
 		}
 	}
 
+	static async getTopDeals() {
+		try {
+			const response = await axios.get(`${BASE_URL}/top-deals`);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	}
+
 	static async addToCart(id) {
 		try {
 			const response = await axios.post(`${BASE_URL}/cart/${id}`);
