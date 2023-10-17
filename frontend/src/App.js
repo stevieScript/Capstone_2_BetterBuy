@@ -60,26 +60,26 @@ function App() {
 	};
 
 	const handleLogout = () => {
+		localStorage.removeItem('user');
 		setCurrentUser(null);
 		setUser(null);
-		localStorage.removeItem('user');
 		<Navigate to='/' />;
 	};
 	return (
-		<div className='App'>
+		<>
 			<BrowserRouter>
 				<UserContext.Provider value={{currentUser, setCurrentUser}}>
-					{/* <LoggedInNav handleLogout={handleLogout} /> */}
 					<NavBar handleLogout={handleLogout} />
-
-					<AppRoutes
-						handleLogin={handleLogin}
-						handleLogout={handleLogout}
-						handleSignup={handleSignup}
-					/>
+					<div className='App'>
+						<AppRoutes
+							handleLogin={handleLogin}
+							handleLogout={handleLogout}
+							handleSignup={handleSignup}
+						/>
+					</div>
 				</UserContext.Provider>
 			</BrowserRouter>
-		</div>
+		</>
 	);
 }
 

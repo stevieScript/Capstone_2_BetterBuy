@@ -8,7 +8,6 @@ import UserContext from '../../auth/UserContext';
 import {useContext} from 'react';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import {removeItem, resetCart} from '../../redux/cartReducer';
-import {current} from '@reduxjs/toolkit';
 
 function Cart() {
 	const {currentUser} = useContext(UserContext);
@@ -24,6 +23,14 @@ function Cart() {
 		}
 	};
 
+	function emptyCart() {
+		return (
+			<div className='empty'>
+				<h1>Cart is Empty</h1>
+			</div>
+		);
+	}
+
 	if (!currentUser) {
 		return <Navigate to='/' />;
 	}
@@ -31,13 +38,12 @@ function Cart() {
 	return (
 		<div className='cart'>
 			<h1>Cart Items</h1>
+			{products.length === 0 && emptyCart()}
 			{products.map((item) => (
-				<div className='cart__item' key={item?.id}>
-					<img src={item?.img} alt={item?.title} />
-					<div className='cart__item__info'>
-						<h2>{item?.title}</h2>
-						<h3>{item?.price}</h3>
-						<p>{item?.quantity}</p>
+				<div className='item' key={item?.id}>
+					<img className='itemImg' src={item?.img} alt={item?.title} />
+					<div className='details'>
+						<h1>{item?.title}</h1>
 						<p>{item?.desc?.substring(0, 100)}</p>
 						<div className='price'>
 							{item?.quantity} X ${item?.price}
@@ -47,10 +53,15 @@ function Cart() {
 				</div>
 			))}
 			<div className='total'>
-				<h3>Subtotal: {total?.toFixed(2)} </h3>
-				<button onClick={handleCheckout}>Checkout</button>
-				<span onClick={() => dispatch(resetCart())}>Clear Cart</span>
+				<span>Subtotal:</span>
+				<span>{total?.toFixed(2)}</span>
 			</div>
+			<button className='checkout' onClick={handleCheckout}>
+				Checkout
+			</button>
+			<span className='reset' onClick={() => dispatch(resetCart())}>
+				Clear Cart
+			</span>
 		</div>
 	);
 }

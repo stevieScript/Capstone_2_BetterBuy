@@ -1,0 +1,26 @@
+.count {
+	font-size: 12px;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background-color: #2879fe;
+	color: white;
+	position: absolute;
+	right: -10px;
+	top: -10px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.icons {
+	display: flex;
+	gap: 15px;
+	color: #777;
+	cursor: pointer;
+}
+.cartIcon {
+	position: relative;
+	cursor: pointer;
+}
+

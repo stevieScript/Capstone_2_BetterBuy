@@ -7,11 +7,14 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {useParams} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import Api from '../../api';
+import {Navigate} from 'react-router-dom';
+import UserContext from '../../auth/UserContext';
+import {useContext} from 'react';
 import {addToCart} from '../../redux/cartReducer';
 
 const Product = () => {
+	const currentUser = useContext(UserContext);
 	const id = useParams().id;
-	// const [selectedImg, setSelectedImg] = useState('img');
 	const [quantity, setQuantity] = useState(1);
 
 	const dispatch = useDispatch();
@@ -20,19 +23,30 @@ const Product = () => {
 
 	const getData = async () => {
 		const results = await Api.getById(id);
+
 		console.log(results['Item']);
 		setData([results['Item']]);
 	};
+	// const goBack = () => {
+	// 	window.history.back();
+	// };
 
 	useEffect(() => {
 		getData();
 	}, []);
-
+	if (!currentUser) {
+		return <Navigate to='/' />;
+	}
 	return (
 		<div className='product'>
 			<>
-				<div className='mainImg'>
-					<img src={data[0]?.PictureURL} alt='' />
+				<div className='left'>
+					{/* <button className='back' onClick={goBack}>
+						Back
+					</button> */}
+					<div className='mainImg'>
+						<img src={data[0]?.PictureURL} alt='' />
+					</div>
 				</div>
 				<div className='right'>
 					<h1>{data[0]?.Title}</h1>
@@ -72,7 +86,7 @@ const Product = () => {
 						<span>Product Type: T-Shirt</span>
 						<span>Tag: T-Shirt, Women, Top</span>
 					</div> */}
-					<hr />
+					{/* <hr /> */}
 					<div className='info'>
 						<span>SELLER RATING: {data[0]?.Seller?.PositiveFeedbackPercent}</span>
 						<hr />

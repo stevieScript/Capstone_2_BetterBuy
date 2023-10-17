@@ -26,7 +26,7 @@ router.get('/', async function (req, res, next) {
 	}
 });
 
-/** GET /search/:id
+/** GET /search?id
  *
  * Route for getting individual item from Ebay API using item id
  *

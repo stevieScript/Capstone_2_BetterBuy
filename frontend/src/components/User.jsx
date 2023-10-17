@@ -1,9 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {Navigate} from 'react-router-dom';
-import {useNavigate, useLocation} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import UserContext from '../auth/UserContext';
 import {useContext} from 'react';
-import {useDispatch} from 'react-redux';
+// import {useDispatch} from 'react-redux';
 import SearchBar from './SearchBar';
 import ProductCard from './ProductCard/ProductCard';
 import Box from '@mui/material/Box';
@@ -14,7 +14,7 @@ function User() {
 	const {currentUser} = useContext(UserContext);
 	const [results, setResults] = useState([]);
 	const navigate = useNavigate();
-	const dispatch = useDispatch();
+	// const dispatch = useDispatch();
 	// const location = useLocation();
 
 	// useEffect(() => {
