@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import AppRoutes from './AppRoutes';
-import NavBar from './components/NavBar';
+import NavBar from './components/NavBar/NavBar';
 // import LoggedInNav from './components/LoggedInNav';
 import Api from './api';
 // import jwt from 'jsonwebtoken';
@@ -13,6 +13,7 @@ import './App.css';
 function App() {
 	const [infoLoaded, setInfoLoaded] = useState(false);
 	const [currentUser, setCurrentUser] = useState(null);
+	const [products, setProducts] = useState([]);
 	const [user, setUser] = useState(() => {
 		const storedUser = localStorage.getItem('user');
 		return storedUser ? JSON.parse(storedUser) : null;
@@ -75,6 +76,8 @@ function App() {
 							handleLogin={handleLogin}
 							handleLogout={handleLogout}
 							handleSignup={handleSignup}
+							products={products}
+							setProducts={setProducts}
 						/>
 					</div>
 				</UserContext.Provider>

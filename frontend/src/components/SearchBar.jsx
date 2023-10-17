@@ -1,13 +1,25 @@
 import {useState} from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import TextField from '@mui/material/TextField';
+import {useNavigate} from 'react-router-dom';
+// import Api from '../api';
 import {Box, Button, IconButton} from '@mui/material';
+import Api from '../api';
 
-function SearchBar({search}) {
+function SearchBar() {
 	const [searchTerm, setSearchTerm] = useState('');
-
+	const [products, setProducts] = useState([]);
+	// const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const handleChange = (event) => {
 		setSearchTerm(event.target.value);
+	};
+
+	const search = async (searchTerm) => {
+		const products = await Api.search(searchTerm);
+		setProducts(products);
+
+		navigate(`/search/${searchTerm}`);
 	};
 
 	const handleSubmit = (event) => {

@@ -10,40 +10,20 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import Api from '../api';
 
-function User() {
+function ProductList({products}) {
 	const {currentUser} = useContext(UserContext);
-	const [results, setResults] = useState([]);
-	const navigate = useNavigate();
-	// const dispatch = useDispatch();
-	// const location = useLocation();
-
-	// useEffect(() => {
-	// 	const params = new URLSearchParams(location.search);
-	// 	const query = params.get('q');
-
-	// 	if (query) {
-	// 		search(query);
-	// 	}
-	// }, []);
-
-	// useEffect(() => {
-	// 	// This is where I will load top procudts
-	// 	const featured = async () => {
-	// 		const results = await Api.getFeatured();
-	// 		setResults(results);
-	// 	};
-	// 	featured();
-	// }, []);
+	// const [products, setResults] = useState([]);
+	// const navigate = useNavigate();
 
 	if (!currentUser) {
 		return <Navigate to='/' />;
 	}
 
-	const search = async (searchTerm) => {
-		const results = await Api.search(searchTerm);
-		setResults(results);
-		navigate('/search?search=' + searchTerm, {state: {results: results}});
-	};
+	// const search = async (searchTerm) => {
+	// 	const products = await Api.search(searchTerm);
+	// 	setResults(products);
+	// 	navigate('/search?search=' + searchTerm, {state: {products: products}});
+	// };
 
 	return (
 		<Box
@@ -52,10 +32,10 @@ function User() {
 				margin: 'auto',
 				padding: '0 10px',
 			}}>
-			<SearchBar search={search} />
-			{results ? (
+			{/* <SearchBar search={search} /> */}
+			{products ? (
 				<Grid container spacing={{xs: 2, md: 4}} columns={{xs: 12, md: 10}}>
-					{results.map((result) => (
+					{products.map((result) => (
 						<Grid item xs='auto' sm='auto' md='auto' key={result['itemId']}>
 							<ProductCard item={result} />
 						</Grid>
@@ -68,5 +48,5 @@ function User() {
 	);
 }
 
-export default User;
+export default ProductList;
 

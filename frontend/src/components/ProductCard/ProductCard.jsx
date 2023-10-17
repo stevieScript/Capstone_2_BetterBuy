@@ -15,7 +15,7 @@ const ProductCard = ({item}) => {
 		return <Navigate to='/' />;
 	}
 	return (
-		<Link className='link' to={`/search/${item.itemId}`}>
+		<Link className='link' to={`/search/product/${item.itemId}`}>
 			<Card className='card'>
 				<div className='image'>
 					<img src={item['galleryURL']} alt={item['title']} />

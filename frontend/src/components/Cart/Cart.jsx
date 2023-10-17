@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import './Cart.css';
 import {useDispatch} from 'react-redux';
 import Api from '../../api';
-import {Navigate} from 'react-router-dom';
+import {Link, Navigate} from 'react-router-dom';
 import UserContext from '../../auth/UserContext';
 import {useContext} from 'react';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
@@ -43,7 +43,9 @@ function Cart() {
 				<div className='item' key={item?.id}>
 					<img className='itemImg' src={item?.img} alt={item?.title} />
 					<div className='details'>
-						<h1>{item?.title}</h1>
+						<Link to={`/search/product/${item.itemId}`}>
+							<h1>{item?.title}</h1>
+						</Link>
 						<p>{item?.desc?.substring(0, 100)}</p>
 						<div className='price'>
 							{item?.quantity} X ${item?.price}

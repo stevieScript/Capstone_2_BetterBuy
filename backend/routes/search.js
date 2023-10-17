@@ -14,9 +14,9 @@ const {ensureLoggedIn, cookieJwtAuth} = require('../middleware/auth');
  * Authorization required: none
  *
  * */
-router.get('/', async function (req, res, next) {
+router.get('/:search', async function (req, res, next) {
 	try {
-		const query = req.query.q;
+		const query = req.params.search;
 		const response = await eBay.finding.findItemsByKeywords({
 			keywords: query,
 		});
@@ -26,7 +26,7 @@ router.get('/', async function (req, res, next) {
 	}
 });
 
-/** GET /search?id
+/** GET /search/product/id
  *
  * Route for getting individual item from Ebay API using item id
  *
@@ -36,7 +36,7 @@ router.get('/', async function (req, res, next) {
  *
  * */
 
-router.get('/:id', async function (req, res, next) {
+router.get('/product/:id', async function (req, res, next) {
 	try {
 		const id = req.params.id;
 		const response = await eBay.shopping.GetSingleItem({
@@ -57,18 +57,19 @@ router.get('/:id', async function (req, res, next) {
  *
  * */
 
-// router.get('/top-deals', async function (req, res, next) {
-// 	try {
-// 		const response = await eBay.finding.findItemsByCategory({
-// 			itemId: '9355',
-// 			sortOrder: 'BestMatch',
-// 		});
-// 		return res.json(response);
-// 	} catch (err) {
-// 		consol.log(err);
-// 		return next(err);
-// 	}
-// });
+router.get('/category/:id', async function (req, res, next) {
+	try {
+		const id = req.params.id;
+		const response = await eBay.finding.findItemsByCategory({
+			categoryId: id,
+			sortOrder: 'BestMatch',
+		});
+		return res.json(response);
+	} catch (err) {
+		consol.log(err);
+		return next(err);
+	}
+});
 
 module.exports = router;
 

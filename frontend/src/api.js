@@ -31,10 +31,10 @@ class Api {
 			console.error(err);
 		}
 	}
-	static async getProducts() {
-		const response = await axios.get(BASE_URL + 'products');
-		return response.data;
-	}
+	// static async getProducts() {
+	// 	const response = await axios.get(BASE_URL + 'products');
+	// 	return response.data;
+	// }
 
 	static async getCart() {
 		const response = await axios.get(BASE_URL + 'cart');
@@ -43,7 +43,7 @@ class Api {
 
 	static async search(searchTerm) {
 		try {
-			const response = await axios.get(BASE_URL + '/search', {params: {q: searchTerm}});
+			const response = await axios.get(`${BASE_URL}/search/${searchTerm}`);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -52,7 +52,7 @@ class Api {
 
 	static async getById(id) {
 		try {
-			const response = await axios.get(`${BASE_URL}/search/${id}`);
+			const response = await axios.get(`${BASE_URL}/search/product/${id}`);
 			console.log(`response.data: ${response.data}`);
 			return response.data;
 		} catch (err) {
@@ -60,9 +60,9 @@ class Api {
 		}
 	}
 
-	static async getTopDeals() {
+	static async getProductsbyCategoryID(id) {
 		try {
-			const response = await axios.get(`${BASE_URL}/top-deals`);
+			const response = await axios.get(`${BASE_URL}/search/category/${id}`);
 			return response.data;
 		} catch (err) {
 			console.error(err);
