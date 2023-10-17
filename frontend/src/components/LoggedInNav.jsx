@@ -19,17 +19,17 @@ import {TextField} from '@mui/material';
 import Cart from './Cart/Cart';
 
 export default function LoggedInNav({handleLogout}) {
-	const [searchTerm, setSearchTerm] = useState('');
+	// const [searchTerm, setSearchTerm] = useState('');
 	const [open, setOpen] = useState(false);
 	const products = useSelector((state) => state.cart.products);
-	const handleChange = (event) => {
-		setSearchTerm(event.target.value);
-	};
+	// const handleChange = (event) => {
+	// 	setSearchTerm(event.target.value);
+	// };
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
-		Api.search(searchTerm);
-	};
+	// const handleSubmit = (event) => {
+	// 	event.preventDefault();
+	// 	Api.search(searchTerm);
+	// };
 
 	const {currentUser} = useContext(UserContext);
 	if (!currentUser) {

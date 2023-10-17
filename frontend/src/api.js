@@ -59,6 +59,36 @@ class Api {
 			console.error(err);
 		}
 	}
+
+	static async addToCart(id) {
+		try {
+			const response = await axios.post(`${BASE_URL}/cart/${id}`);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	}
+
+	static async removeFromCart(id) {
+		try {
+			const response = await axios.delete(`${BASE_URL}/cart/${id}`);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	}
+
+	static async stripeCheckout(products, total) {
+		try {
+			console.log(products, 'products');
+			const response = await axios.post(`${BASE_URL}/create-checkout-session`, {
+				products,
+			});
+			return response;
+		} catch (err) {
+			console.error(err);
+		}
+	}
 }
 
 export default Api;
