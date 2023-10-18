@@ -47,22 +47,6 @@ function LandingPage() {
 			) : (
 				<>
 					<SearchBar search={search} />
-					{/* Featured accepts an array and maps cards
-					{products.electronics?.map((item) => (
-						<FeatureCard item={item} key={item.itemId} />
-					))}
-					{products.cellPhones?.map((item) => (
-						<FeatureCard item={item} key={item.itemId} />
-					))}
-					{products.instruments?.map((item) => (
-						<FeatureCard item={item} key={item.itemId} />
-					))}
-					{products.jewlery?.map((item) => (
-						<FeatureCard item={item} key={item.itemId} />
-					))}
-					{products.clothing?.map((item) => (
-						<FeatureCard item={item} key={item.itemId} />
-					))} */}
 					<div className='electronics'>
 						<h1>Electronics</h1>
 						<Box sx={{flexGrow: 1}}>
@@ -111,7 +95,7 @@ function LandingPage() {
 								<div className='clothing'>
 									<h1>Clothing</h1>
 									<Box sx={{flexGrow: 1}}>
-										<Grid container spacing={1}>
+										<Grid container spacing={2}>
 											{products.clothing?.map((item) => (
 												<Grid item xs={6} md={3} key={item.itemId}>
 													<FeatureCard item={item} />

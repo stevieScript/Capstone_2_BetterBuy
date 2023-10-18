@@ -6,8 +6,6 @@ import ProductList from './ProductList';
 
 function SearchResults() {
 	const {search} = useParams();
-	// const search = useParams().search;
-
 	const [products, setProducts] = useState([]);
 
 	useEffect(() => {
@@ -16,7 +14,7 @@ function SearchResults() {
 			setProducts(products);
 		};
 		searchProducts();
-	}, []);
+	}, [search]);
 
 	return (
 		<div>

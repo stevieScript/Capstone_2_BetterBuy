@@ -1,18 +1,18 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Navigate} from 'react-router-dom';
-import {useNavigate} from 'react-router-dom';
+// import {useNavigate} from 'react-router-dom';
 import UserContext from '../auth/UserContext';
 import {useContext} from 'react';
 // import {useDispatch} from 'react-redux';
-import SearchBar from './SearchBar';
+// import SearchBar from './SearchBar';
 import ProductCard from './ProductCard/ProductCard';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
-import Api from '../api';
+// import Api from '../api';
 
 function ProductList({products}) {
 	const {currentUser} = useContext(UserContext);
-	// const [products, setResults] = useState([]);
+	// const [data, setResults] = useState([]);
 	// const navigate = useNavigate();
 
 	if (!currentUser) {
@@ -21,29 +21,18 @@ function ProductList({products}) {
 
 	// const search = async (searchTerm) => {
 	// 	const products = await Api.search(searchTerm);
-	// 	setResults(products);
+	// 	setResults(data);
 	// 	navigate('/search?search=' + searchTerm, {state: {products: products}});
-	// };
 
 	return (
-		<Box
-			sx={{
-				maxWidth: '1200px',
-				margin: 'auto',
-				padding: '0 10px',
-			}}>
-			{/* <SearchBar search={search} /> */}
-			{products ? (
-				<Grid container spacing={{xs: 2, md: 4}} columns={{xs: 12, md: 10}}>
-					{products.map((result) => (
-						<Grid item xs='auto' sm='auto' md='auto' key={result['itemId']}>
-							<ProductCard item={result} />
-						</Grid>
-					))}
-				</Grid>
-			) : (
-				<p> Sorry, no results found</p>
-			)}
+		<Box sx={{flexGrow: 1}}>
+			<Grid container spacing={2}>
+				{products.map((result) => (
+					<Grid item xs={10} sm={7} md={6} key={result['itemId']}>
+						<ProductCard item={result} />
+					</Grid>
+				))}
+			</Grid>
 		</Box>
 	);
 }
