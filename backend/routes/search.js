@@ -14,7 +14,7 @@ const {ensureLoggedIn, cookieJwtAuth} = require('../middleware/auth');
  * Authorization required: none
  *
  * */
-router.get('/:search', async function (req, res, next) {
+router.get('/products/:search', async function (req, res, next) {
 	try {
 		const query = req.params.search;
 		const response = await eBay.finding.findItemsByKeywords({
@@ -64,7 +64,7 @@ router.get('/category/:id', async function (req, res, next) {
 			categoryId: id,
 			sortOrder: 'BestMatch',
 		});
-		return res.json(response);
+		return res.json(response.searchResult.item);
 	} catch (err) {
 		consol.log(err);
 		return next(err);

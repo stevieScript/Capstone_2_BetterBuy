@@ -43,7 +43,7 @@ class Api {
 
 	static async search(searchTerm) {
 		try {
-			const response = await axios.get(`${BASE_URL}/search/${searchTerm}`);
+			const response = await axios.get(`${BASE_URL}/search/products/${searchTerm}`);
 			return response.data;
 		} catch (err) {
 			console.error(err);

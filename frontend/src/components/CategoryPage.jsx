@@ -4,25 +4,18 @@ import Api from '../api';
 import SearchBar from './SearchBar';
 import ProductList from './ProductList';
 
-function SearchResults() {
-	const {search, id} = useParams();
+function CategoryPage() {
+	const {id} = useParams();
 
 	const [products, setProducts] = useState([]);
 
 	useEffect(() => {
 		const searchProducts = async () => {
-			let products;
-			if (id) {
-				products = await Api.getByCategoryID(id);
-			} else {
-				products = await Api.searchProducts(search);
-			}
-			if (products) {
-				setProducts(products);
-			}
+			const products = await Api.getByCategoryID(id);
+			setProducts(products);
 		};
 		searchProducts();
-	}, [search, id]);
+	}, [id]);
 
 	return (
 		<div>
@@ -32,5 +25,5 @@ function SearchResults() {
 	);
 }
 
-export default SearchResults;
+export default CategoryPage;
 

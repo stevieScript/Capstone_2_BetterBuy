@@ -13,7 +13,8 @@ import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import {getLandingPage} from '../helpers/helpers';
 import FeatureCard from './FeaturedProducts/FeatureCard';
-// import Api from '../api';
+import {Link} from 'react-router-dom';
+import Api from '../api';
 
 function LandingPage() {
 	const {currentUser} = useContext(UserContext);
@@ -35,11 +36,10 @@ function LandingPage() {
 	}
 
 	const search = async (searchTerm) => {
-		// const products = await Api.search(searchTerm);
-		setProducts(products);
-
-		navigate(`/search/${searchTerm}`);
+		// setProducts(products);
+		navigate(`/search/products/${searchTerm}`);
 	};
+
 	return (
 		<div className='main'>
 			{loading ? (
@@ -48,7 +48,10 @@ function LandingPage() {
 				<>
 					<SearchBar search={search} />
 					<div className='electronics'>
-						<h1>Electronics</h1>
+						<Link to='/search/category/293'>
+							<h1>Electronics</h1>
+						</Link>
+
 						<Box sx={{flexGrow: 1}}>
 							<Grid container spacing={2}>
 								{products.electronics?.map((item) => (
@@ -59,7 +62,9 @@ function LandingPage() {
 							</Grid>
 						</Box>
 						<div className='cellPhones'>
-							<h1>Cell Phones</h1>
+							<Link to='/search/category/9355'>
+								<h1>Cell Phones</h1>
+							</Link>
 							<Box sx={{flexGrow: 1}}>
 								<Grid container spacing={2}>
 									{products.cellPhones?.map((item) => (
@@ -71,7 +76,9 @@ function LandingPage() {
 							</Box>
 						</div>
 						<div className='instruments'>
-							<h1>Instruments</h1>
+							<Link to='/search/category/165255'>
+								<h1>Instruments</h1>
+							</Link>
 							<Box sx={{flexGrow: 1}}>
 								<Grid container spacing={2}>
 									{products.instruments?.map((item) => (
@@ -82,7 +89,9 @@ function LandingPage() {
 								</Grid>
 							</Box>
 							<div className='home'>
-								<h1>Jewelry</h1>
+								<Link to='/search/category/1527'>
+									<h1>Jewelry</h1>
+								</Link>
 								<Box sx={{flexGrow: 1}}>
 									<Grid container spacing={2}>
 										{products.jewelry?.map((item) => (
@@ -93,7 +102,9 @@ function LandingPage() {
 									</Grid>
 								</Box>
 								<div className='clothing'>
-									<h1>Clothing</h1>
+									<Link to='/search/category/11450'>
+										<h1>Cell Phones</h1>
+									</Link>
 									<Box sx={{flexGrow: 1}}>
 										<Grid container spacing={2}>
 											{products.clothing?.map((item) => (

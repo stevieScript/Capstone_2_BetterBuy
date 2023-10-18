@@ -19,7 +19,7 @@ function SearchBar() {
 		const products = await Api.search(searchTerm);
 		setProducts(products);
 
-		navigate(`/search/${searchTerm}`);
+		navigate(`/search/products/${searchTerm}`);
 	};
 
 	const handleSubmit = (event) => {
