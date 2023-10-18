@@ -4,26 +4,40 @@ import {Navigate} from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
 import UserContext from '../auth/UserContext';
 import {useContext} from 'react';
+
 // import {useDispatch} from 'react-redux';
 import SearchBar from './SearchBar';
 import ProductCard from './ProductCard/ProductCard';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
+import {getLandingPage} from '../helpers/helpers';
 import Api from '../api';
 
 function LandingPage() {
 	const {currentUser} = useContext(UserContext);
 	const [products, setProducts] = useState([]);
-	const [electronics, setElectronics] = useState([]);
+	const [loading, setLoading] = useState(true);
 	const navigate = useNavigate();
+	// let myMap = {
+	// 	293: 'electronics',
+	// 	9355: 'cellPhones',
+	// 	165255: 'instruments',
+	// 	1277: 'home',
+	// 	11450: 'clothing',
+	// };
 
 	useEffect(() => {
 		async function getProducts() {
-			const products = await Api.getProducts();
+			const products = await getLandingPage();
+			//log first item in products
+			// log all electronics
+			// console.log(products[0]);
+			console.log(products);
 			setProducts(products);
+			setLoading(false);
 		}
 		getProducts();
-	});
+	}, []);
 
 	if (!currentUser) {
 		return <Navigate to='/' />;
@@ -37,10 +51,73 @@ function LandingPage() {
 	};
 	return (
 		<div className='main'>
-			<SearchBar search={search} />
-			<div className='electronics'>
-				<h1>Electronics</h1>
-			</div>
+			{loading ? (
+				<h1>Loading...</h1>
+			) : (
+				<>
+					<SearchBar search={search} />
+					<div className='electronics'>
+						<h1>Electronics</h1>
+						<Box sx={{flexGrow: 1}}>
+							<Grid container spacing={2}>
+								{products.electronics?.map((item) => (
+									<Grid item xs={6} md={3} key={item.id}>
+										<ProductCard item={item} />
+									</Grid>
+								))}
+							</Grid>
+						</Box>
+						<div className='cellPhones'>
+							<h1>Cell Phones</h1>
+							<Box sx={{flexGrow: 1}}>
+								<Grid container spacing={2}>
+									{products.cellPhones?.map((item) => (
+										<Grid item xs={6} md={3} key={item.id}>
+											<ProductCard item={item} />
+										</Grid>
+									))}
+								</Grid>
+							</Box>
+						</div>
+						<div className='instruments'>
+							<h1>Instruments</h1>
+							<Box sx={{flexGrow: 1}}>
+								<Grid container spacing={2}>
+									{products.instruments?.map((item) => (
+										<Grid item xs={6} md={3} key={item.id}>
+											<ProductCard item={item} />
+										</Grid>
+									))}
+								</Grid>
+							</Box>
+							<div className='home'>
+								<h1>Home</h1>
+								<Box sx={{flexGrow: 1}}>
+									<Grid container spacing={2}>
+										{products.jewlery?.map((item) => (
+											<Grid item xs={6} md={3} key={item.id}>
+												<ProductCard item={item} />
+											</Grid>
+										))}
+									</Grid>
+								</Box>
+								<div className='clothing'>
+									<h1>Clothing</h1>
+									<Box sx={{flexGrow: 1}}>
+										<Grid container spacing={2}>
+											{products.clothing?.map((item) => (
+												<Grid item xs={6} md={3} key={item.id}>
+													<ProductCard item={item} />
+												</Grid>
+											))}
+										</Grid>
+									</Box>
+								</div>
+							</div>
+						</div>
+					</div>
+				</>
+			)}
 		</div>
 	);
 }

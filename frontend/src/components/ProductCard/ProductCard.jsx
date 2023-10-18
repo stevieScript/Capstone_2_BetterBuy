@@ -15,14 +15,14 @@ const ProductCard = ({item}) => {
 		return <Navigate to='/' />;
 	}
 	return (
-		<Link className='link' to={`/search/product/${item.itemId}`}>
+		<Link className='link' to={`/search/product/${item?.itemId}`}>
 			<Card className='card'>
 				<div className='image'>
-					<img src={item['galleryURL']} alt={item['title']} />
+					<img src={item?.['galleryURL']} alt={item?.['title']} />
 				</div>
 				<div>
-					<h2>{item['title']}</h2>
-					<h3 className='prices'>${item['sellingStatus']['currentPrice']['value']}</h3>
+					<h2>{item?.['title']}</h2>
+					<h3 className='prices'>${item?.['sellingStatus']?.['currentPrice']['value']}</h3>
 				</div>
 			</Card>
 		</Link>

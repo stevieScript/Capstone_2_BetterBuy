@@ -71,5 +71,31 @@ router.get('/category/:id', async function (req, res, next) {
 	}
 });
 
+/** GET /landing page
+ *
+ * to use the gategory id to get the top 5 items from each category
+ * it will be kjust like above, but limited with paginationInput.entriesPerPage
+ * Authorization required: none
+ *
+ * */
+
+router.get('/landing/:id', async function (req, res, next) {
+	try {
+		const id = req.params.id;
+		const response = await eBay.finding.findItemsByCategory({
+			categoryId: id,
+			sortOrder: 'BestMatch',
+			paginationInput: {
+				entriesPerPage: 5,
+				pageNumber: 1,
+			},
+		});
+		return res.json(response['searchResult']['item']);
+	} catch (err) {
+		consol.log(err);
+		return next(err);
+	}
+});
+
 module.exports = router;
 

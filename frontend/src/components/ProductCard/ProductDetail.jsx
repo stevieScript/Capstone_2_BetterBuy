@@ -23,8 +23,6 @@ const Product = () => {
 
 	const getData = async () => {
 		const results = await Api.getById(id);
-
-		console.log(results['Item']);
 		setData([results['Item']]);
 	};
 	// const goBack = () => {

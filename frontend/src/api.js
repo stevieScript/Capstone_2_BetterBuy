@@ -53,17 +53,26 @@ class Api {
 	static async getById(id) {
 		try {
 			const response = await axios.get(`${BASE_URL}/search/product/${id}`);
-			console.log(`response.data: ${response.data}`);
+
 			return response.data;
 		} catch (err) {
 			console.error(err);
 		}
 	}
 
-	static async getProductsbyCategoryID(id) {
+	static async getByCategoryID(id) {
 		try {
 			const response = await axios.get(`${BASE_URL}/search/category/${id}`);
 			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	}
+
+	static async getLandingPage(id) {
+		try {
+			const response = await axios.get(`${BASE_URL}/search/landing/${id}`);
+			return response;
 		} catch (err) {
 			console.error(err);
 		}
@@ -89,7 +98,6 @@ class Api {
 
 	static async stripeCheckout(products, total) {
 		try {
-			console.log(products, 'products');
 			const response = await axios.post(`${BASE_URL}/create-checkout-session`, {
 				products,
 			});
