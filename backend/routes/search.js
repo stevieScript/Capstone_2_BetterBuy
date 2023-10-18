@@ -86,7 +86,7 @@ router.get('/landing/:id', async function (req, res, next) {
 			categoryId: id,
 			sortOrder: 'BestMatch',
 			paginationInput: {
-				entriesPerPage: 5,
+				entriesPerPage: 4,
 				pageNumber: 1,
 			},
 		});

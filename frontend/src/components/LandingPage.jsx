@@ -7,32 +7,23 @@ import {useContext} from 'react';
 
 // import {useDispatch} from 'react-redux';
 import SearchBar from './SearchBar';
-import ProductCard from './ProductCard/ProductCard';
+// import ProductCard from './ProductCard/ProductCard';
+// import FeaturedItems from './FeaturedProducts/FeaturedItem';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import {getLandingPage} from '../helpers/helpers';
-import Api from '../api';
+import FeatureCard from './FeaturedProducts/FeatureCard';
+// import Api from '../api';
 
 function LandingPage() {
 	const {currentUser} = useContext(UserContext);
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const navigate = useNavigate();
-	// let myMap = {
-	// 	293: 'electronics',
-	// 	9355: 'cellPhones',
-	// 	165255: 'instruments',
-	// 	1277: 'home',
-	// 	11450: 'clothing',
-	// };
 
 	useEffect(() => {
 		async function getProducts() {
 			const products = await getLandingPage();
-			//log first item in products
-			// log all electronics
-			// console.log(products[0]);
-			console.log(products);
 			setProducts(products);
 			setLoading(false);
 		}
@@ -56,13 +47,29 @@ function LandingPage() {
 			) : (
 				<>
 					<SearchBar search={search} />
+					{/* Featured accepts an array and maps cards
+					{products.electronics?.map((item) => (
+						<FeatureCard item={item} key={item.itemId} />
+					))}
+					{products.cellPhones?.map((item) => (
+						<FeatureCard item={item} key={item.itemId} />
+					))}
+					{products.instruments?.map((item) => (
+						<FeatureCard item={item} key={item.itemId} />
+					))}
+					{products.jewlery?.map((item) => (
+						<FeatureCard item={item} key={item.itemId} />
+					))}
+					{products.clothing?.map((item) => (
+						<FeatureCard item={item} key={item.itemId} />
+					))} */}
 					<div className='electronics'>
 						<h1>Electronics</h1>
 						<Box sx={{flexGrow: 1}}>
 							<Grid container spacing={2}>
 								{products.electronics?.map((item) => (
 									<Grid item xs={6} md={3} key={item.id}>
-										<ProductCard item={item} />
+										<FeatureCard item={item} />
 									</Grid>
 								))}
 							</Grid>
@@ -72,8 +79,8 @@ function LandingPage() {
 							<Box sx={{flexGrow: 1}}>
 								<Grid container spacing={2}>
 									{products.cellPhones?.map((item) => (
-										<Grid item xs={6} md={3} key={item.id}>
-											<ProductCard item={item} />
+										<Grid item xs={6} md={3} key={item.itemId}>
+											<FeatureCard item={item} />
 										</Grid>
 									))}
 								</Grid>
@@ -84,19 +91,19 @@ function LandingPage() {
 							<Box sx={{flexGrow: 1}}>
 								<Grid container spacing={2}>
 									{products.instruments?.map((item) => (
-										<Grid item xs={6} md={3} key={item.id}>
-											<ProductCard item={item} />
+										<Grid item xs={6} md={3} key={item.itemId}>
+											<FeatureCard item={item} />
 										</Grid>
 									))}
 								</Grid>
 							</Box>
 							<div className='home'>
-								<h1>Home</h1>
+								<h1>Jewelry</h1>
 								<Box sx={{flexGrow: 1}}>
 									<Grid container spacing={2}>
-										{products.jewlery?.map((item) => (
-											<Grid item xs={6} md={3} key={item.id}>
-												<ProductCard item={item} />
+										{products.jewelry?.map((item) => (
+											<Grid item xs={6} md={3} key={item.itemId}>
+												<FeatureCard item={item} />
 											</Grid>
 										))}
 									</Grid>
@@ -104,10 +111,10 @@ function LandingPage() {
 								<div className='clothing'>
 									<h1>Clothing</h1>
 									<Box sx={{flexGrow: 1}}>
-										<Grid container spacing={2}>
+										<Grid container spacing={1}>
 											{products.clothing?.map((item) => (
-												<Grid item xs={6} md={3} key={item.id}>
-													<ProductCard item={item} />
+												<Grid item xs={6} md={3} key={item.itemId}>
+													<FeatureCard item={item} />
 												</Grid>
 											))}
 										</Grid>

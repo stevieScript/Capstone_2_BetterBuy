@@ -7,15 +7,7 @@ import Api from '../api';
  *and return an array of objects
  * it is just used to clean up the landing page
  */
-const categoryIds = [293, 9355, 165255, 1277, 11450];
-
-// let ids = [
-// 	{electronics: 293},
-// 	{cellPhones: 9355},
-// 	{instruments: 165255},
-// 	{home: 1277},
-// 	{clothing: 11450},
-// ];
+// const categoryIds = [293, 9355, 165255, 1277, 11450];
 
 let categoryMap = {
 	293: 'electronics',
@@ -24,40 +16,6 @@ let categoryMap = {
 	1527: 'jewelry',
 	11450: 'clothing',
 }; // example category IDs
-
-// export async function getLandingPage() {
-// 	try {
-// 		const requests = categoryIds.map(async (id) => {
-// 			const response = await Api.getLandingPage(id);
-// 			return response;
-// 		});
-// 		const responses = await Promise.all(requests);
-
-// 		return responses;
-// 	} catch (error) {
-// 		console.error('Error fetching data:', error);
-// 	}
-// }
-
-// export async function getLandingPage() {
-// 	const items = [];
-// 	for (let id of categoryIds) {
-// 		const response = await Api.getLandingPage(id);
-// 		console.log(response.data);
-// 		items.push(response.data);
-// 	}
-// 	return items;
-// }
-
-//working
-// export async function getLandingPage() {
-// 	const items = {};
-// 	for (let id of Object.keys(myMap)) {
-// 		const response = await Api.getLandingPage(id);
-// 		items[myMap[id]] = response.data;
-// 	}
-// 	return items;
-// }
 
 export async function getLandingPage() {
 	const ids = Object.keys(categoryMap);
