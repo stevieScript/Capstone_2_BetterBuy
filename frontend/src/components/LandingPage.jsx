@@ -1,23 +1,23 @@
 import React, {useEffect, useState} from 'react';
-
-import {Navigate} from 'react-router-dom';
 import {useNavigate} from 'react-router-dom';
-import UserContext from '../auth/UserContext';
-import {useContext} from 'react';
-
-// import {useDispatch} from 'react-redux';
 import SearchBar from './SearchBar';
-// import ProductCard from './ProductCard/ProductCard';
-// import FeaturedItems from './FeaturedProducts/FeaturedItem';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 import {getLandingPage} from '../helpers/helpers';
 import FeatureCard from './FeaturedProducts/FeatureCard';
 import {Link} from 'react-router-dom';
+// import {Navigate} from 'react-router-dom';
+// import UserContext from '../auth/UserContext';
+// import {useContext} from 'react';
+
+// import {useDispatch} from 'react-redux';
+// import ProductCard from './ProductCard/ProductCard';
+// import FeaturedItems from './FeaturedProducts/FeaturedItem';
+
 // import Api from '../api';
 
 function LandingPage() {
-	const {currentUser} = useContext(UserContext);
+	// const {currentUser} = useContext(UserContext);
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const navigate = useNavigate();
@@ -30,10 +30,6 @@ function LandingPage() {
 		}
 		getProducts();
 	}, []);
-
-	if (!currentUser) {
-		return <Navigate to='/' />;
-	}
 
 	const search = async (searchTerm) => {
 		// setProducts(products);

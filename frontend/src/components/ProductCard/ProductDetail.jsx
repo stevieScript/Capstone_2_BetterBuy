@@ -2,18 +2,16 @@ import React from 'react';
 import {useState, useEffect} from 'react';
 import './ProductDetail.css';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
-// import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-// import BalanceIcon from '@mui/icons-material/Balance';
 import {useParams} from 'react-router-dom';
 import {useDispatch} from 'react-redux';
 import Api from '../../api';
-import {Navigate} from 'react-router-dom';
-import UserContext from '../../auth/UserContext';
-import {useContext} from 'react';
+// import {Navigate} from 'react-router-dom';
+// import UserContext from '../../auth/UserContext';
+// import {useContext} from 'react';
 import {addToCart} from '../../redux/cartReducer';
 
 const Product = () => {
-	const currentUser = useContext(UserContext);
+	// const currentUser = useContext(UserContext);
 	const id = useParams().id;
 	const [quantity, setQuantity] = useState(1);
 
@@ -32,16 +30,10 @@ const Product = () => {
 	useEffect(() => {
 		getData();
 	}, []);
-	if (!currentUser) {
-		return <Navigate to='/' />;
-	}
 	return (
 		<div className='product'>
 			<>
 				<div className='left'>
-					{/* <button className='back' onClick={goBack}>
-						Back
-					</button> */}
 					<div className='mainImg'>
 						<img src={data[0]?.PictureURL} alt='' />
 					</div>
@@ -71,20 +63,6 @@ const Product = () => {
 						}>
 						<AddShoppingCartIcon /> ADD TO CART
 					</button>
-					{/* <div className='links'>
-						<div className='item'>
-							<FavoriteBorderIcon /> ADD TO WISH LIST
-						</div>
-						<div className='item'>
-							<BalanceIcon /> ADD TO COMPARE
-						</div>
-					</div>
-					<div className='info'>
-						<span>Vendor: Polo</span>
-						<span>Product Type: T-Shirt</span>
-						<span>Tag: T-Shirt, Women, Top</span>
-					</div> */}
-					{/* <hr /> */}
 					<div className='info'>
 						<span>SELLER RATING: {data[0]?.Seller?.PositiveFeedbackPercent}</span>
 						<hr />

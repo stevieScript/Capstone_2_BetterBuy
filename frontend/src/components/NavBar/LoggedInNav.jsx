@@ -3,18 +3,18 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import {useSelector} from 'react-redux';
 import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
+import {useState} from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import {Navigate} from 'react-router-dom';
-import UserContext from '../../auth/UserContext';
-import {useContext, useState} from 'react';
-import {useNavigate} from 'react-router-dom';
-import SearchBar from '../SearchBar';
-import Api from '../../api';
 import Cart from '../Cart/Cart';
 import CategorySideMenu from '../Categories/CategorySideMenu';
 import './LoggedInNav.css';
+// import IconButton from '@mui/material/IconButton';
+// import {Navigate} from 'react-router-dom';
+// import UserContext from '../../auth/UserContext';
+// import {useNavigate} from 'react-router-dom';
+// import SearchBar from '../SearchBar';
+// import Api from '../../api';
 
 export default function LoggedInNav({handleLogout}) {
 	const [openCart, setOpenCart] = useState(false);
@@ -23,15 +23,12 @@ export default function LoggedInNav({handleLogout}) {
 	// const [results, setResults] = useState([]);
 	// const navigate = useNavigate();
 
-	const {currentUser} = useContext(UserContext);
+	// const {currentUser} = useContext(UserContext);
 	// const search = async (searchTerm) => {
 	// 	const products = await Api.search(searchTerm);
 	// 	setResults(products);
 	// 	navigate('/search?search=' + searchTerm, {state: {products: products}});
 	// };
-	if (!currentUser) {
-		return <Navigate to='/' />;
-	}
 
 	return (
 		<Box>

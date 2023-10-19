@@ -1,16 +1,14 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import {Box, Card} from '@mui/material';
-import {Navigate} from 'react-router-dom';
-import {useContext} from 'react';
-import UserContext from '../../auth/UserContext';
+import {Card} from '@mui/material';
 import './FeaturedItem.css';
+// import {Navigate} from 'react-router-dom';
+// import {useContext} from 'react';
+// import UserContext from '../../auth/UserContext';
 
 function FeatureCard({item}) {
-	const {currentUser} = useContext(UserContext);
-	if (!currentUser) {
-		return <Navigate to='/' />;
-	}
+	// const {currentUser} = useContext(UserContext);
+
 	return (
 		<Link sx={{}} className='link' to={`/search/product/${item?.itemId}`}>
 			<Card className='featureCard'>

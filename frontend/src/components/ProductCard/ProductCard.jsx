@@ -1,8 +1,8 @@
 import {Link} from 'react-router-dom';
-import {Box, Card} from '@mui/material';
-import {Navigate} from 'react-router-dom';
-import {useContext} from 'react';
-import UserContext from '../../auth/UserContext';
+import {Card} from '@mui/material';
+// import {Navigate} from 'react-router-dom';
+// import {useContext} from 'react';
+// import UserContext from '../../auth/UserContext';
 // import CardContent from '@mui/material/CardContent';
 // import CardMedia from '@mui/material/CardMedia';
 // import Typography from '@mui/material/Typography';
@@ -10,10 +10,6 @@ import UserContext from '../../auth/UserContext';
 import './ProductCard.css';
 
 const ProductCard = ({item}) => {
-	const {currentUser} = useContext(UserContext);
-	if (!currentUser) {
-		return <Navigate to='/' />;
-	}
 	return (
 		<Link className='link' to={`/search/product/${item?.itemId}`}>
 			<Card className='card'>
@@ -26,7 +22,6 @@ const ProductCard = ({item}) => {
 				</div>
 			</Card>
 		</Link>
-		// </Box>
 	);
 };
 

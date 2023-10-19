@@ -1,23 +1,19 @@
-import React from 'react';
-import {Navigate} from 'react-router-dom';
-// import {useNavigate} from 'react-router-dom';
-import UserContext from '../auth/UserContext';
-import {useContext} from 'react';
-// import {useDispatch} from 'react-redux';
-// import SearchBar from './SearchBar';
 import ProductCard from './ProductCard/ProductCard';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
+// import {Navigate} from 'react-router-dom';
+// import {useNavigate} from 'react-router-dom';
+// import UserContext from '../auth/UserContext';
+// import {useContext} from 'react';
+// import {useDispatch} from 'react-redux';
+// import SearchBar from './SearchBar';
+
 // import Api from '../api';
 
 function ProductList({products}) {
-	const {currentUser} = useContext(UserContext);
+	// const {currentUser} = useContext(UserContext);
 	// const [data, setResults] = useState([]);
 	// const navigate = useNavigate();
-
-	if (!currentUser) {
-		return <Navigate to='/' />;
-	}
 
 	// const search = async (searchTerm) => {
 	// 	const products = await Api.search(searchTerm);
