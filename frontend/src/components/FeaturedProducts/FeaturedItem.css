@@ -5,21 +5,23 @@
   flex-direction: column;
   gap: 5px;
   margin-bottom: 20px;
+  overflow: hidden;
 }
 
 .featureImage {
   width: 100%;
-  height: 400px;
+  height: 250px;
   overflow: hidden;
   display: block;
   /* position: relative; */
 }
 
-/* &:hover {
-      .secondImg {
-        z-index: 2;
-      }
-    } */
+.end {
+  display: flex;
+  justify-content: space-between;
+  /* align-items: center; */
+  /* padding: 0 5px; */
+}
 
 .featureImage img {
   width: 100%;
@@ -34,26 +36,22 @@
   color: black;
 }
 
-/* .mainImg {
-  z-index: 1;
-} */
-
-/* span {
-  position: absolute;
-  top: 5px;
-  left: 5px;
-  background-color: white;
-  color: teal;
-  padding: 3px 5px;
-  z-index: 3;
-  font-weight: 500;
-  font-size: 12px;
-} */
+.titlePrice {
+  display: flex;
+  flex-direction: column;
+  /* gap: 5px; */
+  padding: 0 5px;
+}
 
 
 h2 {
   font-size: 16px;
   font-weight: 400;
+  height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
 }
 
 .prices {

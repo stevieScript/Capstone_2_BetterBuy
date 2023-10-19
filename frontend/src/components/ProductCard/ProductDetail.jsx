@@ -1,14 +1,14 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 import './ProductDetail.css';
-import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {useParams} from 'react-router-dom';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {useDispatch} from 'react-redux';
+import {addToCart} from '../../redux/cartReducer';
 import Api from '../../api';
 // import {Navigate} from 'react-router-dom';
 // import UserContext from '../../auth/UserContext';
 // import {useContext} from 'react';
-import {addToCart} from '../../redux/cartReducer';
 
 const Product = () => {
 	// const currentUser = useContext(UserContext);

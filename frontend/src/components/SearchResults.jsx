@@ -27,10 +27,12 @@ function SearchResults() {
 	return (
 		<div>
 			<SearchBar />
-			<h1>
-				Search Results for: {search && search}
-				<hr style={{width: '100%', border: '1px solid black', marginBottom: '5px'}} />
-			</h1>
+			{search && (
+				<h1>
+					Search Results for: {search}
+					<hr style={{width: '100%', border: '1px solid black', marginBottom: '5px'}} />
+				</h1>
+			)}
 
 			<ProductList products={products} />
 		</div>
