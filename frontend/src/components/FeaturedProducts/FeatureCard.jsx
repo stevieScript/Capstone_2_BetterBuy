@@ -7,12 +7,12 @@ import {useDispatch} from 'react-redux';
 import {addToCart} from '../../redux/cartReducer';
 
 // import {Navigate} from 'react-router-dom';
-import {useContext, useState} from 'react';
-import UserContext from '../../auth/UserContext';
+// import {useContext, useState} from 'react';
+// import UserContext from '../../auth/UserContext';
 
 function FeatureCard({item}) {
-	const {currentUser} = useContext(UserContext);
-	const [quantity, setQuantity] = useState(1);
+	// const {currentUser} = useContext(UserContext);
+	// const [quantity, setQuantity] = useState(1);
 
 	const dispatch = useDispatch();
 

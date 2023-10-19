@@ -8,20 +8,51 @@ import {Card} from '@mui/material';
 // import Typography from '@mui/material/Typography';
 // import Button from '@mui/material/Button';
 import './ProductCard.css';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import {useDispatch} from 'react-redux';
+import {addToCart} from '../../redux/cartReducer';
+import Button from '@mui/material/Button';
 
 const ProductCard = ({item}) => {
+	// const {currentUser} = useContext(UserContext);
+
+	const dispatch = useDispatch();
 	return (
-		<Link className='link' to={`/search/product/${item?.itemId}`}>
-			<Card className='card'>
+		<Card className='card'>
+			<Link className='link' to={`/search/product/${item?.itemId}`}>
 				<div className='image'>
 					<img src={item?.['galleryURL']} alt={item?.['title']} />
 				</div>
-				<div className='titlePrice'>
+			</Link>
+			<div className='titlePrice'>
+				<Link className='link' to={`/search/product/${item?.itemId}`}>
 					<h2>{item?.['title']}</h2>
+					<p>{item?.['condition']['conditionDisplayName']}</p>
+				</Link>
+				<div className='end'>
 					<h3 className='prices'>${item?.['sellingStatus']?.['currentPrice']['value']}</h3>
+					<Button
+						className='featureButton'
+						sx={{
+							color: 'primary',
+						}}
+						onClick={() =>
+							dispatch(
+								addToCart({
+									id: item?.itemId,
+									title: item?.title,
+									desc: item?.ConditionDescription,
+									price: item?.sellingStatus?.currentPrice?.value,
+									img: item?.galleryURL,
+									quantity: 1,
+								})
+							)
+						}>
+						<AddShoppingCartIcon />
+					</Button>
 				</div>
-			</Card>
-		</Link>
+			</div>
+		</Card>
 	);
 };
 
