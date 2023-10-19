@@ -9,8 +9,9 @@ import {Link} from 'react-router-dom';
 // import {Navigate} from 'react-router-dom';
 // import UserContext from '../auth/UserContext';
 // import {useContext} from 'react';
-
-// import {useDispatch} from 'react-redux';
+import {resetCart} from '../redux/cartReducer';
+import {useDispatch} from 'react-redux';
+// import {reset} from 'nodemon';
 // import ProductCard from './ProductCard/ProductCard';
 // import FeaturedItems from './FeaturedProducts/FeaturedItem';
 
@@ -21,13 +22,26 @@ function LandingPage() {
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const navigate = useNavigate();
+	const dispatch = useDispatch();
+	//useEffect to clear cart after redirect from strip
+	// const dispatch = useDispatch();
+	// useEffect(() => {
+	// 	dispatch(reset());
+	// }, [dispatch]);
 
 	useEffect(() => {
+		const param = new URLSearchParams(window.location.search);
+		const status = param.get('success');
 		async function getProducts() {
 			const products = await getLandingPage();
 			setProducts(products);
 			setLoading(false);
 		}
+		//clear cart after redirect from stripe
+		if (status === 'true') {
+			dispatch(resetCart());
+		}
+
 		getProducts();
 	}, []);
 

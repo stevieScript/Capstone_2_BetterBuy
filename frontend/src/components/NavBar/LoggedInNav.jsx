@@ -16,7 +16,7 @@ import './LoggedInNav.css';
 // import SearchBar from '../SearchBar';
 // import Api from '../../api';
 
-export default function LoggedInNav({handleLogout}) {
+export default function LoggedInNav({handleLogout, mode, setMode}) {
 	const [openCart, setOpenCart] = useState(false);
 	const [openSideMenu, setOpenSideMenu] = useState(false);
 	const products = useSelector((state) => state.cart.products);
@@ -66,7 +66,7 @@ export default function LoggedInNav({handleLogout}) {
 				</Toolbar>
 			</AppBar>
 			{openCart && <Cart />}
-			{openSideMenu && <CategorySideMenu />}
+			{openSideMenu && <CategorySideMenu mode={mode} setMode={setMode} />}
 		</Box>
 	);
 }

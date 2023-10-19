@@ -1,9 +1,10 @@
+import {Box} from '@mui/system';
 import FeatureCard from './FeatureCard';
 import './FeaturedItem.css';
 
 const FeaturedItems = (item) => {
 	return (
-		<div className='featuredProducts'>
+		<Box className='featuredProducts' bgcolor={'background.default'} color={'text.primary'}>
 			<div className='top'>
 				<h1>{item.title}</h1>
 				<p>
@@ -16,7 +17,7 @@ const FeaturedItems = (item) => {
 					<FeatureCard item={item} key={item.id} />
 				))}
 			</div>
-		</div>
+		</Box>
 	);
 };
 

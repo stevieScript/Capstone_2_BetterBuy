@@ -12,13 +12,17 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import {useNavigate} from 'react-router-dom';
+import UserContext from '../auth/UserContext';
+
 export default function SignIn({handleLogin}) {
+	const {currentUser} = useContext(UserContext);
 	const navigate = useNavigate();
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
 	});
 
+	if (currentUser) navigate('/user');
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		let result = await handleLogin(formData);

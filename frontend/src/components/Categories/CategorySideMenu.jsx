@@ -1,5 +1,7 @@
 import {useEffect, useState} from 'react';
 import {Link} from 'react-router-dom';
+import {Switch} from '@mui/material';
+import ModeNightIcon from '@mui/icons-material/ModeNight';
 import './SideMenu.css';
 
 let ids = {
@@ -25,13 +27,14 @@ function categoryLinks() {
 	return links;
 }
 
-function CategorySideMenu() {
+function CategorySideMenu({mode, setMode}) {
 	// let links = categoryLinks();
 	return (
 		<div className='sideMenu'>
 			<h1>Top Categories:</h1>
 			<div className='category-links'>{categoryLinks()}</div>
-			{/* <h1>testing</h1> */}
+			<ModeNightIcon />
+			<Switch onChange={(e) => setMode(mode === 'light' ? 'dark' : 'light')} />
 		</div>
 	);
 }

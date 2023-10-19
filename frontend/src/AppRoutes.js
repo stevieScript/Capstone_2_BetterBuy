@@ -18,6 +18,10 @@ function AppRoutes({handleLogin, handleSignup, handleLogout, products, setProduc
 				path='/user'
 				element={<PrivateRoute element={<LandingPage handleLogout={handleLogout} />} />}
 			/>
+			<Route
+				path='/checkout?success=true'
+				element={<PrivateRoute element={<LandingPage handleLogout={handleLogout} />} />}
+			/>
 
 			<Route path='/search/product/:id' element={<PrivateRoute element={<Product />} />} />
 
