@@ -66,7 +66,6 @@ router.get('/category/:id', async function (req, res, next) {
 		});
 		return res.json(response.searchResult.item);
 	} catch (err) {
-		consol.log(err);
 		return next(err);
 	}
 });
@@ -92,7 +91,6 @@ router.get('/landing/:id', async function (req, res, next) {
 		});
 		return res.json(response['searchResult']['item']);
 	} catch (err) {
-		consol.log(err);
 		return next(err);
 	}
 });

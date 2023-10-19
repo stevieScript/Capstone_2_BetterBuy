@@ -14,7 +14,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import {getLandingPage} from '../helpers/helpers';
 import FeatureCard from './FeaturedProducts/FeatureCard';
 import {Link} from 'react-router-dom';
-import Api from '../api';
+// import Api from '../api';
 
 function LandingPage() {
 	const {currentUser} = useContext(UserContext);

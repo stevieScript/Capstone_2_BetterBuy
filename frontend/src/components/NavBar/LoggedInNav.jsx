@@ -13,10 +13,12 @@ import {useNavigate} from 'react-router-dom';
 import SearchBar from '../SearchBar';
 import Api from '../../api';
 import Cart from '../Cart/Cart';
+import CategorySideMenu from '../Categories/CategorySideMenu';
 import './LoggedInNav.css';
 
 export default function LoggedInNav({handleLogout}) {
-	const [open, setOpen] = useState(false);
+	const [openCart, setOpenCart] = useState(false);
+	const [openSideMenu, setOpenSideMenu] = useState(false);
 	const products = useSelector((state) => state.cart.products);
 	// const [results, setResults] = useState([]);
 	// const navigate = useNavigate();
@@ -35,9 +37,15 @@ export default function LoggedInNav({handleLogout}) {
 		<Box>
 			<AppBar position='static'>
 				<Toolbar>
-					<IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ml: 2}}>
+					<Box
+						color='inherit'
+						sx={{mr: 1, ml: 1}}
+						className='menuIcon'
+						onClick={() => setOpenSideMenu(!openSideMenu)}>
+						{/* <IconButton size='large' edge='start' color='inherit' aria-label='menu' sx={{ml: 2}}> */}
 						<MenuIcon />
-					</IconButton>
+						{/* </IconButton> */}
+					</Box>
 					<Box marginRight='auto'>
 						<Button href='/' variant='text' color='inherit'>
 							BetterBuy
@@ -54,13 +62,14 @@ export default function LoggedInNav({handleLogout}) {
 						color='inherit'
 						sx={{mr: 3, ml: 1}}
 						className='cartIcon'
-						onClick={() => setOpen(!open)}>
+						onClick={() => setOpenCart(!openCart)}>
 						<ShoppingCartIcon />
 						<span className='count'>{products.length}</span>
 					</Box>
 				</Toolbar>
 			</AppBar>
-			{open && <Cart />}
+			{openCart && <Cart />}
+			{openSideMenu && <CategorySideMenu />}
 		</Box>
 	);
 }

@@ -7,7 +7,6 @@ import Api from '../api';
  *and return an array of objects
  * it is just used to clean up the landing page
  */
-// const categoryIds = [293, 9355, 165255, 1277, 11450];
 
 let categoryMap = {
 	293: 'electronics',
@@ -26,7 +25,7 @@ export async function getLandingPage() {
 	// Map the responses back to the categoryMap
 	const items = {};
 	for (let i = 0; i < ids.length; i++) {
-		items[categoryMap[ids[i]]] = responses[i].data;
+		items[categoryMap[ids[i]]] = responses[i]?.data;
 	}
 
 	return items;
