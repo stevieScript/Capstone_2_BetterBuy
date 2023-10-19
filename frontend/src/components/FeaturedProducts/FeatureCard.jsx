@@ -28,29 +28,29 @@ function FeatureCard({item}) {
 				<Link sx={{}} className='link' to={`/search/product/${item?.itemId}`}>
 					<h2>{item?.['title']}</h2>
 				</Link>
-				<div className='end'>
-					<h3 className='featurePrices'>${item?.['sellingStatus']?.['currentPrice']['value']}</h3>
-					<Button
-						className='featureButton'
-						sx={{
-							// backgroundColor: '#f0c040',
-							color: 'primary',
-						}}
-						onClick={() =>
-							dispatch(
-								addToCart({
-									id: item?.itemId,
-									title: item?.title,
-									desc: item?.ConditionDescription,
-									price: item?.sellingStatus?.currentPrice?.value,
-									img: item?.galleryURL,
-									quantity: 1,
-								})
-							)
-						}>
-						<AddShoppingCartIcon />
-					</Button>
-				</div>
+			</div>
+			<div className='end'>
+				<h3 className='featurePrices'>${item?.['sellingStatus']?.['currentPrice']['value']}</h3>
+				<Button
+					className='featureButton'
+					sx={{
+						// backgroundColor: '#f0c040',
+						color: 'primary',
+					}}
+					onClick={() =>
+						dispatch(
+							addToCart({
+								id: item?.itemId,
+								title: item?.title,
+								desc: item?.ConditionDescription,
+								price: item?.sellingStatus?.currentPrice?.value,
+								img: item?.galleryURL,
+								quantity: 1,
+							})
+						)
+					}>
+					<AddShoppingCartIcon />
+				</Button>
 			</div>
 		</Card>
 		// 	<div className='addToCart'></div>

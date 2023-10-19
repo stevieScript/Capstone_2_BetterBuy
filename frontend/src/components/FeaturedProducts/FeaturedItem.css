@@ -1,10 +1,11 @@
 .featureCard {
-  width: 250px;
+  /* 250 / 16 */
+  /* width: 15.625rem; */
   height: 400px;
   display: flex;
   flex-direction: column;
   gap: 5px;
-  margin-bottom: 10px;
+  /* margin-bottom: 10px; */
   overflow: hidden;
 }
 
@@ -20,7 +21,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* padding: 0 5px; */
+  margin-left: 10px;
 }
 
 .featureImage img {
