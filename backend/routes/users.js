@@ -10,7 +10,28 @@ router.get('/:id', async function (req, res, next) {
 	// const user = await User.get(req.params.id);
 	try {
 		const user = await User.get(req.params.id);
-		return res.json({id: user.id, email: user.email});
+		return res.json({
+			id: user.id,
+			email: user.email,
+			firstName: user.firstName,
+			lastName: user.lastName,
+		});
+	} catch (err) {
+		return next(err);
+	}
+});
+
+/** update user */
+router.patch('/:id', async function (req, res, next) {
+	// const user = await User.update(req.params.id, req.body);
+	try {
+		const user = await User.update(req.params.id, req.body);
+		return res.json({
+			id: user.id,
+			email: user.email,
+			firstName: user.firstName,
+			lastName: user.lastName,
+		});
 	} catch (err) {
 		return next(err);
 	}

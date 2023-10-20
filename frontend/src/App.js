@@ -10,7 +10,7 @@ import {BrowserRouter, Navigate} from 'react-router-dom';
 import {createTheme, ThemeProvider} from '@mui/material/';
 // import User from './components/User';
 import './App.css';
-import {Box} from '@mui/system';
+// import {Box} from '@mui/system';
 
 function App() {
 	const [infoLoaded, setInfoLoaded] = useState(false);
@@ -80,18 +80,18 @@ function App() {
 			<ThemeProvider theme={darkTheme}>
 				<BrowserRouter>
 					<UserContext.Provider value={{currentUser, setCurrentUser}}>
-						<Box bgcolor={'background.default'} color={'text.primary'}>
-							<NavBar handleLogout={handleLogout} mode={mode} setMode={setMode} />
-							<div className='App'>
-								<AppRoutes
-									handleLogin={handleLogin}
-									handleLogout={handleLogout}
-									handleSignup={handleSignup}
-									products={products}
-									setProducts={setProducts}
-								/>
-							</div>
-						</Box>
+						{/* <Box bgcolor={'background.default'} color={'text.primary'}> */}
+						<NavBar handleLogout={handleLogout} mode={mode} setMode={setMode} />
+						<div className='App'>
+							<AppRoutes
+								handleLogin={handleLogin}
+								handleLogout={handleLogout}
+								handleSignup={handleSignup}
+								products={products}
+								setProducts={setProducts}
+							/>
+						</div>
+						{/* </Box> */}
 					</UserContext.Provider>
 				</BrowserRouter>
 			</ThemeProvider>

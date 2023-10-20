@@ -6,6 +6,7 @@ import Product from './components/ProductCard/ProductDetail';
 import LandingPage from './components/LandingPage';
 import SearchResults from './components/SearchResults';
 import PrivateRoute from './PrivateRoute';
+import EditProfile from './components/EditProfile';
 
 function AppRoutes({handleLogin, handleSignup, handleLogout, products, setProducts}) {
 	return (
@@ -17,6 +18,10 @@ function AppRoutes({handleLogin, handleSignup, handleLogout, products, setProduc
 			<Route
 				path='/user'
 				element={<PrivateRoute element={<LandingPage handleLogout={handleLogout} />} />}
+			/>
+			<Route
+				path='/edit'
+				element={<PrivateRoute element={<EditProfile handleLogout={handleLogout} />} />}
 			/>
 			<Route
 				path='/checkout?success=true'

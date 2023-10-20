@@ -12,7 +12,7 @@ import './LoggedInNav.css';
 // import IconButton from '@mui/material/IconButton';
 // import {Navigate} from 'react-router-dom';
 // import UserContext from '../../auth/UserContext';
-// import {useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 // import SearchBar from '../SearchBar';
 // import Api from '../../api';
 
@@ -21,7 +21,7 @@ export default function LoggedInNav({handleLogout, mode, setMode}) {
 	const [openSideMenu, setOpenSideMenu] = useState(false);
 	const products = useSelector((state) => state.cart.products);
 	// const [results, setResults] = useState([]);
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 
 	// const {currentUser} = useContext(UserContext);
 	// const search = async (searchTerm) => {
@@ -52,7 +52,7 @@ export default function LoggedInNav({handleLogout, mode, setMode}) {
 					<Button marginleft='auto' color='inherit' onClick={handleLogout}>
 						Logout
 					</Button>
-					<Button color='inherit' href='/signup'>
+					<Button color='inherit' sx={{ml: 1, mr: 1}} onClick={() => navigate('/edit')}>
 						Profile
 					</Button>
 					<Box
