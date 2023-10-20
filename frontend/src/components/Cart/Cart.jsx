@@ -33,7 +33,7 @@ function Cart() {
 
 	return (
 		<div className='cart'>
-			<h1>Cart Items</h1>
+			<h1>Cart Items:</h1>
 			{products.length === 0 && emptyCart()}
 			{products.map((item) => (
 				<div className='item' key={item?.id}>

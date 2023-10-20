@@ -44,6 +44,7 @@ function SearchBar() {
 					sx={{width: '80%'}}
 				/>
 				<IconButton type='submit' sx={{p: '10px'}}>
+					{/* 36 / 16 =  */}
 					<SearchIcon sx={{fontSize: '36px'}} />
 				</IconButton>
 			</form>
