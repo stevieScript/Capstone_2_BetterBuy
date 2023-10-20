@@ -16,7 +16,6 @@ function EditProfile() {
 	useEffect(() => {
 		const fetchUser = async () => {
 			let user = await Api.getUser(currentUser.id);
-			console.log(user);
 			setUser(user);
 		};
 		fetchUser();

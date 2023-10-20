@@ -11,20 +11,11 @@ import Grid from '@mui/material/Unstable_Grid2';
 // import Api from '../api';
 
 function ProductList({products}) {
-	// const {currentUser} = useContext(UserContext);
-	// const [data, setResults] = useState([]);
-	// const navigate = useNavigate();
-
-	// const search = async (searchTerm) => {
-	// 	const products = await Api.search(searchTerm);
-	// 	setResults(data);
-	// 	navigate('/search?search=' + searchTerm, {state: {products: products}});
-
 	return (
 		<Box sx={{flexGrow: 1}}>
-			<Grid container spacing={2}>
+			<Grid container spacing={3}>
 				{products.map((result) => (
-					<Grid item xs={10} sm={7} md={6} key={result['itemId']}>
+					<Grid item xs={10} sm={7} md={5.2} key={result['itemId']}>
 						<ProductCard item={result} />
 					</Grid>
 				))}

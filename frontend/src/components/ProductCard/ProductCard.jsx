@@ -27,7 +27,7 @@ const ProductCard = ({item}) => {
 			<div className='titlePrice'>
 				<Link className='link' to={`/search/product/${item?.itemId}`}>
 					<h2>{item?.['title']}</h2>
-					<p>{item?.['condition']['conditionDisplayName']}</p>
+					<p>{item?.['condition']?.['conditionDisplayName']}</p>
 				</Link>
 				<div className='end'>
 					<h3 className='prices'>${item?.['sellingStatus']?.['currentPrice']['value']}</h3>
