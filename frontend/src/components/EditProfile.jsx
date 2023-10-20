@@ -60,7 +60,7 @@ function EditProfile() {
 	};
 
 	return (
-		<Box>
+		<Box sx={{maxWidth: '60%', margin: '3% auto'}}>
 			<Typography component='h1' variant='h5'>
 				Edit Profile
 			</Typography>
