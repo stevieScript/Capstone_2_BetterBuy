@@ -30,7 +30,7 @@ function SearchResults() {
 			{search && (
 				<h1>
 					Search Results for: {search}
-					<hr style={{width: '100%', border: '1px solid black', marginBottom: '5px'}} />
+					{/* <hr style={{width: '100%', border: '1px solid black', marginBottom: '5px'}} /> */}
 				</h1>
 			)}
 

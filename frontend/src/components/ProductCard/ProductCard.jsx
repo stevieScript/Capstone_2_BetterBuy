@@ -1,5 +1,5 @@
 import {Link} from 'react-router-dom';
-import {Card} from '@mui/material';
+import {Box, Card} from '@mui/material';
 // import {Navigate} from 'react-router-dom';
 // import {useContext} from 'react';
 // import UserContext from '../../auth/UserContext';
@@ -24,11 +24,11 @@ const ProductCard = ({item}) => {
 					<img src={item?.['galleryURL']} alt={item?.['title']} />
 				</div>
 			</Link>
-			<div className='titlePrice'>
+			<Box>
 				<Link className='link' to={`/search/product/${item?.itemId}`}>
 					<h2>{item?.['title']}</h2>
-					<p>{item?.['condition']?.['conditionDisplayName']}</p>
 				</Link>
+				<p>{item?.['condition']?.['conditionDisplayName']}</p>
 				<div className='end'>
 					<h3 className='prices'>${item?.['sellingStatus']?.['currentPrice']['value']}</h3>
 					<Button
@@ -51,7 +51,7 @@ const ProductCard = ({item}) => {
 						<AddShoppingCartIcon />
 					</Button>
 				</div>
-			</div>
+			</Box>
 		</Card>
 	);
 };

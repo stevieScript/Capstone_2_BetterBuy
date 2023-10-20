@@ -31,7 +31,7 @@ function SearchBar() {
 	return (
 		<Box
 			sx={{
-				margin: '10px 0',
+				margin: '.625rem 0',
 			}}>
 			<form onSubmit={handleSubmit}>
 				<TextField
@@ -43,9 +43,9 @@ function SearchBar() {
 					onChange={handleChange}
 					sx={{width: '80%'}}
 				/>
-				<IconButton type='submit' sx={{p: '10px'}}>
+				<IconButton type='submit' sx={{p: '.625rem'}}>
 					{/* 36 / 16 =  */}
-					<SearchIcon sx={{fontSize: '36px'}} />
+					<SearchIcon sx={{fontSize: '2.25rem'}} />
 				</IconButton>
 			</form>
 		</Box>

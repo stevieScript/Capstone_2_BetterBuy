@@ -13,9 +13,9 @@ import Grid from '@mui/material/Unstable_Grid2';
 function ProductList({products}) {
 	return (
 		<Box sx={{flexGrow: 1}}>
-			<Grid container spacing={3}>
+			<Grid container spacing={2}>
 				{products.map((result) => (
-					<Grid item xs={10} sm={7} md={5.2} key={result['itemId']}>
+					<Grid item xs={12} sm={8} md={6} lg={5} key={result['itemId']}>
 						<ProductCard item={result} />
 					</Grid>
 				))}
