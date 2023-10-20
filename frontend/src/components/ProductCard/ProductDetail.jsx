@@ -20,8 +20,10 @@ const Product = () => {
 	const [data, setData] = useState([]);
 
 	const getData = async () => {
+		console.log(id);
 		const results = await Api.getById(id);
-		setData([results['Item']]);
+		console.log(results);
+		setData([results?.['Item']]);
 	};
 	// const goBack = () => {
 	// 	window.history.back();

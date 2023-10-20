@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
 		});
 		res.json({sessionId: session.id, url: session.url});
 	} catch (err) {
-		console.log(err);
+		console.error(err);
 	}
 });
 

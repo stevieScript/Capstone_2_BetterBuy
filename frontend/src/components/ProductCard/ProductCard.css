@@ -1,31 +1,32 @@
 .card {
 	width: 31rem;
+	height: 100px;
 	display: flex;
 	height: 12.5rem;
 	gap: .5rem;
 }
 
 .image {
-
 	width: 12rem;
 	height: 100%;
 	overflow: hidden;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	/* object-fit: contain; */
+	object-fit: contain;
 	object-position: center;
-	background-color: #f5f5f5;
+	/* background-color: #f5f5f5; */
 	margin: 0;
+	padding: 0;
 }
 
 
-.image img {
+/* .image img {
 	height: 100%;
 	object-position: center;
 	display: block;
 	margin-bottom: 0;
-}
+} */
 
 .prices {
 	color: black;
@@ -33,6 +34,7 @@
 
 p {
 	margin-left: .5rem;
+
 }
 
 h2 {

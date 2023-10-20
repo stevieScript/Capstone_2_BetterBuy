@@ -43,7 +43,7 @@ function LandingPage() {
 		}
 
 		getProducts();
-	}, []);
+	}, [dispatch]);
 
 	const search = async (searchTerm) => {
 		// setProducts(products);
@@ -61,7 +61,6 @@ function LandingPage() {
 						<Link to='/search/category/293'>
 							<h1>Electronics</h1>
 						</Link>
-
 						<Box sx={{flexGrow: 1}}>
 							<Grid container spacing={2}>
 								{products.electronics?.map((item) => (
@@ -71,6 +70,7 @@ function LandingPage() {
 								))}
 							</Grid>
 						</Box>
+						<div />
 						<div className='cellPhones'>
 							<Link to='/search/category/9355'>
 								<h1>Cell Phones</h1>

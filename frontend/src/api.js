@@ -26,7 +26,6 @@ class Api {
 	static async getUser(id) {
 		try {
 			const response = await axios.get(`${BASE_URL}/users/${id}`);
-			console.log(response.data);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -63,7 +62,7 @@ class Api {
 	static async getById(id) {
 		try {
 			const response = await axios.get(`${BASE_URL}/search/product/${id}`);
-
+			console.log(response.data);
 			return response.data;
 		} catch (err) {
 			console.error(err);
