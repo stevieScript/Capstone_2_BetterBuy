@@ -11,7 +11,7 @@ import {Link} from 'react-router-dom';
 // import {useContext} from 'react';
 import {resetCart} from '../redux/cartReducer';
 import {useDispatch} from 'react-redux';
-// import {reset} from 'nodemon';
+
 // import ProductCard from './ProductCard/ProductCard';
 // import FeaturedItems from './FeaturedProducts/FeaturedItem';
 
