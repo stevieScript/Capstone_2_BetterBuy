@@ -1,5 +1,5 @@
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const dotenv = require('dotenv');
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
 const CLIENT_URL = process.env.CLIENT_URL || 'http://localhost:3000';
 const express = require('express');
 const router = new express.Router();

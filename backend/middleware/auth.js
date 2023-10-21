@@ -5,6 +5,7 @@
 const jwt = require('jsonwebtoken');
 const {SECRET_KEY} = require('../config');
 const {UnauthorizedError} = require('../expressError');
+const e = require('express');
 
 /** Middleware: Authenticate user.
  *
@@ -19,7 +20,6 @@ function authenticateJWT(req, res, next) {
 		const authHeader = req.headers && req.headers.authorization;
 		if (authHeader) {
 			const token = authHeader.replace(/^[Bb]earer /, '').trim();
-			// res.locals.user = jwt.verify(token, SECRET_KEY);
 			req.user = jwt.verify(token, SECRET_KEY);
 		}
 		return next();
@@ -45,14 +45,15 @@ function ensureLoggedIn(req, res, next) {
 function cookieJwtAuth(req, res, next) {
 	const token = req.cookies.token;
 	// Handle no token scenario, e.g., return a specific status or proceed without user data
-	if (!token) return next();
-
+	console.log('token', token);
+	if (!token) throw new UnauthorizedError();
 	try {
 		req.user = jwt.verify(token, SECRET_KEY);
+		console.log('req.user', req.user);
 		return next();
 	} catch (err) {
 		res.clearCookie('token'); // Clear the invalid token
-		return next(); // or return res.status(401).send('Invalid token');
+		return res.status(401).send('Invalid token');
 	}
 }
 

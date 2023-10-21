@@ -1,11 +1,10 @@
 const express = require('express');
-const dotenv = require('dotenv');
-const axios = require('axios');
+// const dotenv = require('dotenv');
+// const axios = require('axios');
 const eBay = require('../eBayapi');
 const {BadRequestError} = require('../expressError');
-const e = require('express');
 const router = new express.Router();
-const {ensureLoggedIn, cookieJwtAuth} = require('../middleware/auth');
+// const {cookieJwtAuth} = require('../middleware/auth');
 
 /** GET /search
  *

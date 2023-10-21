@@ -48,7 +48,6 @@ function App() {
 	const handleSignup = async (signupData) => {
 		try {
 			let res = await Api.register(signupData);
-
 			setCurrentUser(res.id);
 			return {success: true};
 		} catch (errors) {

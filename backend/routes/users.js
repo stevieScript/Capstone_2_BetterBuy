@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
 const {SECRET_KEY} = require('../config');
+const {cookieJwtAuth} = require('../middleware/auth');
 const User = require('../models/user');
 const express = require('express');
 const {BadRequestError} = require('../expressError');
@@ -7,7 +8,6 @@ const router = new express.Router();
 
 /** get user by ID */
 router.get('/:id', async function (req, res, next) {
-	// const user = await User.get(req.params.id);
 	try {
 		const user = await User.get(req.params.id);
 		return res.json({
@@ -22,8 +22,7 @@ router.get('/:id', async function (req, res, next) {
 });
 
 /** update user */
-router.patch('/:id', async function (req, res, next) {
-	// const user = await User.update(req.params.id, req.body);
+router.patch('/:id', cookieJwtAuth, async function (req, res, next) {
 	try {
 		const user = await User.update(req.params.id, req.body);
 		return res.json({

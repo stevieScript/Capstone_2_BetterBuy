@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const {NotFoundError} = require('./expressError');
-const {authenticateJWT} = require('./middleware/auth');
+const {authenticateJWT, cookieJwtAuth} = require('./middleware/auth');
 const cookieParser = require('cookie-parser');
 
 const authRoutes = require('./routes/auth');
@@ -18,11 +18,10 @@ app.use(
 app.use(express.json());
 app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
-app.use(authenticateJWT);
 app.use('/auth', authRoutes);
-app.use('/search', searchRoutes);
 app.use('/users', userRoutes);
-app.use('/create-checkout-session', checkoutRoutes);
+app.use('/search', cookieJwtAuth, searchRoutes);
+app.use('/create-checkout-session', cookieJwtAuth, checkoutRoutes);
 
 /** Handle 404 errors -- this matches everything */
 app.use(function (req, res, next) {
