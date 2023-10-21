@@ -4,7 +4,7 @@ const express = require('express');
 const eBay = require('../eBayapi');
 const {BadRequestError} = require('../expressError');
 const router = new express.Router();
-// const {cookieJwtAuth} = require('../middleware/auth');
+const {cookieJwtAuth} = require('../middleware/auth');
 
 /** GET /search
  *

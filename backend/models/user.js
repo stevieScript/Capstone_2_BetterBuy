@@ -40,7 +40,7 @@ class User {
 			// compare hashed password to a new hash from password
 			const isValid = await bcrypt.compare(password, user.password);
 			if (isValid === true) {
-				// delete user.password;
+				delete user.password;
 				return user.id;
 			}
 		}

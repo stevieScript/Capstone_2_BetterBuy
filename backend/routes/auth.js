@@ -26,9 +26,11 @@ router.post('/token', async function (req, res, next) {
 
 		const {email, password} = req.body;
 		const user = await User.authenticate(email, password);
+		console.log('User', user); //this one shows up in the console
 		const token = jwt.sign({id: user}, SECRET_KEY, {
-			expiresIn: 60 * 60 * 24, // 1 day
+			expiresIn: '24h', // 1 day
 		});
+		console.log('Token', token); //this one shows up in the console
 		res.cookie('token', token, {httpOnly: true});
 		return res.json({user});
 	} catch (err) {

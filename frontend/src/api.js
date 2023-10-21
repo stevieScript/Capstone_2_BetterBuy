@@ -7,6 +7,7 @@ class Api {
 		try {
 			const response = await axios.post(`${BASE_URL}/auth/register`, user);
 			localStorage.setItem('user', response.data.id);
+			console.log(response.data);
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -17,6 +18,7 @@ class Api {
 		try {
 			const response = await axios.post(`${BASE_URL}/auth/token`, credentials);
 			localStorage.setItem('user', JSON.stringify(response.data.user));
+			console.log(response.data, 'login');
 			return response.data.user;
 		} catch (err) {
 			console.error(err);
@@ -40,10 +42,15 @@ class Api {
 			console.error(err);
 		}
 	}
-	// static async getProducts() {
-	// 	const response = await axios.get(BASE_URL + 'products');
-	// 	return response.data;
-	// }
+
+	static async logout() {
+		try {
+			const response = await axios.delete(`${BASE_URL}/users/logout`);
+			return response.data;
+		} catch (err) {
+			console.error(err);
+		}
+	}
 
 	static async getCart() {
 		const response = await axios.get(BASE_URL + 'cart');

@@ -1,23 +1,27 @@
 const express = require('express');
+const isDevelopment = process.env.NODE_ENV !== 'production';
+const allowedOrigin = isDevelopment
+	? 'http://localhost:3000'
+	: 'https://sb-capstone-2-betterbuy.onrender.com';
 const cors = require('cors');
 const {NotFoundError} = require('./expressError');
 const {authenticateJWT, cookieJwtAuth} = require('./middleware/auth');
 const cookieParser = require('cookie-parser');
 
 const authRoutes = require('./routes/auth');
-const searchRoutes = require('./routes/search');
 const userRoutes = require('./routes/users');
+const searchRoutes = require('./routes/search');
 const checkoutRoutes = require('./routes/checkout');
 const app = express();
 app.use(
-	cors()
-	// 	{
-	// 	origin: 'http://localhost:3000',
-	// }
+	cors({
+		origin: allowedOrigin,
+		credentials: true,
+	})
 );
-app.use(express.json());
-app.use(cookieParser());
 app.use(express.urlencoded({extended: true}));
+app.use(cookieParser());
+app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/search', cookieJwtAuth, searchRoutes);

@@ -45,11 +45,10 @@ function ensureLoggedIn(req, res, next) {
 function cookieJwtAuth(req, res, next) {
 	const token = req.cookies.token;
 	// Handle no token scenario, e.g., return a specific status or proceed without user data
-	console.log('token', token);
+	console.log('token in auth', token);
 	if (!token) throw new UnauthorizedError();
 	try {
 		req.user = jwt.verify(token, SECRET_KEY);
-		console.log('req.user', req.user);
 		return next();
 	} catch (err) {
 		res.clearCookie('token'); // Clear the invalid token

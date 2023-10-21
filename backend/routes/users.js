@@ -36,5 +36,17 @@ router.patch('/:id', cookieJwtAuth, async function (req, res, next) {
 	}
 });
 
+/** logout user */
+
+router.delete('/logout', async function (req, res, next) {
+	try {
+		console.log('logout');
+		res.clearCookie('token');
+		return res.json({message: 'Logged out'});
+	} catch (err) {
+		return next(err);
+	}
+});
+
 module.exports = router;
 

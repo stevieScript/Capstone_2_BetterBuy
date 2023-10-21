@@ -17,8 +17,13 @@ function App() {
 	const [currentUser, setCurrentUser] = useState(null);
 	const [products, setProducts] = useState([]);
 	const [user, setUser] = useState(() => {
-		const storedUser = localStorage.getItem('user');
-		return storedUser ? JSON.parse(storedUser) : null;
+		try {
+			const storedUser = localStorage.getItem('user');
+			return storedUser ? JSON.parse(storedUser) : null;
+		} catch (error) {
+			console.error('Error parsing user from localStorage:', error);
+			return null;
+		}
 	});
 
 	const [mode, setMode] = useState('light');
@@ -48,6 +53,7 @@ function App() {
 	const handleSignup = async (signupData) => {
 		try {
 			let res = await Api.register(signupData);
+			console.log(res, 'signup');
 			setCurrentUser(res.id);
 			return {success: true};
 		} catch (errors) {
@@ -68,10 +74,11 @@ function App() {
 		}
 	};
 
-	const handleLogout = () => {
-		localStorage.removeItem('user');
+	const handleLogout = async () => {
+		await Api.logout();
 		setCurrentUser(null);
 		setUser(null);
+		localStorage.removeItem('user');
 		<Navigate to='/' />;
 	};
 	return (
