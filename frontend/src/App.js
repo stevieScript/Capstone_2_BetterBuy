@@ -83,10 +83,11 @@ function App() {
 		<Box
 			sx={{
 				display: 'flex',
-				margin: 'auto',
+				alignItems: 'center',
+				justifyContent: 'center',
+				height: '100vh',
 				fontSize: '24pt',
 				fontWeight: 'bold',
-				textlign: 'center',
 			}}>
 			<CircularProgress />
 		</Box>

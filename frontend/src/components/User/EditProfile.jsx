@@ -7,7 +7,6 @@ import Typography from '@mui/material/Typography';
 import UserContext from '../../auth/UserContext';
 import Api from '../../api';
 import {useNavigate} from 'react-router-dom';
-import LoadingSpinner from '../../common/LoadingSpinner';
 import {CircularProgress} from '@mui/material';
 
 function EditProfile() {
@@ -70,10 +69,11 @@ function EditProfile() {
 		<Box
 			sx={{
 				display: 'flex',
-				margin: 'auto',
+				alignItems: 'center',
+				justifyContent: 'center',
+				height: '100vh',
 				fontSize: '24pt',
 				fontWeight: 'bold',
-				textlign: 'center',
 			}}>
 			<CircularProgress />
 		</Box>
