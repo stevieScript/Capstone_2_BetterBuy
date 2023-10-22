@@ -14,9 +14,6 @@ function PrivateRoute({element}) {
 	const user = useSelector((state) => state.cart.userId);
 	const {currentUser} = useContext(UserContext);
 
-	// const dispatch = useDispatch();
-	// const user = localStorage.getItem('user');
-
 	console.debug('PrivateRoute', 'currentUser=', currentUser);
 
 	if (!user || !currentUser) {

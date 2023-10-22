@@ -11,7 +11,7 @@ import {CircularProgress} from '@mui/material';
 
 function EditProfile() {
 	const {currentUser, setCurrentUser} = useContext(UserContext);
-	const [data, setData] = useState();
+	// const [formData, setFormData] = useState();
 	const navigate = useNavigate();
 	const [formData, setFormData] = useState(null);
 	const [infoLoaded, setInfoLoaded] = useState(false);
@@ -21,7 +21,7 @@ function EditProfile() {
 			try {
 				let user = await Api.getUser(currentUser);
 
-				setData(user);
+				setFormData(user);
 			} catch (err) {
 				console.error(err);
 			}
@@ -31,7 +31,7 @@ function EditProfile() {
 
 		setInfoLoaded(false);
 		getUser();
-	}, [currentUser.id]);
+	}, []);
 
 	const [errors, setErrors] = useState([]);
 
@@ -52,7 +52,7 @@ function EditProfile() {
 				email: formData.email,
 				password: formData.password,
 			};
-			let updatedUser = await Api.updateUser(currentUser.id, profileData);
+			let updatedUser = await Api.updateUser(currentUser, profileData);
 			setFormData((formData) => ({
 				...formData,
 				password: '',
@@ -98,7 +98,7 @@ function EditProfile() {
 							id='firstName'
 							label='First Name'
 							autoFocus
-							value={data?.firstName}
+							value={formData?.firstName}
 							onChange={handleChange}
 						/>
 					</Grid>
@@ -110,7 +110,7 @@ function EditProfile() {
 							label='Last Name'
 							name='lastName'
 							autoComplete='lname'
-							value={data?.lastName}
+							value={formData?.lastName}
 							onChange={handleChange}
 						/>
 					</Grid>
@@ -122,7 +122,7 @@ function EditProfile() {
 							label='Email Address'
 							name='email'
 							autoComplete='email'
-							value={data?.email}
+							value={formData?.email}
 							onChange={handleChange}
 						/>
 					</Grid>
@@ -135,7 +135,7 @@ function EditProfile() {
 							type='password'
 							id='password'
 							autoComplete='new-password'
-							value={data?.password}
+							value={formData?.password}
 							onChange={handleChange}
 						/>
 					</Grid>

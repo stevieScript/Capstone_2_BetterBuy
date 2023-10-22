@@ -34,7 +34,7 @@ export default function LoggedInNav() {
 						sx={{mr: 1, ml: 1}}
 						className='menuIcon'
 						onClick={() => setOpenSideMenu(!openSideMenu)}>
-						<MenuIcon />
+						<MenuIcon sx={{cursor: 'pointer'}} />
 					</Box>
 					<Box marginRight='auto'>
 						<Button onClick={() => navigate('/user')} color='inherit' sx={{ml: 3}}>

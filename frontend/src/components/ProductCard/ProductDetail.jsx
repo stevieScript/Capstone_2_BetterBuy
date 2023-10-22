@@ -12,7 +12,8 @@ import {useContext} from 'react';
 import {Box, CircularProgress} from '@mui/material';
 
 const Product = () => {
-	const currentUser = useContext(UserContext);
+	const {currentUser} = useContext(UserContext);
+	console.log(currentUser);
 	const id = useParams().id;
 	const [quantity, setQuantity] = useState(1);
 	const [loading, setLoading] = useState(true);
@@ -72,7 +73,7 @@ const Product = () => {
 							onClick={() =>
 								dispatch(
 									addToCart({
-										userId: currentUser?.id,
+										userId: currentUser,
 										product: {
 											id: data[0]?.ItemID,
 											title: data[0]?.Title,
