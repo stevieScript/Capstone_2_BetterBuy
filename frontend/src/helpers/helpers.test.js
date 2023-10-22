@@ -1,5 +1,6 @@
-const Api = require('../api');
+import Api from '../api';
 
+jest.mock('axios');
 jest.mock('../api');
 
 describe('getLandingPage', () => {

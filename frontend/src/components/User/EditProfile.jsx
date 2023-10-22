@@ -7,22 +7,29 @@ import Typography from '@mui/material/Typography';
 import UserContext from '../../auth/UserContext';
 import Api from '../../api';
 import {useNavigate} from 'react-router-dom';
+import LoadingSpinner from '../../common/LoadingSpinner';
 
 function EditProfile() {
 	const {currentUser, setCurrentUser} = useContext(UserContext);
 	const [data, setData] = useState();
 	const navigate = useNavigate();
 	const [formData, setFormData] = useState(null);
+	const [infoLoaded, setInfoLoaded] = useState(false);
 
 	useEffect(() => {
 		async function getUser() {
 			try {
 				let user = await Api.getUser(currentUser.id);
+
 				setData(user);
 			} catch (err) {
 				console.log(err);
 			}
+
+			setInfoLoaded(true);
 		}
+
+		setInfoLoaded(false);
 		getUser();
 	}, [currentUser.id]);
 
@@ -58,7 +65,9 @@ function EditProfile() {
 		}
 	};
 
-	return (
+	return !infoLoaded ? (
+		<LoadingSpinner />
+	) : (
 		<Box sx={{maxWidth: '60%', margin: '3% auto'}}>
 			<Typography component='h1' variant='h5'>
 				Edit Profile

@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import AppRoutes from './AppRoutes';
 import NavBar from './components/NavBar/NavBar';
 // import LoggedInNav from './components/LoggedInNav';
+import LoadingSpinner from './common/LoadingSpinner';
 import Api from './api';
 import UserContext from './auth/UserContext';
 import {BrowserRouter} from 'react-router-dom';
