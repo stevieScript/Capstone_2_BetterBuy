@@ -8,25 +8,16 @@ import SearchResults from './components/Search/SearchResults';
 import PrivateRoute from './PrivateRoute';
 import EditProfile from './components/User/EditProfile';
 
-function AppRoutes({handleLogin, handleSignup, handleLogout, products, setProducts}) {
+function AppRoutes({handleLogin, handleSignup}) {
 	return (
 		<Routes>
 			<Route path='/' element={<Home />} />
 			<Route path='/login' element={<Login handleLogin={handleLogin} />} />
 			<Route path='/signup' element={<Signup handleSignup={handleSignup} />} />
 
-			<Route
-				path='/user'
-				element={<PrivateRoute element={<LandingPage handleLogout={handleLogout} />} />}
-			/>
-			<Route
-				path='/edit'
-				element={<PrivateRoute element={<EditProfile handleLogout={handleLogout} />} />}
-			/>
-			<Route
-				path='/checkout/success'
-				element={<PrivateRoute element={<LandingPage handleLogout={handleLogout} />} />}
-			/>
+			<Route path='/user' element={<PrivateRoute element={<LandingPage />} />} />
+			<Route path='/edit' element={<PrivateRoute element={<EditProfile />} />} />
+			<Route path='/checkout/success' element={<PrivateRoute element={<LandingPage />} />} />
 
 			<Route path='/search/product/:id' element={<PrivateRoute element={<Product />} />} />
 

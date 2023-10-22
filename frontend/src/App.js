@@ -63,25 +63,21 @@ function App() {
 		}
 	};
 
-	// const handleLogout = async () => {
-	// 	await Api.logout();
-	// 	setCurrentUser(null);
-	// 	setUser(null);
-	// 	localStorage.removeItem('user');
-	// };
+	const logout = async () => {
+		await Api.logout();
+		setCurrentUser(null);
+		setUser(null);
+		localStorage.removeItem('user');
+	};
 	return !infoLoaded ? (
 		<LoadingSpinner />
 	) : (
 		<>
 			<BrowserRouter>
 				<UserContext.Provider value={{currentUser, setCurrentUser}}>
-					<NavBar />
+					<NavBar logout={logout} />
 					<div className='App'>
-						<AppRoutes
-							handleLogin={handleLogin}
-							// handleLogout={handleLogout}
-							handleSignup={handleSignup}
-						/>
+						<AppRoutes handleLogin={handleLogin} handleSignup={handleSignup} />
 					</div>
 				</UserContext.Provider>
 			</BrowserRouter>
