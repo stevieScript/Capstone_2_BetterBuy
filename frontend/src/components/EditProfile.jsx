@@ -10,23 +10,22 @@ import {useNavigate} from 'react-router-dom';
 
 function EditProfile() {
 	const {currentUser, setCurrentUser} = useContext(UserContext);
-	const [user, setUser] = useState(currentUser);
+	const [data, setData] = useState();
 	const navigate = useNavigate();
+	const [formData, setFormData] = useState(null);
 
 	useEffect(() => {
-		const fetchUser = async () => {
-			let user = await Api.getUser(currentUser.id);
-			setUser(user);
-		};
-		fetchUser();
-	}, []);
+		async function getUser() {
+			try {
+				let user = await Api.getUser(currentUser.id);
+				setData(user);
+			} catch (err) {
+				console.log(err);
+			}
+		}
+		getUser();
+	}, [currentUser.id]);
 
-	const [formData, setFormData] = useState({
-		firstName: user.firstName,
-		lastName: user.lastName,
-		email: user.email,
-		password: '',
-	});
 	const [errors, setErrors] = useState([]);
 
 	const handleChange = (e) => {
@@ -80,7 +79,7 @@ function EditProfile() {
 							id='firstName'
 							label='First Name'
 							autoFocus
-							value={formData.firstName}
+							value={data?.firstName}
 							onChange={handleChange}
 						/>
 					</Grid>
@@ -92,7 +91,7 @@ function EditProfile() {
 							label='Last Name'
 							name='lastName'
 							autoComplete='lname'
-							value={formData.lastName}
+							value={data?.lastName}
 							onChange={handleChange}
 						/>
 					</Grid>
@@ -104,7 +103,7 @@ function EditProfile() {
 							label='Email Address'
 							name='email'
 							autoComplete='email'
-							value={formData.email}
+							value={data?.email}
 							onChange={handleChange}
 						/>
 					</Grid>
@@ -117,7 +116,7 @@ function EditProfile() {
 							type='password'
 							id='password'
 							autoComplete='new-password'
-							value={formData.password}
+							value={data?.password}
 							onChange={handleChange}
 						/>
 					</Grid>

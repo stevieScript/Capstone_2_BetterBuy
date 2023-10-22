@@ -30,8 +30,10 @@ function LandingPage() {
 	// }, [dispatch]);
 
 	useEffect(() => {
+		console.log('LandingPage useEffect');
 		const param = new URLSearchParams(window.location.search);
 		const status = param.get('success');
+		console.log('status=', status);
 		async function getProducts() {
 			const products = await getLandingPage();
 			setProducts(products);

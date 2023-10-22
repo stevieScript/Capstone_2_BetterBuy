@@ -11,10 +11,11 @@ import UserContext from './auth/UserContext';
 
 function PrivateRoute({element}) {
 	const {currentUser} = useContext(UserContext);
+	const user = localStorage.getItem('user');
 
 	console.debug('PrivateRoute', 'currentUser=', currentUser);
 
-	if (!currentUser) {
+	if (!currentUser && !user) {
 		return <Navigate to='/login' />;
 	}
 

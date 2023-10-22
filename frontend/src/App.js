@@ -67,6 +67,7 @@ function App() {
 			let user = await Api.login(loginData);
 			setUser(user);
 			setCurrentUser(user);
+			localStorage.setItem('user', JSON.stringify(user));
 			return {success: true};
 		} catch (errors) {
 			console.error('login failed', errors);
@@ -79,7 +80,7 @@ function App() {
 		setCurrentUser(null);
 		setUser(null);
 		localStorage.removeItem('user');
-		<Navigate to='/' />;
+		// <Navigate to='/' />;
 	};
 	return (
 		<>

@@ -24,7 +24,7 @@ function AppRoutes({handleLogin, handleSignup, handleLogout, products, setProduc
 				element={<PrivateRoute element={<EditProfile handleLogout={handleLogout} />} />}
 			/>
 			<Route
-				path='/checkout?success=true'
+				path='/checkout/success'
 				element={<PrivateRoute element={<LandingPage handleLogout={handleLogout} />} />}
 			/>
 
