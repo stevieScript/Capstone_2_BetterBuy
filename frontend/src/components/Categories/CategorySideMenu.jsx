@@ -33,8 +33,8 @@ function CategorySideMenu({mode, setMode}) {
 		<div className='sideMenu'>
 			<h1>Top Categories:</h1>
 			<div className='category-links'>{categoryLinks()}</div>
-			<ModeNightIcon />
-			<Switch onChange={(e) => setMode(mode === 'light' ? 'dark' : 'light')} />
+			{/* <ModeNightIcon />
+			<Switch onChange={(e) => setMode(mode === 'light' ? 'dark' : 'light')} /> */}
 		</div>
 	);
 }

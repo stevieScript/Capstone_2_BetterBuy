@@ -4,8 +4,8 @@ import TextField from '@mui/material/TextField';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import UserContext from '../auth/UserContext';
-import Api from '../api';
+import UserContext from '../../auth/UserContext';
+import Api from '../../api';
 import {useNavigate} from 'react-router-dom';
 
 function EditProfile() {

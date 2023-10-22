@@ -1,4 +1,4 @@
-import ProductCard from './ProductCard/ProductCard';
+import ProductCard from './ProductCard';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
 // import {Navigate} from 'react-router-dom';

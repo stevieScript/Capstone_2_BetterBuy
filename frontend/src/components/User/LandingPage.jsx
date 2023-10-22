@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import SearchBar from './SearchBar';
+import SearchBar from '../Search/SearchBar';
 import Box from '@mui/material/Box';
 import Grid from '@mui/material/Unstable_Grid2';
-import {getLandingPage} from '../helpers/helpers';
-import FeatureCard from './FeaturedProducts/FeatureCard';
+import {getLandingPage} from '../../helpers/helpers';
+import FeatureCard from '../FeaturedProducts/FeatureCard';
 import {Link} from 'react-router-dom';
-import {resetCart} from '../redux/cartReducer';
+import {resetCart} from '../../redux/cartReducer';
 import {useDispatch} from 'react-redux';
 
 function LandingPage() {

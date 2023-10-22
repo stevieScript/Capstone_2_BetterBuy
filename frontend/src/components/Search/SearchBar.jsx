@@ -4,7 +4,7 @@ import TextField from '@mui/material/TextField';
 import {useNavigate} from 'react-router-dom';
 // import Api from '../api';
 import {Box, Button, IconButton} from '@mui/material';
-import Api from '../api';
+import Api from '../../api';
 
 function SearchBar() {
 	const [searchTerm, setSearchTerm] = useState('');

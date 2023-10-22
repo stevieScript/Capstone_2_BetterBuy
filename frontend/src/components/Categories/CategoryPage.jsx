@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
-import Api from '../api';
-import SearchBar from './SearchBar';
-import ProductList from './ProductList';
+import Api from '../../api';
+import SearchBar from '../SearchBar';
+import ProductList from '../ProductCard/ProductList';
 
 function CategoryPage() {
 	const {id} = useParams();
