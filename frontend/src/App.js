@@ -1,20 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import AppRoutes from './AppRoutes';
 import NavBar from './components/NavBar/NavBar';
-// import LoggedInNav from './components/LoggedInNav';
 import LoadingSpinner from './common/LoadingSpinner';
 import Api from './api';
 import UserContext from './auth/UserContext';
 import {BrowserRouter} from 'react-router-dom';
-// import {createTheme, ThemeProvider} from '@mui/material/';
-// import User from './components/User';
 import './App.css';
-// import {Box} from '@mui/system';
 
 function App() {
 	const [infoLoaded, setInfoLoaded] = useState(false);
 	const [currentUser, setCurrentUser] = useState(null);
-	const [products, setProducts] = useState([]);
 	const [user, setUser] = useState(() => {
 		try {
 			const storedUser = localStorage.getItem('user');
@@ -68,34 +63,28 @@ function App() {
 		}
 	};
 
-	const handleLogout = async () => {
-		await Api.logout();
-		setCurrentUser(null);
-		setUser(null);
-		localStorage.removeItem('user');
-		// <Navigate to='/' />;
-	};
-	return (
+	// const handleLogout = async () => {
+	// 	await Api.logout();
+	// 	setCurrentUser(null);
+	// 	setUser(null);
+	// 	localStorage.removeItem('user');
+	// };
+	return !infoLoaded ? (
+		<LoadingSpinner />
+	) : (
 		<>
-			{/* <ThemeProvider theme={darkTheme}> */}
-			{/* mode={mode} setMode={setMode} */}
 			<BrowserRouter>
 				<UserContext.Provider value={{currentUser, setCurrentUser}}>
-					{/* <Box bgcolor={'background.default'} color={'text.primary'}> */}
-					<NavBar handleLogout={handleLogout} />
+					<NavBar />
 					<div className='App'>
 						<AppRoutes
 							handleLogin={handleLogin}
-							handleLogout={handleLogout}
+							// handleLogout={handleLogout}
 							handleSignup={handleSignup}
-							products={products}
-							setProducts={setProducts}
 						/>
 					</div>
-					{/* </Box> */}
 				</UserContext.Provider>
 			</BrowserRouter>
-			{/* </ThemeProvider> */}
 		</>
 	);
 }
