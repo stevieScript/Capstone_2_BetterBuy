@@ -6,28 +6,14 @@ import Grid from '@mui/material/Unstable_Grid2';
 import {getLandingPage} from '../helpers/helpers';
 import FeatureCard from './FeaturedProducts/FeatureCard';
 import {Link} from 'react-router-dom';
-// import {Navigate} from 'react-router-dom';
-// import UserContext from '../auth/UserContext';
-// import {useContext} from 'react';
 import {resetCart} from '../redux/cartReducer';
 import {useDispatch} from 'react-redux';
 
-// import ProductCard from './ProductCard/ProductCard';
-// import FeaturedItems from './FeaturedProducts/FeaturedItem';
-
-// import Api from '../api';
-
 function LandingPage() {
-	// const {currentUser} = useContext(UserContext);
 	const [products, setProducts] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const navigate = useNavigate();
 	const dispatch = useDispatch();
-	//useEffect to clear cart after redirect from strip
-	// const dispatch = useDispatch();
-	// useEffect(() => {
-	// 	dispatch(reset());
-	// }, [dispatch]);
 
 	useEffect(() => {
 		const param = new URLSearchParams(window.location.search);
@@ -45,10 +31,8 @@ function LandingPage() {
 	}, [dispatch]);
 
 	const search = async (searchTerm) => {
-		// setProducts(products);
 		navigate(`/search/products/${searchTerm}`);
 	};
-
 	return (
 		<div className='main'>
 			{loading ? (
