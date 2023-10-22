@@ -40,6 +40,8 @@ function App() {
 	const handleSignup = async (signupData) => {
 		try {
 			let res = await Api.register(signupData);
+			console.log('signup successful', res.id);
+			localStorage.setItem('user', JSON.stringify(res.id));
 			setCurrentUser(res.id);
 			return {success: true};
 		} catch (errors) {

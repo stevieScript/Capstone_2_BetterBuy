@@ -6,7 +6,7 @@ class Api {
 	static async register(user) {
 		try {
 			const response = await axios.post(`${BASE_URL}/auth/register`, user);
-			localStorage.setItem('user', response.data.id);
+
 			return response.data;
 		} catch (err) {
 			console.error(err);
@@ -16,7 +16,6 @@ class Api {
 	static async login(credentials) {
 		try {
 			const response = await axios.post(`${BASE_URL}/auth/token`, credentials);
-			localStorage.setItem('user', JSON.stringify(response.data.user));
 			return response.data.user;
 		} catch (err) {
 			console.error(err);
