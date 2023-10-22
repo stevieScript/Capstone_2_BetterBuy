@@ -12,9 +12,8 @@ import UserContext from './auth/UserContext';
 
 function PrivateRoute({element}) {
 	const user = useSelector((state) => state.cart.userId);
-	console.log('user', user);
 	const {currentUser} = useContext(UserContext);
-	console.log('currentUser', currentUser);
+
 	// const dispatch = useDispatch();
 	// const user = localStorage.getItem('user');
 

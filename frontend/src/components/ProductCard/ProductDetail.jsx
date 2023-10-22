@@ -21,25 +21,24 @@ const Product = () => {
 
 	const [data, setData] = useState([]);
 
-	const getData = async () => {
-		try {
-			const results = await Api.getById(id);
-			console.log(results);
-			setData([results?.['Item']]);
-		} catch (err) {
-			console.log(err);
-		}
-		setLoading(false);
-	};
 	// const goBack = () => {
 	// 	window.history.back();
 	// };
 
 	useEffect(() => {
+		const getData = async () => {
+			try {
+				const results = await Api.getById(id);
+				setData([results?.['Item']]);
+			} catch (err) {
+				console.error(err);
+			}
+			setLoading(false);
+		};
 		getData();
 	}, []);
 	return (
-		<div className='product'>
+		<Box>
 			{loading ? (
 				<Box
 					sx={{
@@ -53,7 +52,7 @@ const Product = () => {
 					<CircularProgress />
 				</Box>
 			) : (
-				<>
+				<Box className='product'>
 					<div className='left'>
 						<div className='mainImg'>
 							<img src={data[0]?.PictureURL} alt='' />
@@ -74,12 +73,14 @@ const Product = () => {
 								dispatch(
 									addToCart({
 										userId: currentUser?.id,
-										id: data[0]?.ItemID,
-										title: data[0]?.Title,
-										desc: data[0]?.ConditionDescription,
-										price: data[0]?.CurrentPrice.value,
-										img: data[0]?.PictureURL,
-										quantity,
+										product: {
+											id: data[0]?.ItemID,
+											title: data[0]?.Title,
+											desc: data[0]?.ConditionDescription,
+											price: data[0]?.CurrentPrice.value,
+											img: data[0]?.PictureURL,
+											quantity,
+										},
 									})
 								)
 							}>
@@ -93,9 +94,9 @@ const Product = () => {
 							<span>CATEGORY: {data[0]?.PrimaryCategoryName}</span>
 						</div>
 					</div>
-				</>
+				</Box>
 			)}
-		</div>
+		</Box>
 	);
 };
 

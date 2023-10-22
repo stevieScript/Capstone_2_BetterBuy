@@ -12,7 +12,7 @@ import {Box, CircularProgress} from '@mui/material';
 
 function App() {
 	const dispatch = useDispatch();
-	const user = useSelector((state) => state.cart.user);
+	const user = useSelector((state) => state.cart.userId);
 	const [infoLoaded, setInfoLoaded] = useState(false);
 	const [currentUser, setCurrentUser] = useState(null);
 	// const [user, setUser] = useState(() => {
@@ -64,7 +64,6 @@ function App() {
 				setCurrentUser(user);
 				dispatch(setUserId(user));
 				// localStorage.setItem('user', JSON.stringify(user));
-				console.log('user', user);
 				return {success: true};
 			}
 		} catch (errors) {

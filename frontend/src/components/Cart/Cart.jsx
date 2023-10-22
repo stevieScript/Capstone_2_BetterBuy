@@ -18,7 +18,6 @@ function Cart() {
 	const handleCheckout = async () => {
 		const response = await Api.stripeCheckout(products);
 		if (response.status === 200) {
-			console.log('success', response?.data?.url);
 			window.location.href = response?.data?.url;
 		}
 	};

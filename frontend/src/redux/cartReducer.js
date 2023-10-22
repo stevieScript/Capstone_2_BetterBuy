@@ -10,7 +10,6 @@ export const cartSlice = createSlice({
 	initialState,
 	reducers: {
 		setUserId: (state, action) => {
-			console.log('setUserId', action.payload);
 			if (action.payload !== state.userId) {
 				state.products = [];
 				state.userId = action.payload;
@@ -31,15 +30,10 @@ export const cartSlice = createSlice({
 			}
 		},
 		removeItem: (state, action) => {
-			if (action.payload.userId !== state.userId) {
-				state.products = [];
-				state.userId = action.payload.userId;
-			}
-			state.products = state.products.filter((item) => item.id !== action.payload.id);
+			state.products = state.products.filter((item) => item.id !== action.payload);
 		},
 		resetCart: (state) => {
 			state.products = [];
-			state.userId = null;
 		},
 	},
 });
