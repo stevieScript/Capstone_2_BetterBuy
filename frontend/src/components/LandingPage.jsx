@@ -30,10 +30,8 @@ function LandingPage() {
 	// }, [dispatch]);
 
 	useEffect(() => {
-		console.log('LandingPage useEffect');
 		const param = new URLSearchParams(window.location.search);
 		const status = param.get('success');
-		console.log('status=', status);
 		async function getProducts() {
 			const products = await getLandingPage();
 			setProducts(products);
@@ -43,7 +41,6 @@ function LandingPage() {
 		if (status === 'true') {
 			dispatch(resetCart());
 		}
-
 		getProducts();
 	}, [dispatch]);
 
@@ -66,7 +63,7 @@ function LandingPage() {
 						<Box sx={{flexGrow: 1}}>
 							<Grid container spacing={2}>
 								{products.electronics?.map((item) => (
-									<Grid item xs={6} md={3} key={item.id}>
+									<Grid item xs={6} md={3} key={item.itemId}>
 										<FeatureCard item={item} />
 									</Grid>
 								))}

@@ -15,7 +15,7 @@ function PrivateRoute({element}) {
 
 	console.debug('PrivateRoute', 'currentUser=', currentUser);
 
-	if (!currentUser && !user) {
+	if (!user && !currentUser) {
 		return <Navigate to='/login' />;
 	}
 

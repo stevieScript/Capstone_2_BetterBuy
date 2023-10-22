@@ -3,11 +3,9 @@ import AppRoutes from './AppRoutes';
 import NavBar from './components/NavBar/NavBar';
 // import LoggedInNav from './components/LoggedInNav';
 import Api from './api';
-// import jwt from 'jsonwebtoken';
 import UserContext from './auth/UserContext';
-// import jwt_decode from 'jwt-decode';
-import {BrowserRouter, Navigate} from 'react-router-dom';
-import {createTheme, ThemeProvider} from '@mui/material/';
+import {BrowserRouter} from 'react-router-dom';
+// import {createTheme, ThemeProvider} from '@mui/material/';
 // import User from './components/User';
 import './App.css';
 // import {Box} from '@mui/system';
@@ -24,13 +22,6 @@ function App() {
 			console.error('Error parsing user from localStorage:', error);
 			return null;
 		}
-	});
-
-	const [mode, setMode] = useState('light');
-	const darkTheme = createTheme({
-		palette: {
-			mode: mode,
-		},
 	});
 
 	useEffect(() => {
@@ -53,7 +44,6 @@ function App() {
 	const handleSignup = async (signupData) => {
 		try {
 			let res = await Api.register(signupData);
-			console.log(res, 'signup');
 			setCurrentUser(res.id);
 			return {success: true};
 		} catch (errors) {
@@ -65,10 +55,12 @@ function App() {
 	const handleLogin = async (loginData) => {
 		try {
 			let user = await Api.login(loginData);
-			setUser(user);
-			setCurrentUser(user);
-			localStorage.setItem('user', JSON.stringify(user));
-			return {success: true};
+			if (user) {
+				setUser(user);
+				setCurrentUser(user);
+				localStorage.setItem('user', JSON.stringify(user));
+				return {success: true};
+			}
 		} catch (errors) {
 			console.error('login failed', errors);
 			return {success: false, errors};
@@ -84,24 +76,25 @@ function App() {
 	};
 	return (
 		<>
-			<ThemeProvider theme={darkTheme}>
-				<BrowserRouter>
-					<UserContext.Provider value={{currentUser, setCurrentUser}}>
-						{/* <Box bgcolor={'background.default'} color={'text.primary'}> */}
-						<NavBar handleLogout={handleLogout} mode={mode} setMode={setMode} />
-						<div className='App'>
-							<AppRoutes
-								handleLogin={handleLogin}
-								handleLogout={handleLogout}
-								handleSignup={handleSignup}
-								products={products}
-								setProducts={setProducts}
-							/>
-						</div>
-						{/* </Box> */}
-					</UserContext.Provider>
-				</BrowserRouter>
-			</ThemeProvider>
+			{/* <ThemeProvider theme={darkTheme}> */}
+			{/* mode={mode} setMode={setMode} */}
+			<BrowserRouter>
+				<UserContext.Provider value={{currentUser, setCurrentUser}}>
+					{/* <Box bgcolor={'background.default'} color={'text.primary'}> */}
+					<NavBar handleLogout={handleLogout} />
+					<div className='App'>
+						<AppRoutes
+							handleLogin={handleLogin}
+							handleLogout={handleLogout}
+							handleSignup={handleSignup}
+							products={products}
+							setProducts={setProducts}
+						/>
+					</div>
+					{/* </Box> */}
+				</UserContext.Provider>
+			</BrowserRouter>
+			{/* </ThemeProvider> */}
 		</>
 	);
 }

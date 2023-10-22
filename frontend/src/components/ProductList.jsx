@@ -15,7 +15,7 @@ function ProductList({products}) {
 		<Box sx={{flexGrow: 1}}>
 			<Grid container spacing={2}>
 				{products.map((result) => (
-					<Grid item xs={12} sm={8} md={6} lg={5} key={result['itemId']}>
+					<Grid item xs={12} sm={8} md={6} lg={5} key={result.itemId}>
 						<ProductCard item={result} />
 					</Grid>
 				))}
