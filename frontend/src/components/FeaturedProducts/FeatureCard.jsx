@@ -6,13 +6,12 @@ import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import {useDispatch} from 'react-redux';
 import {addToCart} from '../../redux/cartReducer';
 import {Box} from '@mui/system';
-
 // import {Navigate} from 'react-router-dom';
-// import {useContext, useState} from 'react';
-// import UserContext from '../../auth/UserContext';
+import {useContext, useState} from 'react';
+import UserContext from '../../auth/UserContext';
 
 function FeatureCard({item}) {
-	// const {currentUser} = useContext(UserContext);
+	const {currentUser} = useContext(UserContext);
 	// const [quantity, setQuantity] = useState(1);
 
 	const dispatch = useDispatch();
@@ -41,12 +40,15 @@ function FeatureCard({item}) {
 						onClick={() =>
 							dispatch(
 								addToCart({
-									id: item?.itemId,
-									title: item?.title,
-									desc: item?.ConditionDescription,
-									price: item?.sellingStatus?.currentPrice?.value,
-									img: item?.galleryURL,
-									quantity: 1,
+									userId: currentUser,
+									product: {
+										id: item?.itemId,
+										title: item?.title,
+										desc: item?.ConditionDescription,
+										price: item?.sellingStatus?.currentPrice?.value,
+										img: item?.galleryURL,
+										quantity: 1,
+									},
 								})
 							)
 						}>

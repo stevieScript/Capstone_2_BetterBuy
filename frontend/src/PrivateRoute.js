@@ -1,4 +1,5 @@
 import React, {useContext} from 'react';
+import {useSelector} from 'react-redux';
 import {Navigate} from 'react-router-dom';
 import UserContext from './auth/UserContext';
 
@@ -10,12 +11,16 @@ import UserContext from './auth/UserContext';
  */
 
 function PrivateRoute({element}) {
+	const user = useSelector((state) => state.cart.userId);
+	console.log('user', user);
 	const {currentUser} = useContext(UserContext);
-	const user = localStorage.getItem('user');
+	console.log('currentUser', currentUser);
+	// const dispatch = useDispatch();
+	// const user = localStorage.getItem('user');
 
 	console.debug('PrivateRoute', 'currentUser=', currentUser);
 
-	if (!user && !currentUser) {
+	if (!user || !currentUser) {
 		return <Navigate to='/login' />;
 	}
 

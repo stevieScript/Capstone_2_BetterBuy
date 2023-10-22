@@ -7,11 +7,11 @@ import {useDispatch} from 'react-redux';
 import {addToCart} from '../../redux/cartReducer';
 import Api from '../../api';
 // import {Navigate} from 'react-router-dom';
-// import UserContext from '../../auth/UserContext';
-// import {useContext} from 'react';
+import UserContext from '../../auth/UserContext';
+import {useContext} from 'react';
 
 const Product = () => {
-	// const currentUser = useContext(UserContext);
+	const currentUser = useContext(UserContext);
 	const id = useParams().id;
 	const [quantity, setQuantity] = useState(1);
 
@@ -54,6 +54,7 @@ const Product = () => {
 						onClick={() =>
 							dispatch(
 								addToCart({
+									userId: currentUser?.id,
 									id: data[0]?.ItemID,
 									title: data[0]?.Title,
 									desc: data[0]?.ConditionDescription,

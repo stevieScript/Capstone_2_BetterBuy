@@ -2,9 +2,13 @@ import React, {useContext} from 'react';
 import {Navigate} from 'react-router-dom';
 import UserContext from '../../auth/UserContext';
 import {Typography, Button, Box, ButtonGroup} from '@mui/material';
+import {useSelector} from 'react-redux';
 function Home() {
 	const {currentUser} = useContext(UserContext);
-	if (currentUser) {
+	console.log(currentUser, 'currentUser in home');
+	const user = useSelector((state) => state.cart.user);
+	console.log(user, 'user in home');
+	if (user || currentUser) {
 		return <Navigate to='/user' />;
 	}
 	return (

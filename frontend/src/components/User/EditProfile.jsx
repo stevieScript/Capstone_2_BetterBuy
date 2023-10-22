@@ -8,6 +8,7 @@ import UserContext from '../../auth/UserContext';
 import Api from '../../api';
 import {useNavigate} from 'react-router-dom';
 import LoadingSpinner from '../../common/LoadingSpinner';
+import {CircularProgress} from '@mui/material';
 
 function EditProfile() {
 	const {currentUser, setCurrentUser} = useContext(UserContext);
@@ -19,7 +20,7 @@ function EditProfile() {
 	useEffect(() => {
 		async function getUser() {
 			try {
-				let user = await Api.getUser(currentUser.id);
+				let user = await Api.getUser(currentUser);
 
 				setData(user);
 			} catch (err) {
@@ -66,7 +67,16 @@ function EditProfile() {
 	};
 
 	return !infoLoaded ? (
-		<LoadingSpinner />
+		<Box
+			sx={{
+				display: 'flex',
+				margin: 'auto',
+				fontSize: '24pt',
+				fontWeight: 'bold',
+				textlign: 'center',
+			}}>
+			<CircularProgress />
+		</Box>
 	) : (
 		<Box sx={{maxWidth: '60%', margin: '3% auto'}}>
 			<Typography component='h1' variant='h5'>

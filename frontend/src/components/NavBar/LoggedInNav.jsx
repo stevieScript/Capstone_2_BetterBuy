@@ -22,7 +22,7 @@ export default function LoggedInNav() {
 	const handleLogout = async () => {
 		await Api.logout();
 		setCurrentUser(null);
-		localStorage.removeItem('user');
+		// localStorage.removeItem('user');
 	};
 
 	return (
@@ -37,7 +37,7 @@ export default function LoggedInNav() {
 						<MenuIcon />
 					</Box>
 					<Box marginRight='auto'>
-						<Button href='/' variant='text' color='inherit'>
+						<Button onClick={() => navigate('/user')} color='inherit' sx={{ml: 3}}>
 							BetterBuy
 						</Button>
 					</Box>

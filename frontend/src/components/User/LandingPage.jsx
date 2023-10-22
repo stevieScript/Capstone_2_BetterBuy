@@ -8,6 +8,7 @@ import FeatureCard from '../FeaturedProducts/FeatureCard';
 import {Link} from 'react-router-dom';
 import {resetCart} from '../../redux/cartReducer';
 import {useDispatch} from 'react-redux';
+import CircularProgress from '@mui/material/CircularProgress';
 
 function LandingPage() {
 	const [products, setProducts] = useState([]);
@@ -36,7 +37,16 @@ function LandingPage() {
 	return (
 		<div className='main'>
 			{loading ? (
-				<h1>Loading...</h1>
+				<Box
+					sx={{
+						display: 'flex',
+						margin: 'auto',
+						fontSize: '24pt',
+						fontWeight: 'bold',
+						textlign: 'center',
+					}}>
+					<CircularProgress />
+				</Box>
 			) : (
 				<>
 					<SearchBar search={search} />
