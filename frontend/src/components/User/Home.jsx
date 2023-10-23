@@ -5,21 +5,32 @@ import {Typography, Button, Box, ButtonGroup} from '@mui/material';
 import {useSelector} from 'react-redux';
 function Home() {
 	const {currentUser} = useContext(UserContext);
-	console.log(currentUser, 'currentUser in home');
 	const user = useSelector((state) => state.cart.user);
-	console.log(user, 'user in home');
+
 	if (user || currentUser) {
 		return <Navigate to='/user' />;
 	}
+
 	return (
-		<Box>
+		<Box
+			sx={
+				{
+					// border: '2px solid black',
+					// display: 'flex',
+					// flexDirection: 'column',
+					// alignItems: 'center',
+					// justifyContent: 'center',
+				}
+			}>
 			<Box
 				sx={{
 					display: 'flex',
 					flexDirection: 'column',
 					alignItems: 'center',
 					justifyContent: 'center',
+					margin: '0 auto',
 					height: '100vh',
+					// border: '2px solid black',
 				}}>
 				<Typography variant='h6' gutterBottom>
 					Welcome to Better Buy. Log in or sign up to get started.
