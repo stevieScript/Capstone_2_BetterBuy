@@ -8,6 +8,7 @@ const router = new express.Router();
 // const {createToken} = require('../helpers/tokens');
 const userAuthSchema = require('../schemas/userAuth.json');
 const userRegisterSchema = require('../schemas/userRegister.json');
+const isProduction = process.env.NODE_ENV === 'production';
 
 /** POST /auth/token:  { email, password } => { token }
  *
@@ -30,7 +31,7 @@ router.post('/token', async function (req, res, next) {
 			expiresIn: '24h', // 1 day
 		});
 		//this one shows up in the console
-		res.cookie('token', token, {httpOnly: true, secure: true});
+		res.cookie('token', token, {httpOnly: true, secure: isProduction ? true : false});
 		return res.json({user});
 	} catch (err) {
 		return next(err);
@@ -56,7 +57,7 @@ router.post('/register', async function (req, res, next) {
 		const token = jwt.sign({id: newUser.id}, SECRET_KEY, {
 			expiresIn: '24h',
 		});
-		res.cookie('token', token, {httpOnly: true, secure: true});
+		res.cookie('token', token, {httpOnly: true, secure: isProduction ? true : false});
 		return res.status(201).json({id: newUser.id, email: newUser.email});
 	} catch (err) {
 		return next(err);
