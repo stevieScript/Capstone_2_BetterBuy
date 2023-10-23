@@ -16,18 +16,7 @@ function App() {
 	const user = useSelector((state) => state.cart.userId);
 	const [infoLoaded, setInfoLoaded] = useState(false);
 	const [currentUser, setCurrentUser] = useState(null);
-	const [token, setToken] = useState(() => {
-		try {
-			const storedUser = localStorage.getItem('token');
-			return storedUser ? JSON.parse(storedUser) : null;
-		} catch (error) {
-			console.error('Error parsing user from localStorage:', error);
-			return null;
-		}
-	});
-	if (token) {
-		axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-	}
+	const storedToken = localStorage.getItem('token');
 
 	useEffect(() => {
 		async function getCurrentUser() {
@@ -35,7 +24,10 @@ function App() {
 				try {
 					let currentUser = await Api.getUser(user);
 					setCurrentUser(currentUser);
-					setToken(currentUser.token);
+					localStorage.setItem('token', JSON.stringify(currentUser.token));
+					if (storedToken) {
+						axios.defaults.headers.common.Authorization = `Bearer ${storedToken}`;
+					}
 				} catch (err) {
 					console.error('App loadUserInfo: problem loading', err);
 					setCurrentUser(null);
@@ -45,13 +37,13 @@ function App() {
 		}
 		setInfoLoaded(false);
 		getCurrentUser();
-	}, [token]);
+	}, []);
 
 	const handleSignup = async (signupData) => {
 		try {
 			let res = await Api.register(signupData);
 			console.log('res', res);
-			setToken(res.token);
+			localStorage.setItem('token', JSON.stringify(res.token));
 			setCurrentUser(res.id);
 			dispatch(setUserId(res.id));
 			return {success: true};
@@ -64,11 +56,11 @@ function App() {
 	const handleLogin = async (loginData) => {
 		try {
 			let res = await Api.login(loginData);
-			if (user) {
+			if (res.user) {
 				console.log('user', res.user);
 				setCurrentUser(res.user);
 				dispatch(setUserId(res.user));
-				setToken(res.token);
+				localStorage.setItem('token', JSON.stringify(res.token));
 				return {success: true};
 			}
 		} catch (errors) {
@@ -81,7 +73,7 @@ function App() {
 		await Api.logout();
 		setCurrentUser(null);
 		// setUser(null);
-		setToken(null);
+		localStorage.removeItem('token');
 	};
 	return !infoLoaded ? (
 		<Box
