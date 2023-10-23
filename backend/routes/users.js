@@ -1,9 +1,10 @@
-const jwt = require('jsonwebtoken');
-const {SECRET_KEY} = require('../config');
-const {cookieJwtAuth} = require('../middleware/auth');
+// const jwt = require('jsonwebtoken');
+// const {SECRET_KEY} = require('../config');
+// const {cookieJwtAuth, authenticateJWT} = require('../middleware/auth');
+const {authenticateJWT} = require('../middleware/auth');
 const User = require('../models/user');
 const express = require('express');
-const {BadRequestError} = require('../expressError');
+// const {BadRequestError} = require('../expressError');
 const router = new express.Router();
 
 /** get user by ID */
@@ -22,7 +23,7 @@ router.get('/:id', async function (req, res, next) {
 });
 
 /** update user */
-router.patch('/:id', cookieJwtAuth, async function (req, res, next) {
+router.patch('/:id', authenticateJWT, async function (req, res, next) {
 	try {
 		const user = await User.update(req.params.id, req.body);
 		return res.json({
@@ -40,6 +41,7 @@ router.patch('/:id', cookieJwtAuth, async function (req, res, next) {
 
 router.delete('/logout', async function (req, res, next) {
 	try {
+		//remove the token header from the request
 		res.clearCookie('token');
 		return res.json({message: 'Logged out'});
 	} catch (err) {

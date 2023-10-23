@@ -5,6 +5,7 @@ const User = require('../models/user');
 const express = require('express');
 const {BadRequestError} = require('../expressError');
 const router = new express.Router();
+const {createToken} = require('../helpers/tokens');
 // const {createToken} = require('../helpers/tokens');
 const userAuthSchema = require('../schemas/userAuth.json');
 const userRegisterSchema = require('../schemas/userRegister.json');
@@ -26,13 +27,13 @@ router.post('/token', async function (req, res, next) {
 		}
 		const {email, password} = req.body;
 		const user = await User.authenticate(email, password);
+		const token = createToken(user);
+		// console.log('token', token);
 		//this one shows up in the console
-		const token = jwt.sign({id: user}, SECRET_KEY, {
-			expiresIn: '24h', // 1 day
-		});
-		//this one shows up in the console
-		res.cookie('token', token, {httpOnly: true, secure: isProduction ? true : false});
-		return res.json({user});
+		// res.cookie('token', token, {httpOnly: true, secure: isProduction ? true : false});
+
+		// res.setHeader(Authorization, `Bearer ${token}`);
+		return res.json({user, token});
 	} catch (err) {
 		return next(err);
 	}
@@ -54,11 +55,10 @@ router.post('/register', async function (req, res, next) {
 
 		const newUser = await User.register(req.body);
 
-		const token = jwt.sign({id: newUser.id}, SECRET_KEY, {
-			expiresIn: '24h',
-		});
-		res.cookie('token', token, {httpOnly: true, secure: isProduction ? true : false});
-		return res.status(201).json({id: newUser.id, email: newUser.email});
+		const token = createToken(newUser);
+		// res.cookie('token', token, {httpOnly: true, secure: isProduction ? true : false});
+		// res.setHeader(Authorization, `Bearer ${token}`);
+		return res.status(201).json({id: newUser.id, email: newUser.email, token});
 	} catch (err) {
 		return next(err);
 	}

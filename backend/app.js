@@ -21,11 +21,12 @@ app.use(
 );
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
+// app.use(authenticateJWT);
 app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
-app.use('/search', cookieJwtAuth, searchRoutes);
-app.use('/create-checkout-session', cookieJwtAuth, checkoutRoutes);
+app.use('/search', authenticateJWT, searchRoutes);
+app.use('/create-checkout-session', authenticateJWT, checkoutRoutes);
 
 /** Handle 404 errors -- this matches everything */
 app.use(function (req, res, next) {

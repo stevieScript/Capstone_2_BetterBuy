@@ -18,13 +18,15 @@ const e = require('express');
 function authenticateJWT(req, res, next) {
 	try {
 		const authHeader = req.headers && req.headers.authorization;
-		if (authHeader) {
-			const token = authHeader.replace(/^[Bb]earer /, '').trim();
-			req.user = jwt.verify(token, SECRET_KEY);
+		if (!authHeader) {
+			return res.status(401).json({error: 'Authentication token required'});
 		}
+
+		const token = authHeader.replace(/^[Bb]earer /, '').trim();
+		res.locals.user = jwt.verify(token, SECRET_KEY);
 		return next();
 	} catch (err) {
-		return next();
+		return res.status(401).json({message: 'Unauthorized'});
 	}
 }
 
@@ -33,31 +35,31 @@ function authenticateJWT(req, res, next) {
  * If not, raises Unauthorized.
  */
 
-function ensureLoggedIn(req, res, next) {
-	try {
-		if (!req.user) throw new UnauthorizedError();
-		return next();
-	} catch (err) {
-		return next(err);
-	}
-}
+// function ensureLoggedIn(req, res, next) {
+// 	try {
+// 		if (!req.user) throw new UnauthorizedError();
+// 		return next();
+// 	} catch (err) {
+// 		return next(err);
+// 	}
+// }
 
-function cookieJwtAuth(req, res, next) {
-	const token = req.cookies.token;
-	// Handle no token scenario, e.g., return a specific status or proceed without user data
-	if (!token) throw new UnauthorizedError();
-	try {
-		req.user = jwt.verify(token, SECRET_KEY);
-		return next();
-	} catch (err) {
-		res.clearCookie('token'); // Clear the invalid token
-		return res.status(401).send('Invalid token');
-	}
-}
+// function cookieJwtAuth(req, res, next) {
+// 	const token = req.cookies.token;
+// 	// Handle no token scenario, e.g., return a specific status or proceed without user data
+// 	if (!token) throw new UnauthorizedError();
+// 	try {
+// 		req.user = jwt.verify(token, SECRET_KEY);
+// 		return next();
+// 	} catch (err) {
+// 		res.clearCookie('token'); // Clear the invalid token
+// 		return res.status(401).send('Invalid token');
+// 	}
+// }
 
 module.exports = {
 	authenticateJWT,
-	cookieJwtAuth,
-	ensureLoggedIn,
+	// cookieJwtAuth,
+	// ensureLoggedIn,
 };
 

@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import AppRoutes from './AppRoutes';
 import NavBar from './components/NavBar/NavBar';
-
+import axios from 'axios';
 import Api from './api';
 import UserContext from './auth/UserContext';
 import {BrowserRouter} from 'react-router-dom';
@@ -15,15 +15,18 @@ function App() {
 	const user = useSelector((state) => state.cart.userId);
 	const [infoLoaded, setInfoLoaded] = useState(false);
 	const [currentUser, setCurrentUser] = useState(null);
-	// const [user, setUser] = useState(() => {
-	// 	try {
-	// 		const storedUser = localStorage.getItem('user');
-	// 		return storedUser ? JSON.parse(storedUser) : null;
-	// 	} catch (error) {
-	// 		console.error('Error parsing user from localStorage:', error);
-	// 		return null;
-	// 	}
-	// });
+	const [token, setToken] = useState(() => {
+		try {
+			const storedUser = localStorage.getItem('token');
+			return storedUser ? JSON.parse(storedUser) : null;
+		} catch (error) {
+			console.error('Error parsing user from localStorage:', error);
+			return null;
+		}
+	});
+	if (token) {
+		axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+	}
 
 	useEffect(() => {
 		async function getCurrentUser() {
@@ -31,6 +34,7 @@ function App() {
 				try {
 					let currentUser = await Api.getUser(user);
 					setCurrentUser(currentUser);
+					localStorage.setItem('user', JSON.stringify(currentUser));
 					// dispatch(setUserId(currentUser));
 				} catch (err) {
 					console.error('App loadUserInfo: problem loading', err);
@@ -46,7 +50,8 @@ function App() {
 	const handleSignup = async (signupData) => {
 		try {
 			let res = await Api.register(signupData);
-			// localStorage.setItem('user', JSON.stringify(res.id));
+			console.log('res', res);
+			localStorage.setItem('token', JSON.stringify(res.token));
 			setCurrentUser(res.id);
 			dispatch(setUserId(res.id));
 			return {success: true};
@@ -58,12 +63,13 @@ function App() {
 
 	const handleLogin = async (loginData) => {
 		try {
-			let user = await Api.login(loginData);
+			let res = await Api.login(loginData);
 			if (user) {
+				console.log('user', res.user);
 				// setUser(user);
-				setCurrentUser(user);
-				dispatch(setUserId(user));
-				// localStorage.setItem('user', JSON.stringify(user));
+				setCurrentUser(res.user);
+				dispatch(setUserId(res.user));
+				localStorage.setItem('token', JSON.stringify(res.token));
 				return {success: true};
 			}
 		} catch (errors) {
@@ -76,7 +82,7 @@ function App() {
 		await Api.logout();
 		setCurrentUser(null);
 		// setUser(null);
-		// localStorage.removeItem('user');
+		localStorage.removeItem('token');
 	};
 	return !infoLoaded ? (
 		<Box
