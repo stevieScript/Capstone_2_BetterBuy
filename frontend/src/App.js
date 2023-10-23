@@ -9,7 +9,6 @@ import {setUserId} from './redux/cartReducer';
 import './App.css';
 import {useDispatch, useSelector} from 'react-redux';
 import {Box, CircularProgress} from '@mui/material';
-import {set} from '../../backend/app';
 
 function App() {
 	const dispatch = useDispatch();
@@ -42,8 +41,8 @@ function App() {
 	const handleSignup = async (signupData) => {
 		try {
 			let res = await Api.register(signupData);
-			console.log('res', res);
 			localStorage.setItem('token', JSON.stringify(res.token));
+			axios.defaults.headers.common.Authorization = `Bearer ${res.token}`;
 			setCurrentUser(res.id);
 			dispatch(setUserId(res.id));
 			return {success: true};
@@ -57,7 +56,7 @@ function App() {
 		try {
 			let res = await Api.login(loginData);
 			if (res.user) {
-				console.log('user', res.user);
+				axios.defaults.headers.common.Authorization = `Bearer ${res.token}`;
 				setCurrentUser(res.user);
 				dispatch(setUserId(res.user));
 				localStorage.setItem('token', JSON.stringify(res.token));
