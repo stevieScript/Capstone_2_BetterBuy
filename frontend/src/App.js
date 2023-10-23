@@ -9,6 +9,7 @@ import {setUserId} from './redux/cartReducer';
 import './App.css';
 import {useDispatch, useSelector} from 'react-redux';
 import {Box, CircularProgress} from '@mui/material';
+import {set} from '../../backend/app';
 
 function App() {
 	const dispatch = useDispatch();
@@ -34,8 +35,7 @@ function App() {
 				try {
 					let currentUser = await Api.getUser(user);
 					setCurrentUser(currentUser);
-					// localStorage.setItem('token', JSON.stringify(currentUser));
-					// dispatch(setUserId(currentUser));
+					setToken(currentUser.token);
 				} catch (err) {
 					console.error('App loadUserInfo: problem loading', err);
 					setCurrentUser(null);
@@ -45,7 +45,7 @@ function App() {
 		}
 		setInfoLoaded(false);
 		getCurrentUser();
-	}, []);
+	}, [token]);
 
 	const handleSignup = async (signupData) => {
 		try {
@@ -81,7 +81,7 @@ function App() {
 		await Api.logout();
 		setCurrentUser(null);
 		// setUser(null);
-		localStorage.removeItem('token');
+		setToken(null);
 	};
 	return !infoLoaded ? (
 		<Box
