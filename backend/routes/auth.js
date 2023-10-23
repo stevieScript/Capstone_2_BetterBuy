@@ -30,7 +30,7 @@ router.post('/token', async function (req, res, next) {
 			expiresIn: '24h', // 1 day
 		});
 		//this one shows up in the console
-		res.cookie('token', token, {httpOnly: true});
+		res.cookie('token', token, {httpOnly: true, secure: true});
 		return res.json({user});
 	} catch (err) {
 		return next(err);
@@ -56,7 +56,7 @@ router.post('/register', async function (req, res, next) {
 		const token = jwt.sign({id: newUser.id}, SECRET_KEY, {
 			expiresIn: '24h',
 		});
-		res.cookie('token', token, {httpOnly: true});
+		res.cookie('token', token, {httpOnly: true, secure: true});
 		return res.status(201).json({id: newUser.id, email: newUser.email});
 	} catch (err) {
 		return next(err);
