@@ -34,7 +34,7 @@ function App() {
 				try {
 					let currentUser = await Api.getUser(user);
 					setCurrentUser(currentUser);
-					localStorage.setItem('user', JSON.stringify(currentUser));
+					// localStorage.setItem('token', JSON.stringify(currentUser));
 					// dispatch(setUserId(currentUser));
 				} catch (err) {
 					console.error('App loadUserInfo: problem loading', err);
@@ -51,7 +51,7 @@ function App() {
 		try {
 			let res = await Api.register(signupData);
 			console.log('res', res);
-			localStorage.setItem('token', JSON.stringify(res.token));
+			setToken(res.token);
 			setCurrentUser(res.id);
 			dispatch(setUserId(res.id));
 			return {success: true};
@@ -66,10 +66,9 @@ function App() {
 			let res = await Api.login(loginData);
 			if (user) {
 				console.log('user', res.user);
-				// setUser(user);
 				setCurrentUser(res.user);
 				dispatch(setUserId(res.user));
-				localStorage.setItem('token', JSON.stringify(res.token));
+				setToken(res.token);
 				return {success: true};
 			}
 		} catch (errors) {
