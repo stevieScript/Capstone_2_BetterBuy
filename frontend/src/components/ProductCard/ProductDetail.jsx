@@ -13,7 +13,6 @@ import {Box, CircularProgress} from '@mui/material';
 
 const Product = () => {
 	const {currentUser} = useContext(UserContext);
-	console.log(currentUser);
 	const id = useParams().id;
 	const [quantity, setQuantity] = useState(1);
 	const [loading, setLoading] = useState(true);

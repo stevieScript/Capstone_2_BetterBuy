@@ -1,11 +1,11 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import './Cart.css';
+import {removeItem, resetCart} from '../../redux/cartReducer';
 import {useDispatch} from 'react-redux';
+import './Cart.css';
 import Api from '../../api';
 import {Link} from 'react-router-dom';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import {removeItem, resetCart} from '../../redux/cartReducer';
 // import UserContext from '../../auth/UserContext';
 // import {useContext} from 'react';
 
@@ -53,12 +53,18 @@ function Cart() {
 				<span>Subtotal:</span>
 				<span>{total?.toFixed(2)}</span>
 			</div>
+
 			<button className='checkout' onClick={handleCheckout}>
 				Checkout
 			</button>
-			<span className='reset' onClick={() => dispatch(resetCart())}>
-				Clear Cart
-			</span>
+			<div className='links'>
+				<span className='reset' onClick={() => dispatch(resetCart())}>
+					Clear Cart
+				</span>
+				<Link className='historyLink' to={'/order-history'}>
+					Order History
+				</Link>
+			</div>
 		</div>
 	);
 }

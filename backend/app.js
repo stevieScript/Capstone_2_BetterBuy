@@ -5,7 +5,7 @@ const allowedOrigin = isDevelopment
 	: 'https://functional-turkey.surge.sh';
 const cors = require('cors');
 const {NotFoundError} = require('./expressError');
-const {authenticateJWT, cookieJwtAuth} = require('./middleware/auth');
+const {authenticateJWT} = require('./middleware/auth');
 const cookieParser = require('cookie-parser');
 
 const authRoutes = require('./routes/auth');

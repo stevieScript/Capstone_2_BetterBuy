@@ -6,7 +6,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import {getLandingPage} from '../../helpers/helpers';
 import FeatureCard from '../FeaturedProducts/FeatureCard';
 import {Link} from 'react-router-dom';
-import {resetCart} from '../../redux/cartReducer';
+import {completedOrder} from '../../redux/cartReducer';
 import {useDispatch} from 'react-redux';
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -26,7 +26,7 @@ function LandingPage() {
 		}
 		//clear cart after redirect from stripe
 		if (status === 'true') {
-			dispatch(resetCart());
+			dispatch(completedOrder());
 		}
 		getProducts();
 	}, [dispatch]);
@@ -93,12 +93,12 @@ function LandingPage() {
 								</Grid>
 							</Box>
 							<div className='home'>
-								<Link to='/search/category/1527'>
-									<h1>Jewelry</h1>
+								<Link to='/search/category/13595'>
+									<h1>Household</h1>
 								</Link>
 								<Box sx={{flexGrow: 1}}>
 									<Grid container spacing={2}>
-										{products.jewelry?.map((item) => (
+										{products.household?.map((item) => (
 											<Grid item xs={6} md={3} key={item.itemId}>
 												<FeatureCard item={item} />
 											</Grid>
@@ -106,12 +106,12 @@ function LandingPage() {
 									</Grid>
 								</Box>
 								<div className='clothing'>
-									<Link to='/search/category/11450'>
+									<Link to='/search/category/1527'>
 										<h1>Cell Phones</h1>
 									</Link>
 									<Box sx={{flexGrow: 1}}>
 										<Grid container spacing={2}>
-											{products.clothing?.map((item) => (
+											{products.cellPhones?.map((item) => (
 												<Grid item xs={6} md={3} key={item.itemId}>
 													<FeatureCard item={item} />
 												</Grid>

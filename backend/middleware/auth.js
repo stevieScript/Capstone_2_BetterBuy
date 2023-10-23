@@ -19,7 +19,8 @@ function authenticateJWT(req, res, next) {
 	try {
 		const authHeader = req.headers && req.headers.authorization;
 		if (!authHeader) {
-			return res.status(401).json({error: 'Authentication token required'});
+			const error = new UnauthorizedError('No token provided');
+			return res.status(401).json({error});
 		}
 
 		const token = authHeader.replace(/^[Bb]earer /, '').trim();
@@ -30,19 +31,23 @@ function authenticateJWT(req, res, next) {
 	}
 }
 
-/** Middleware to use when they must be logged in.
+/** Middleware to use when updateing a user's info.
  *
- * If not, raises Unauthorized.
+ * If not the correct user or not a token, raises Unauthorized.
  */
 
-// function ensureLoggedIn(req, res, next) {
-// 	try {
-// 		if (!req.user) throw new UnauthorizedError();
-// 		return next();
-// 	} catch (err) {
-// 		return next(err);
-// 	}
-// }
+function ensureCorrectUser(req, res, next) {
+	try {
+		const user = res.locals.user;
+		if (!(user && user.id === req.params.id)) {
+			const err = new UnauthorizedError();
+			return next(err);
+		}
+		return next();
+	} catch (err) {
+		return next(err);
+	}
+}
 
 // function cookieJwtAuth(req, res, next) {
 // 	const token = req.cookies.token;
@@ -59,7 +64,6 @@ function authenticateJWT(req, res, next) {
 
 module.exports = {
 	authenticateJWT,
-	// cookieJwtAuth,
-	// ensureLoggedIn,
+	ensureCorrectUser,
 };
 

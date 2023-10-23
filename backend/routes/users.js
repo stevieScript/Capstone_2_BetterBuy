@@ -1,7 +1,4 @@
-// const jwt = require('jsonwebtoken');
-// const {SECRET_KEY} = require('../config');
-// const {cookieJwtAuth, authenticateJWT} = require('../middleware/auth');
-const {authenticateJWT} = require('../middleware/auth');
+const {authenticateJWT, ensureCorrectUser} = require('../middleware/auth');
 const User = require('../models/user');
 const express = require('express');
 // const {BadRequestError} = require('../expressError');
@@ -35,18 +32,6 @@ router.patch('/:id', authenticateJWT, async function (req, res, next) {
 			firstName: user.firstName,
 			lastName: user.lastName,
 		});
-	} catch (err) {
-		return next(err);
-	}
-});
-
-/** logout user */
-
-router.delete('/logout', async function (req, res, next) {
-	try {
-		//remove the token header from the request
-		res.clearCookie('token');
-		return res.json({message: 'Logged out'});
 	} catch (err) {
 		return next(err);
 	}

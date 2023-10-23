@@ -11,18 +11,21 @@ import CategorySideMenu from '../Categories/CategorySideMenu';
 import './LoggedInNav.css';
 import UserContext from '../../auth/UserContext';
 import {useNavigate} from 'react-router-dom';
-import Api from '../../api';
+// import Api from '../../api';
+import {removeToken} from '../../redux/cartReducer';
+// import './App.css';
+import {useDispatch} from 'react-redux';
 
 export default function LoggedInNav() {
 	const {setCurrentUser} = useContext(UserContext);
+	const dispatch = useDispatch();
 	const [openCart, setOpenCart] = useState(false);
 	const [openSideMenu, setOpenSideMenu] = useState(false);
 	const products = useSelector((state) => state.cart.products);
 	const navigate = useNavigate();
 	const handleLogout = async () => {
-		await Api.logout();
 		setCurrentUser(null);
-		// localStorage.removeItem('user');
+		dispatch(removeToken());
 	};
 
 	return (

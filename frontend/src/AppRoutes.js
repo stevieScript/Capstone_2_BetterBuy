@@ -7,6 +7,7 @@ import LandingPage from './components/User/LandingPage';
 import SearchResults from './components/Search/SearchResults';
 import PrivateRoute from './PrivateRoute';
 import EditProfile from './components/User/EditProfile';
+import OrderHistory from './components/Cart/OrderHistory';
 
 function AppRoutes({handleLogin, handleSignup}) {
 	return (
@@ -18,6 +19,7 @@ function AppRoutes({handleLogin, handleSignup}) {
 			<Route path='/user' element={<PrivateRoute element={<LandingPage />} />} />
 			<Route path='/edit' element={<PrivateRoute element={<EditProfile />} />} />
 			<Route path='/checkout/success' element={<PrivateRoute element={<LandingPage />} />} />
+			<Route path='/order-history' element={<PrivateRoute element={<OrderHistory />} />} />
 
 			<Route path='/search/product/:id' element={<PrivateRoute element={<Product />} />} />
 

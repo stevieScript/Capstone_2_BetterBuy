@@ -83,3 +83,14 @@ h1 {
 	font-weight: 500;
 	margin-bottom: 1.25rem;
 }
+
+.historyLink {
+	text-decoration: none;
+
+	color: #2879fe;
+}
+
+.links {
+	display: flex;
+	justify-content: space-between;
+}

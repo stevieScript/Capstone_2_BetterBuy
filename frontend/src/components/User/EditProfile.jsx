@@ -53,6 +53,7 @@ function EditProfile() {
 				password: formData.password,
 			};
 			let updatedUser = await Api.updateUser(currentUser, profileData);
+			console.log(updatedUser);
 			setFormData((formData) => ({
 				...formData,
 				password: '',

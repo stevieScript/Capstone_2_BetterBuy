@@ -1,0 +1,83 @@
+.history {
+  /* width: 60%; */
+  /* top: 3.8rem; */
+  /* right: 2.5rem; */
+  /* z-index: 999; */
+  background: #fff;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+
+  /* -webkit-box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75); */
+}
+
+.itemImg {
+  width: 10rem;
+  height: 10rem;
+  object-fit: cover;
+}
+
+.historyItem {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  /* border: 2px solid black; */
+}
+
+.details h1 {
+  /* margin-bottom: 1.875rem; */
+  color: gray;
+  font-weight: 400;
+  /* font-size: 1.5rem; */
+}
+
+/* .details h1 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: gray;
+} */
+
+/* .details p {
+  font-size: .875rem;
+  color: gray;
+  margin-bottom: .625rem;
+} */
+
+.price {
+  color: #2879fe;
+  font-size: 1.4rem;
+}
+
+.delete {
+  color: red;
+  font-size: 1.875rem;
+  cursor: pointer;
+}
+
+/* .total {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: .625rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: gray;
+} */
+
+.resetHistory {
+  color: red;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+
+.historyLink {
+  text-decoration: none;
+  color: #2879fe;
+}
+
+.link {
+  margin-bottom: 1rem;
+  text-decoration: underline;
+}

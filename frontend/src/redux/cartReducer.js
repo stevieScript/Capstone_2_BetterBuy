@@ -2,7 +2,9 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
 	products: [],
+	history: [],
 	userId: null,
+	token: null,
 };
 
 export const cartSlice = createSlice({
@@ -16,6 +18,12 @@ export const cartSlice = createSlice({
 			} else {
 				state.userId = action.payload;
 			}
+		},
+		setToken: (state, action) => {
+			state.token = action.payload;
+		},
+		removeToken: (state) => {
+			state.token = null;
 		},
 		addToCart: (state, action) => {
 			if (action.payload.userId !== state.userId) {
@@ -35,11 +43,27 @@ export const cartSlice = createSlice({
 		resetCart: (state) => {
 			state.products = [];
 		},
+		completedOrder: (state) => {
+			state.history.push(...state.products);
+			state.products = [];
+		},
+		clearHistory: (state) => {
+			state.history = [];
+		},
 	},
 });
 
 // Action creators are generated for each case reducer function
-export const {addToCart, removeItem, resetCart, setUserId} = cartSlice.actions;
+export const {
+	addToCart,
+	removeItem,
+	resetCart,
+	setUserId,
+	completedOrder,
+	setToken,
+	removeToken,
+	clearHistory,
+} = cartSlice.actions;
 
 export default cartSlice.reducer;
 
