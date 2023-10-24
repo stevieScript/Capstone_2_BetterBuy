@@ -48,7 +48,7 @@ app.options('/*', function (req, res, next) {
 });
 
 // General CORS setup
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 // enable pre-flight request for all routes
 
