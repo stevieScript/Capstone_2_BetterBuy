@@ -1,8 +1,6 @@
 const express = require('express');
 const isDevelopment = process.env.NODE_ENV !== 'production';
-const allowedOrigin = isDevelopment
-	? 'http://localhost:3000'
-	: 'https://determined-reward.surge.sh';
+const allowedOrigin = 'https://determined-reward.surge.sh';
 const cors = require('cors');
 const {NotFoundError} = require('./expressError');
 const {authenticateJWT} = require('./middleware/auth');
@@ -22,24 +20,32 @@ app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/search', authenticateJWT, searchRoutes);
 app.use('/create-checkout-session', authenticateJWT, checkoutRoutes);
-const corsOptions = {
-	origin: allowedOrigin,
-	methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-	allowedHeaders: [
-		'Origin',
-		'X-Requested-With',
-		'Content-Type',
-		'Accept',
-		'x-client-key',
-		'x-client-token',
-		'x-client-secret',
-		'Authorization',
-	],
-	credentials: true,
-};
+// const corsOptions = {
+// 	origin: allowedOrigin,
+// 	methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+// 	allowedHeaders: [
+// 		'Origin',
+// 		'X-Requested-With',
+// 		'Content-Type',
+// 		'Accept',
+// 		'x-client-key',
+// 		'x-client-token',
+// 		'x-client-secret',
+// 		'Authorization',
+// 	],
+// 	credentials: true,
+// };
 
 // Handle preflight requests
-app.options('*', cors(corsOptions));
+app.options('/*', function (req, res, next) {
+	res.header('Access-Control-Allow-Origin', allowedOrigin);
+	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+	res.header(
+		'Access-Control-Allow-Headers',
+		'Content-Type, Authorization, Content-Length, X-Requested-With'
+	);
+	res.sendStatus(200);
+});
 
 // General CORS setup
 app.use(cors(corsOptions));
@@ -47,7 +53,9 @@ app.use(cors(corsOptions));
 // enable pre-flight request for all routes
 
 app.use((req, res, next) => {
-	console.log(`Received ${req.method} request to ${req.path} from ${req.origin}`);
+	console.log('isDevelopment:', isDevelopment);
+	console.log('Allowed Origin:', allowedOrigin);
+	console.log('Request Origin:', req.get('Origin'));
 	next();
 });
 
