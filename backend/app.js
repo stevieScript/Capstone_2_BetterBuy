@@ -22,18 +22,27 @@ app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/search', authenticateJWT, searchRoutes);
 app.use('/create-checkout-session', authenticateJWT, checkoutRoutes);
-app.options('*', cors());
-app.use(
-	cors({
-		origin: allowedOrigin,
-		methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-		allowedHeaders: [
-			'Access-Control-Allow-Headers',
-			'Origin, X-Requested-With, Content-Type, Accept, x-client-key, x-client-token, x-client-secret, Authorization',
-		],
-		credentials: true,
-	})
-);
+const corsOptions = {
+	origin: allowedOrigin,
+	methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+	allowedHeaders: [
+		'Origin',
+		'X-Requested-With',
+		'Content-Type',
+		'Accept',
+		'x-client-key',
+		'x-client-token',
+		'x-client-secret',
+		'Authorization',
+	],
+	credentials: true,
+};
+
+// Handle preflight requests
+app.options('*', cors(corsOptions));
+
+// General CORS setup
+app.use(cors(corsOptions));
 
 // enable pre-flight request for all routes
 
