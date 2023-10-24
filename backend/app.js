@@ -44,6 +44,7 @@ app.options('/*', function (req, res, next) {
 		'Access-Control-Allow-Headers',
 		'Content-Type, Authorization, Content-Length, X-Requested-With'
 	);
+	res.header('Access-Control-Allow-Credentials', 'true'); // Added line
 	res.sendStatus(200);
 });
 

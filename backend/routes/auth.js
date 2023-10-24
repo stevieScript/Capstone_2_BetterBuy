@@ -16,7 +16,11 @@ const isProduction = process.env.NODE_ENV === 'production';
  * Returns JWT token which can be used to authenticate further requests.
  *
  * Authorization required: none
- *
+ *	// console.log('token', token);
+		//this one shows up in the console
+		// res.cookie('token', token, {httpOnly: true, secure: isProduction ? true : false});
+
+		// res.setHeader(Authorization, `Bearer ${token}`);
  * */
 router.post('/token', async function (req, res, next) {
 	try {
@@ -28,11 +32,7 @@ router.post('/token', async function (req, res, next) {
 		const {email, password} = req.body;
 		const user = await User.authenticate(email, password);
 		const token = createToken(user);
-		// console.log('token', token);
-		//this one shows up in the console
-		// res.cookie('token', token, {httpOnly: true, secure: isProduction ? true : false});
 
-		// res.setHeader(Authorization, `Bearer ${token}`);
 		return res.json({user, token});
 	} catch (err) {
 		return next(err);
