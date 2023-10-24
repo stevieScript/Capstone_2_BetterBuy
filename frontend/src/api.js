@@ -39,14 +39,14 @@ class Api {
 		}
 	}
 
-	static async logout() {
-		try {
-			const response = await axios.delete(`${BASE_URL}/users/logout`);
-			return response.data;
-		} catch (err) {
-			console.error(err);
-		}
-	}
+	// static async logout() {
+	// 	try {
+	// 		const response = await axios.delete(`${BASE_URL}/users/logout`);
+	// 		return response.data;
+	// 	} catch (err) {
+	// 		console.error(err);
+	// 	}
+	// }
 
 	static async getCart() {
 		const response = await axios.get(BASE_URL + 'cart');
