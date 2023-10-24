@@ -47,7 +47,11 @@ export const cartSlice = createSlice({
 			state.products = [];
 		},
 		completedOrder: (state) => {
-			state.history.push(...state.products);
+			const order = {
+				products: [...state.products],
+				userId: state.userId,
+			};
+			state.history.push(order);
 			state.products = [];
 		},
 		clearHistory: (state) => {
