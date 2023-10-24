@@ -2,7 +2,7 @@ const express = require('express');
 const isDevelopment = process.env.NODE_ENV !== 'production';
 const allowedOrigin = isDevelopment
 	? 'http://localhost:3000'
-	: 'https://functional-turkey.surge.sh';
+	: 'https://determined-reward.surge.sh';
 const cors = require('cors');
 const {NotFoundError} = require('./expressError');
 const {authenticateJWT} = require('./middleware/auth');
