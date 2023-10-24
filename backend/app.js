@@ -11,7 +11,7 @@ const userRoutes = require('./routes/users');
 const searchRoutes = require('./routes/search');
 const checkoutRoutes = require('./routes/checkout');
 const app = express();
-
+app.use(cors());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 // app.use(authenticateJWT);
@@ -36,27 +36,27 @@ app.use('/create-checkout-session', authenticateJWT, checkoutRoutes);
 // 	credentials: true,
 // };
 
-app.options('*', (req, res) => {
-	res.header('Access-Control-Allow-Origin', allowedOrigin);
-	res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-	res.header(
-		'Access-Control-Allow-Headers',
-		'Content-Type, Authorization, Content-Length, X-Requested-With'
-	);
-	res.header('Access-Control-Allow-Credentials', 'true');
-	res.sendStatus(200);
-});
+// app.options('*', (req, res) => {
+// 	res.header('Access-Control-Allow-Origin', allowedOrigin);
+// 	res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+// 	res.header(
+// 		'Access-Control-Allow-Headers',
+// 		'Content-Type, Authorization, Content-Length, X-Requested-With'
+// 	);
+// 	res.header('Access-Control-Allow-Credentials', 'true');
+// 	res.sendStatus(200);
+// });
 
-app.use((req, res, next) => {
-	res.header('Access-Control-Allow-Origin', allowedOrigin);
-	res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
-	res.header(
-		'Access-Control-Allow-Headers',
-		'Content-Type, Authorization, Content-Length, X-Requested-With'
-	);
-	res.header('Access-Control-Allow-Credentials', 'true');
-	next();
-});
+// app.use((req, res, next) => {
+// 	res.header('Access-Control-Allow-Origin', allowedOrigin);
+// 	res.header('Access-Control-Allow-Methods', 'GET,POST,PUT,DELETE,OPTIONS');
+// 	res.header(
+// 		'Access-Control-Allow-Headers',
+// 		'Content-Type, Authorization, Content-Length, X-Requested-With'
+// 	);
+// 	res.header('Access-Control-Allow-Credentials', 'true');
+// 	next();
+// });
 
 // Handle preflight requests
 // app.options('/*', function (req, res, next) {
@@ -75,12 +75,12 @@ app.use((req, res, next) => {
 
 // enable pre-flight request for all routes
 
-app.use((req, res, next) => {
-	console.log('isDevelopment:', isDevelopment);
-	console.log('Allowed Origin:', allowedOrigin);
-	console.log('Request Origin:', req.get('Origin'));
-	next();
-});
+// app.use((req, res, next) => {
+// 	console.log('isDevelopment:', isDevelopment);
+// 	console.log('Allowed Origin:', allowedOrigin);
+// 	console.log('Request Origin:', req.get('Origin'));
+// 	next();
+// });
 
 // app.use(
 // 	cors({
