@@ -22,7 +22,7 @@ app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/search', authenticateJWT, searchRoutes);
 app.use('/create-checkout-session', authenticateJWT, checkoutRoutes);
-
+app.options('*', cors());
 app.use(
 	cors({
 		origin: allowedOrigin,
@@ -32,7 +32,7 @@ app.use(
 	})
 );
 
-app.options('*', cors()); // enable pre-flight request for all routes
+// enable pre-flight request for all routes
 
 app.use((req, res, next) => {
 	console.log(`Received ${req.method} request to ${req.path} from ${req.origin}`);
