@@ -23,18 +23,26 @@ app.use('/users', userRoutes);
 app.use('/search', authenticateJWT, searchRoutes);
 app.use('/create-checkout-session', authenticateJWT, checkoutRoutes);
 
-app.use(function (req, res, next) {
-	res.header('Access-Control-Allow-Origin', allowedOrigin);
-	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-	return next();
-});
-
 app.use(
 	cors({
 		origin: allowedOrigin,
+		methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+		allowedHeaders: ['Origin', 'X-Requested-With', 'Content-Type', 'Accept', 'Authorization'],
 		credentials: true,
 	})
 );
+
+app.use((req, res, next) => {
+	console.log(`Received ${req.method} request to ${req.path} from ${req.origin}`);
+	next();
+});
+
+// app.use(
+// 	cors({
+// 		origin: allowedOrigin,
+// 		credentials: true,
+// 	})
+// );
 
 /** Handle 404 errors -- this matches everything */
 app.use(function (req, res, next) {
