@@ -16,6 +16,7 @@ import Container from '@mui/material/Container';
 
 export default function SignUp({handleSignup}) {
 	const navigate = useNavigate();
+	const [errors, setErrors] = useState([]);
 	const [formData, setFormData] = useState({
 		firstName: '',
 		lastName: '',
@@ -31,7 +32,8 @@ export default function SignUp({handleSignup}) {
 		if (result.success) {
 			navigate('/user');
 		} else {
-			// setErrors(result.errors);
+			setErrors(result.errors);
+			console.log(result);
 		}
 	};
 
@@ -45,7 +47,7 @@ export default function SignUp({handleSignup}) {
 
 	return (
 		<Container component='main' maxWidth='xs'>
-			{/* {errors.length ? (
+			{errors.length ? (
 				<Box
 					sx={{
 						marginTop: 8,
@@ -59,7 +61,7 @@ export default function SignUp({handleSignup}) {
 						))}
 					</Typography>
 				</Box>
-			) : null} */}
+			) : null}
 			<CssBaseline />
 			<Box
 				sx={{

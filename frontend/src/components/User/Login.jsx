@@ -20,7 +20,6 @@ export default function SignIn({handleLogin}) {
 		password: '',
 	});
 	const [errors, setErrors] = useState([]);
-
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
@@ -48,6 +47,19 @@ export default function SignIn({handleLogin}) {
 			{errors.length ? <Alert type='danger' messages={errors} /> : null}
 			{/* // <ThemeProvider theme={defaultTheme}> */}
 			<Container component='main' maxWidth='xs'>
+				{errors.length ? (
+					<Box
+						sx={{
+							marginTop: 8,
+							display: 'flex',
+							flexDirection: 'column',
+							alignItems: 'center',
+						}}>
+						<Typography component='h1' variant='h5'>
+							<div>{errors}</div>
+						</Typography>
+					</Box>
+				) : null}
 				<CssBaseline />
 				<Box
 					sx={{

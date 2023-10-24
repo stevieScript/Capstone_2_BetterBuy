@@ -46,7 +46,6 @@ function App() {
 				return {success: true};
 			}
 		} catch (errors) {
-			console.error('signup failed', errors);
 			return {success: false, errors};
 		}
 	};
@@ -54,22 +53,20 @@ function App() {
 	const handleLogin = async (loginData) => {
 		try {
 			let res = await Api.login(loginData);
-			if (res.user) {
+			if (res.user && res.token) {
 				axios.defaults.headers.common.Authorization = `Bearer ${res.token}`;
 				setCurrentUser(res.user);
 				dispatch(setUserId(res.user));
 				dispatch(setToken(res.token));
 				return {success: true};
+			} else {
+				return {success: false, errors: ['Invalid Credentials']};
 			}
 		} catch (errors) {
-			console.error('login failed', errors);
 			return {success: false, errors};
 		}
 	};
 
-	const logout = async () => {
-		setCurrentUser(null);
-	};
 	return !infoLoaded ? (
 		<Box
 			sx={{
@@ -86,7 +83,7 @@ function App() {
 		<>
 			<BrowserRouter>
 				<UserContext.Provider value={{currentUser, setCurrentUser}}>
-					<NavBar logout={logout} />
+					<NavBar />
 					<div className='App'>
 						<AppRoutes handleLogin={handleLogin} handleSignup={handleSignup} />
 					</div>

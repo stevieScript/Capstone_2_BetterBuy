@@ -19,6 +19,9 @@ export const cartSlice = createSlice({
 				state.userId = action.payload;
 			}
 		},
+		removeId: (state) => {
+			state.userId = null;
+		},
 		setToken: (state, action) => {
 			state.token = action.payload;
 		},
@@ -63,6 +66,7 @@ export const {
 	setToken,
 	removeToken,
 	clearHistory,
+	removeId,
 } = cartSlice.actions;
 
 export default cartSlice.reducer;

@@ -12,7 +12,7 @@ import './LoggedInNav.css';
 import UserContext from '../../auth/UserContext';
 import {useNavigate} from 'react-router-dom';
 // import Api from '../../api';
-import {removeToken} from '../../redux/cartReducer';
+import {removeToken, removeId} from '../../redux/cartReducer';
 // import './App.css';
 import {useDispatch} from 'react-redux';
 
@@ -23,8 +23,9 @@ export default function LoggedInNav() {
 	const [openSideMenu, setOpenSideMenu] = useState(false);
 	const products = useSelector((state) => state.cart.products);
 	const navigate = useNavigate();
-	const handleLogout = async () => {
+	const logout = async () => {
 		setCurrentUser(null);
+		dispatch(removeId());
 		dispatch(removeToken());
 	};
 
@@ -44,7 +45,7 @@ export default function LoggedInNav() {
 							BetterBuy
 						</Button>
 					</Box>
-					<Button marginleft='auto' color='inherit' onClick={handleLogout}>
+					<Button marginleft='auto' color='inherit' onClick={logout}>
 						Logout
 					</Button>
 					<Button color='inherit' sx={{ml: 1, mr: 1}} onClick={() => navigate('/edit')}>
