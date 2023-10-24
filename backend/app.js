@@ -32,6 +32,8 @@ app.use(
 	})
 );
 
+app.options('*', cors()); // enable pre-flight request for all routes
+
 app.use((req, res, next) => {
 	console.log(`Received ${req.method} request to ${req.path} from ${req.origin}`);
 	next();
