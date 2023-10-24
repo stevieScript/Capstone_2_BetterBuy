@@ -26,7 +26,7 @@ router.post('/', async (req, res) => {
 				};
 			}),
 			success_url: `${CLIENT_URL}/checkout/success?success=true`,
-			cancel_url: `${CLIENT_URL}/checkout/failed`,
+			cancel_url: `${CLIENT_URL}/checkout/success?success=false`,
 		});
 		res.json({sessionId: session.id, url: session.url});
 	} catch (err) {
