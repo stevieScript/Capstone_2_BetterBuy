@@ -11,7 +11,6 @@ import {CircularProgress} from '@mui/material';
 
 function EditProfile() {
 	const {currentUser, setCurrentUser} = useContext(UserContext);
-	// const [formData, setFormData] = useState();
 	const navigate = useNavigate();
 	const [formData, setFormData] = useState(null);
 	const [infoLoaded, setInfoLoaded] = useState(false);
@@ -20,7 +19,6 @@ function EditProfile() {
 		async function getUser() {
 			try {
 				let user = await Api.getUser(currentUser);
-
 				setFormData(user);
 			} catch (err) {
 				console.error(err);
@@ -53,7 +51,6 @@ function EditProfile() {
 				password: formData.password,
 			};
 			let updatedUser = await Api.updateUser(currentUser, profileData);
-			console.log(updatedUser);
 			setFormData((formData) => ({
 				...formData,
 				password: '',

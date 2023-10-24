@@ -6,7 +6,7 @@ const e = require('express');
 
 function createToken(user) {
 	let payload = {
-		username: user.firstName,
+		user,
 	};
 
 	return jwt.sign(payload, SECRET_KEY, {expiresIn: '1h'});

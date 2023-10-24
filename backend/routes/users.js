@@ -9,7 +9,7 @@ const router = new express.Router();
 router.get('/:id', async function (req, res, next) {
 	try {
 		const user = await User.get(req.params.id);
-		const token = createToken(user);
+		const token = createToken(user.id);
 		return res.json({
 			id: user.id,
 			firstName: user.firstName,

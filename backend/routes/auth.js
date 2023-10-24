@@ -55,7 +55,7 @@ router.post('/register', async function (req, res, next) {
 
 		const newUser = await User.register(req.body);
 
-		const token = createToken(newUser);
+		const token = createToken(newUser.id);
 		// res.cookie('token', token, {httpOnly: true, secure: isProduction ? true : false});
 		// res.setHeader(Authorization, `Bearer ${token}`);
 		return res.status(201).json({id: newUser.id, email: newUser.email, token});
