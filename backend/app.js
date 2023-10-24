@@ -28,6 +28,12 @@ app.use('/users', userRoutes);
 app.use('/search', authenticateJWT, searchRoutes);
 app.use('/create-checkout-session', authenticateJWT, checkoutRoutes);
 
+app.use(function (req, res, next) {
+	res.header('Access-Control-Allow-Origin', allowedOrigin);
+	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+	return next();
+});
+
 /** Handle 404 errors -- this matches everything */
 app.use(function (req, res, next) {
 	return next(new NotFoundError());
