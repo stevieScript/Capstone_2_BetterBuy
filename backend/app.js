@@ -13,12 +13,7 @@ const userRoutes = require('./routes/users');
 const searchRoutes = require('./routes/search');
 const checkoutRoutes = require('./routes/checkout');
 const app = express();
-app.use(
-	cors({
-		origin: allowedOrigin,
-		credentials: true,
-	})
-);
+
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 // app.use(authenticateJWT);
@@ -33,6 +28,13 @@ app.use(function (req, res, next) {
 	res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
 	return next();
 });
+
+app.use(
+	cors({
+		origin: allowedOrigin,
+		credentials: true,
+	})
+);
 
 /** Handle 404 errors -- this matches everything */
 app.use(function (req, res, next) {
