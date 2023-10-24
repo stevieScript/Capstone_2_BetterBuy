@@ -22,7 +22,6 @@ function App() {
 			if (user) {
 				try {
 					axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-					// axios.defaults.withCredentials = true;
 					let currentUser = await Api.getUser(user);
 					setCurrentUser(currentUser);
 				} catch (err) {
@@ -41,8 +40,6 @@ function App() {
 			let res = await Api.register(signupData);
 			if (res.token) {
 				axios.defaults.headers.common.Authorization = `Bearer ${res.token}`;
-				// axios.defaults.withCredentials = true;
-
 				setCurrentUser(res.id);
 				dispatch(setUserId(res.id));
 				dispatch(setToken(res.token));
@@ -59,7 +56,6 @@ function App() {
 			let res = await Api.login(loginData);
 			if (res.user) {
 				axios.defaults.headers.common.Authorization = `Bearer ${res.token}`;
-				// axios.defaults.withCredentials = true;
 				setCurrentUser(res.user);
 				dispatch(setUserId(res.user));
 				dispatch(setToken(res.token));
@@ -72,7 +68,6 @@ function App() {
 	};
 
 	const logout = async () => {
-		// await Api.logout();
 		setCurrentUser(null);
 	};
 	return !infoLoaded ? (
