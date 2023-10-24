@@ -38,10 +38,13 @@ function App() {
 	const handleSignup = async (signupData) => {
 		try {
 			let res = await Api.register(signupData);
-			setCurrentUser(res.id);
-			dispatch(setUserId(res.id));
-			dispatch(setToken(res.token));
-			return {success: true};
+			if (res.token) {
+				axios.defaults.headers.common.Authorization = `Bearer ${res.token}`;
+				setCurrentUser(res.id);
+				dispatch(setUserId(res.id));
+				dispatch(setToken(res.token));
+				return {success: true};
+			}
 		} catch (errors) {
 			console.error('signup failed', errors);
 			return {success: false, errors};
