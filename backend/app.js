@@ -36,17 +36,26 @@ app.use('/create-checkout-session', authenticateJWT, checkoutRoutes);
 // 	credentials: true,
 // };
 
+app.use(
+	cors({
+		origin: allowedOrigin,
+		credentials: true,
+		methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+		allowedHeaders: ['Content-Type', 'Authorization', 'Content-Length', 'X-Requested-With'],
+	})
+);
+
 // Handle preflight requests
-app.options('/*', function (req, res, next) {
-	res.header('Access-Control-Allow-Origin', allowedOrigin);
-	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-	res.header(
-		'Access-Control-Allow-Headers',
-		'Content-Type, Authorization, Content-Length, X-Requested-With'
-	);
-	res.header('Access-Control-Allow-Credentials', 'true'); // Added line
-	res.sendStatus(200);
-});
+// app.options('/*', function (req, res, next) {
+// 	res.header('Access-Control-Allow-Origin', allowedOrigin);
+// 	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+// 	res.header(
+// 		'Access-Control-Allow-Headers',
+// 		'Content-Type, Authorization, Content-Length, X-Requested-With'
+// 	);
+// 	res.header('Access-Control-Allow-Credentials', 'true'); // Added line
+// 	res.sendStatus(200);
+// });
 
 // General CORS setup
 // app.use(cors(corsOptions));
