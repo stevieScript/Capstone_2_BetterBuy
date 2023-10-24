@@ -16,6 +16,7 @@ const app = express();
 app.use(
 	cors({
 		origin: allowedOrigin,
+		credentials: true,
 	})
 );
 app.use(express.urlencoded({extended: true}));
